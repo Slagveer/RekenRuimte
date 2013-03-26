@@ -1,0 +1,115 @@
+<head>
+  <title>RekenRuimte</title>
+</head>
+
+<body>
+    {{> page}}
+    {{> game}}
+</body>
+
+<template name="game">
+    <div class="container">
+        <div class="row">
+            <div class="span12">
+                <canvas id="canvas" width="550" height="400" style="background-color:#000000"></canvas>
+            </div>
+        </div>
+    </div>
+</template>
+
+<template name="page">
+    <div class="container">
+        <div class="row">
+            <div class="span12">
+                <h1>Hello World!</h1>
+                {{greeting}}
+                <input type="button" value="Click" />
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="span1"> </div>
+            <div class="span10">
+                <div class="row">
+                    <div class="span5">
+                        <h3 style="margin-bottom: 0px">Alle gebruikers</h3>
+                    </div>
+                    <div class="span5">
+                        <div style="float: right">
+                            {{loginButtons align="right"}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="span1"> </div>
+        </div>
+        {{#if currentUser}}
+            <div class="row">
+                <div class="span1"> </div>
+                <div class="span10">
+                    <div class="row">
+                        <div class="span8">{{> userslist }}</div>
+                    </div>
+                </div>
+                <div class="span1"> </div>
+            </div>
+        {{/if}}
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="lessons">
+                <ul>
+                {{#each lessons}}
+                    {{> lesson}}
+                {{/each}}
+                </ul>
+            </div>
+
+            {{#if selectedLesson}}
+                <div class="selected-lesson">
+                    <div class="name">{{selectedLesson}}
+                    </div>
+                    <input type="button" class="inc" value="Geef 5 punten" />
+                </div>
+            {{/if}}
+
+            {{#unless selectedLesson}}
+                <div class="none">Click a lesson to select</div>
+            {{/unless}}
+        </div>
+    </div>
+</template>
+
+<template name="userslist">
+    <div class="userslist">
+        {{#each users}}
+
+            {{> user}}
+
+        {{/each}}
+    </div>
+</template>
+
+<template name="user">
+    {{#if userLoggedIn}}
+        <div class="user {{highestScore}}" style="font-weight: bold;">
+            {{ username}} {{score}}
+        </div>
+    {{else}}
+        <div class="user {{highestScore}}">
+            {{ username}} {{score}}
+        </div>
+    {{/if}}
+</template>
+
+<template name="lesson">
+    <li class="lesson {{selected}}">
+        {{name}}
+    </li>
+</template>
+
+
+
+
+
