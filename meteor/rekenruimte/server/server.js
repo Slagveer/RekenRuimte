@@ -13,32 +13,32 @@ Scores = new Meteor.Collection("scores");
         var data = [
             {name: "Maten I",correct:"Goed gedaan!",incorrect:"Helaas, het door jou gegeven antwoord (###) is niet goed. Het antwoord had moeten zijn: ",time:10,questions:
                 [
-                    {question:"9,2 m + 7,2 m",description:"Reken uit: geef je antwoord in decimeter",option1:"1640 dm",option2:"16,4 dm",option3:"16400 dm",answer:"164 dm",points:"1"},
-                    {question:"8,4 m + 8,8 m",description:"Reken uit: geef je antwoord in decimeter",option1:"1720 dm",option2:"17,2 dm",option3:"17200 dm",answer:"172 dm",points:"1"},
+                    {question:"9,2 m + 7,2 m",description:"Reken uit: geef je antwoord in decimeter",option1:"1640 dm",option2:"164 dm",option3:"16400 dm",answer:"164 dm",points:"1"},
+                    {question:"8,4 m + 8,8 m",description:"Reken uit: geef je antwoord in decimeter",option1:"1720 dm",option2:"17,2 dm",option3:"172 dm",answer:"172 dm",points:"1"},
                     {question:"5,7 m + 2,3 m",description:"Reken uit: geef je antwoord in decimeter",option1:"80 dm",option2:"8 dm",option3:"800 dm",answer:"80 dm",points:"1"},
-                    {question:"4,1 m + 7,1 m",description:"Reken uit: geef je antwoord in decimeter",option1:"1120 dm",option2:"11,2 dm",option3:"11200 dm",answer:"112 dm",points:"1"},
-                    {question:"3,3 m + 9,8 m",description:"Reken uit: geef je antwoord in decimeter",option1:"1310 dm",option2:"13,1 dm",option3:"13100 dm",answer:"131 dm",points:"1"},
-                    {question:"8,2 m + 4,1 m",description:"Reken uit: geef je antwoord in decimeter",option1:"1230 dm",option2:"12,3 dm",option3:"12300 dm",answer:"123 dm",points:"1"}
+                    {question:"4,1 m + 7,1 m",description:"Reken uit: geef je antwoord in decimeter",option1:"112 dm",option2:"11,2 dm",option3:"1120 dm",answer:"112 dm",points:"1"},
+                    {question:"3,3 m + 9,8 m",description:"Reken uit: geef je antwoord in decimeter",option1:"131 dm",option2:"13,1 dm",option3:"13100 dm",answer:"131 dm",points:"1"},
+                    {question:"8,2 m + 4,1 m",description:"Reken uit: geef je antwoord in decimeter",option1:"123 dm",option2:"12,3 dm",option3:"12300 dm",answer:"123 dm",points:"1"}
                 ]
             },
             {name: "Maten II",correct:"Goed gedaan!",incorrect:"Helaas, het door jou gegeven antwoord (###) is niet goed. Het antwoord had moeten zijn: ",time:8,questions:
                 [
-                    {question:"9,2 m + 7,2 m",description:"Reken uit: geef je antwoord in decimeter",option1:"1640 dm",option2:"16,4 dm",option3:"16400 dm",answer:"164 dm",points:"2"},
-                    {question:"8,4 m + 8,8 m",description:"Reken uit: geef je antwoord in decimeter",option1:"1720 dm",option2:"17,2 dm",option3:"17200 dm",answer:"172 dm",points:"2"},
+                    {question:"9,2 m + 7,2 m",description:"Reken uit: geef je antwoord in decimeter",option1:"1640 dm",option2:"164 dm",option3:"16400 dm",answer:"164 dm",points:"2"},
+                    {question:"8,4 m + 8,8 m",description:"Reken uit: geef je antwoord in decimeter",option1:"1720 dm",option2:"17,2 dm",option3:"172 dm",answer:"172 dm",points:"2"},
                     {question:"5,7 m + 2,3 m",description:"Reken uit: geef je antwoord in decimeter",option1:"80 dm",option2:"8 dm",option3:"800 dm",answer:"80 dm",points:"2"},
-                    {question:"4,1 m + 7,1 m",description:"Reken uit: geef je antwoord in decimeter",option1:"1120 dm",option2:"11,2 dm",option3:"11200 dm",answer:"112 dm",points:"2"},
-                    {question:"3,3 m + 9,8 m",description:"Reken uit: geef je antwoord in decimeter",option1:"1310 dm",option2:"13,1 dm",option3:"13100 dm",answer:"131 dm",points:"2"},
-                    {question:"8,2 m + 4,1 m",description:"Reken uit: geef je antwoord in decimeter",option1:"1230 dm",option2:"12,3 dm",option3:"12300 dm",answer:"123 dm",points:"2"}
+                    {question:"4,1 m + 7,1 m",description:"Reken uit: geef je antwoord in decimeter",option1:"1120 dm",option2:"11,2 dm",option3:"1120 dm",answer:"112 dm",points:"2"},
+                    {question:"3,3 m + 9,8 m",description:"Reken uit: geef je antwoord in decimeter",option1:"131 dm",option2:"13,1 dm",option3:"13100 dm",answer:"131 dm",points:"2"},
+                    {question:"8,2 m + 4,1 m",description:"Reken uit: geef je antwoord in decimeter",option1:"123 dm",option2:"12,3 dm",option3:"12300 dm",answer:"123 dm",points:"2"}
                 ]
             },
             {name: "Maten III",correct:"Goed gedaan!",incorrect:"Helaas, het door jou gegeven antwoord (###) is niet goed. Het antwoord had moeten zijn: ",time:8,questions:
                 [
-                    {question:"9,2 m + 7,2 m",description:"Reken uit: geef je antwoord in decimeter",option1:"1640 dm",option2:"16,4 dm",option3:"16400 dm",answer:"164 dm",points:"3"},
-                    {question:"8,4 m + 8,8 m",description:"Reken uit: geef je antwoord in decimeter",option1:"1720 dm",option2:"17,2 dm",option3:"17200 dm",answer:"172 dm",points:"3"},
+                    {question:"9,2 m + 7,2 m",description:"Reken uit: geef je antwoord in decimeter",option1:"1640 dm",option2:"164 dm",option3:"16400 dm",answer:"164 dm",points:"3"},
+                    {question:"8,4 m + 8,8 m",description:"Reken uit: geef je antwoord in decimeter",option1:"1720 dm",option2:"17,2 dm",option3:"172 dm",answer:"172 dm",points:"3"},
                     {question:"5,7 m + 2,3 m",description:"Reken uit: geef je antwoord in decimeter",option1:"80 dm",option2:"8 dm",option3:"800 dm",answer:"80 dm",points:"3"},
-                    {question:"4,1 m + 7,1 m",description:"Reken uit: geef je antwoord in decimeter",option1:"1120 dm",option2:"11,2 dm",option3:"11200 dm",answer:"112 dm",points:"3"},
-                    {question:"3,3 m + 9,8 m",description:"Reken uit: geef je antwoord in decimeter",option1:"1310 dm",option2:"13,1 dm",option3:"13100 dm",answer:"131 dm",points:"3"},
-                    {question:"8,2 m + 4,1 m",description:"Reken uit: geef je antwoord in decimeter",option1:"1230 dm",option2:"12,3 dm",option3:"12300 dm",answer:"123 dm",points:"3"}
+                    {question:"4,1 m + 7,1 m",description:"Reken uit: geef je antwoord in decimeter",option1:"1120 dm",option2:"11,2 dm",option3:"1120 dm",answer:"112 dm",points:"3"},
+                    {question:"3,3 m + 9,8 m",description:"Reken uit: geef je antwoord in decimeter",option1:"131 dm",option2:"13,1 dm",option3:"13100 dm",answer:"131 dm",points:"3"},
+                    {question:"8,2 m + 4,1 m",description:"Reken uit: geef je antwoord in decimeter",option1:"123 dm",option2:"12,3 dm",option3:"12300 dm",answer:"123 dm",points:"3"}
                 ]
             }
         ];

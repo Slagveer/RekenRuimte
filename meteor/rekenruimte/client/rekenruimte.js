@@ -1,16 +1,41 @@
 Lessons = new Meteor.Collection("lessons");
 Scores = new Meteor.Collection("scores");
 Session.set("defaultSelectedLesson",true);
-var spaceShips = [];
+Session.set("startScreen",true);
+var spaceShips = [], moon, stars = [], starLength = 8;
 
 function init() {
     canvas = document.getElementById("canvas");
     console.log("INIT START");
-    exportRoot = new lib.RekenRuimte();
+    var exportRoot = new lib.RekenRuimte();
+    moon = new lib.mcMoon();
+    stage = new createjs.Stage(canvas);
+
+    moon.scaleY = .5;
+    moon.scaleX = .5;
+    moon.x = 300;//canvas.width - moon.width;
+    moon.y = 50;
+
+    console.log(moon.mouth);
 
     stage = new createjs.Stage(canvas);
     //stage.addChild(exportRoot);
-    //stage.update();
+    stage.addChild(moon);
+    var star, size;
+    for(var i = 0;i < starLength;i++){
+        size = Math.random() * .7;
+        star = new lib.mcStar();
+        star.scaleX = size;
+        star.scaleY = size;
+        star.x = 300 * Math.random();
+        star.y = 100 * Math.random();
+        stage.addChild(star);
+        createjs.Tween.get(star,{loop: true}).to({rotation: 360},10000, createjs.Ease.easeInOut).call(function(){console.log("finished")});
+        stars.push(star);
+    }
+    //moon.mouth.setTransform(2.5,27.1);
+
+    stage.update();
 
     createjs.Ticker.setFPS(24);
     createjs.Ticker.addListener(window);
@@ -18,18 +43,29 @@ function init() {
 
 function tick(){
 
+
+
     if(typeof Lessons.findOne({_id:Session.get("selectedLesson")}) !== "undefined"){
-        var questionsLength = Lessons.findOne({_id:Session.get("selectedLesson")}).questions.length, questionIndex = Math.floor(Math.random() * questionsLength);
+
 
         if(spaceShips.length === 0){
+
+            var questionsLength = Lessons.findOne({_id:Session.get("selectedLesson")}).questions.length, questionIndex = Math.floor(Math.random() * questionsLength);
+            Session.set("questionIndex", questionIndex);
+            Session.set("question", Lessons.findOne({_id:Session.get("selectedLesson")}).questions[questionIndex]);
+
             var s = new lib.mcSpaceShip();
             s.y = 100;
             s.x = 650;
             s.scaleY = .5;
             s.scaleX = .5;
-            s.instance_7.text.text = Lessons.findOne({_id:Session.get("selectedLesson")}).questions[questionIndex].option1;
+            s.ship.text.text = Lessons.findOne({_id:Session.get("selectedLesson")}).questions[questionIndex].option1;
+            s.ship_1.textCorrect.text = Lessons.findOne({_id:Session.get("selectedLesson")}).questions[questionIndex].option1;
+            s.ship_2.textIncorrect.text = Lessons.findOne({_id:Session.get("selectedLesson")}).questions[questionIndex].option1;
+            //console.log(s);
             s.onClick = handleClick;
             stage.addChild(s);
+            createjs.Tween.get(s).wait(Math.random() * 500).to({x: 500},1000, createjs.Ease.elasticInOut).call(function(){console.log("finished")});
 
             spaceShips.push(s);
 
@@ -38,11 +74,12 @@ function tick(){
             s.x = 650;
             s.scaleY = .5;
             s.scaleX = .5;
-            //console.log(s.instance_7.text.text);
-            s.question = Lessons.findOne({_id:Session.get("selectedLesson")}).questions[questionIndex];
-            s.instance_7.text.text = Lessons.findOne({_id:Session.get("selectedLesson")}).questions[questionIndex].option2;
+            s.ship.text.text = Lessons.findOne({_id:Session.get("selectedLesson")}).questions[questionIndex].option2;
+            s.ship_1.textCorrect.text = Lessons.findOne({_id:Session.get("selectedLesson")}).questions[questionIndex].option2;
+            s.ship_2.textIncorrect.text = Lessons.findOne({_id:Session.get("selectedLesson")}).questions[questionIndex].option2;
             s.onClick = handleClick;
             stage.addChild(s);
+            createjs.Tween.get(s).wait(Math.random() * 500).to({x: 500},1000, createjs.Ease.elasticInOut).call(function(){console.log("finished")});
 
             spaceShips.push(s);
 
@@ -51,14 +88,26 @@ function tick(){
             s.x = 650;
             s.scaleY = .5;
             s.scaleX = .5;
-            //console.log(s.instance_7.text.text);
-            s.instance_7.text.text = Lessons.findOne({_id:Session.get("selectedLesson")}).questions[questionIndex].option3;
+            s.ship.text.text = Lessons.findOne({_id:Session.get("selectedLesson")}).questions[questionIndex].option3;
+            s.ship_1.textCorrect.text = Lessons.findOne({_id:Session.get("selectedLesson")}).questions[questionIndex].option3;
+            s.ship_2.textIncorrect.text = Lessons.findOne({_id:Session.get("selectedLesson")}).questions[questionIndex].option3;
             s.onClick = handleClick;
             stage.addChild(s);
+            createjs.Tween.get(s).wait(Math.random() * 500).to({x: 500},1000, createjs.Ease.elasticInOut).call(function(){console.log("finished")});
 
             spaceShips.push(s);
+            Session.set("answered",false);
         }
 
+        if(Session.get("answered") === true){
+            for (var i=spaceShips.length-1; i>=0; i--) {
+                var spaceShip = spaceShips[i];
+                createjs.Tween.get(spaceShip).to({x: -100, color:{}},1000, createjs.Ease.elasticInOut).call(function(){
+                    //console.log(spaceShips.length)
+                });
+            }
+        }
+        //if(Session.get("answered") === false){
         for (var i=spaceShips.length-1; i>=0; i--) {
             var spaceShip = spaceShips[i];
 
@@ -74,13 +123,13 @@ function tick(){
                 var score = Scores.findOne({lesson_id:Session.get("selectedLesson"),user_id:Meteor.userId()});
                 if(typeof score !== "undefined"){
                     //console.info(score.score);
-                    Scores.update(score._id, {$inc: {score: 5}});
+                    Scores.update(score._id, {$inc: {score: 0}});
                 }else{
                     //Scores.insert({lesson_id:Session.get("selectedLesson"),user_id:Meteor.userId(),score:1,timestamp:(new Date()).getTime()});
                     Meteor.call('createScore', {
                         user_id: Meteor.userId(),
                         lesson_id: Session.get("selectedLesson"),
-                        score: 1
+                        score: 0
                     }, function (error, score) {
                         if (! error) {
                             console.log(error);
@@ -91,16 +140,55 @@ function tick(){
                 //updateScore(spaceShip.y > 400 ? 100 : -500);
             }
         }
+
     }
     stage.update();
 }
 
 function handleClick(eventObj) {
     var spaceShip = eventObj.target;
-    //console.log(spaceShip.children[0].text.text);
-    spaceShip.children[0].text.text = "000";
-    createjs.Tween.get(spaceShip).to({x: 150},300, Ease.elasticInOut).call(function(){console.log("finished")});
+    moonReaction();
+    if(Session.get("answered") === false){
+        if(Session.get("question").answer === spaceShip.ship.text.text){
+            spaceShip.gotoAndPlay("correct");
+            Session.set("answer", true);
+            var score = Scores.findOne({lesson_id:Session.get("selectedLesson"),user_id:Meteor.userId()});
+            if(typeof score !== "undefined"){
+                //console.info(score.score);
+                Scores.update(score._id, {$inc: {score: Number(Session.get("question").points)}});
+            }else{
+                Meteor.call('createScore', {
+                    user_id: Meteor.userId(),
+                    lesson_id: Session.get("selectedLesson"),
+                    score: Number(Session.get("question").points)
+                }, function (error, score) {
+                    if (! error) {
+                        console.log(error);
+                    }
+                });
+            }
+        }else{
+            spaceShip.gotoAndPlay("incorrect");
+            Session.set("answer", false);
+        }
+
+        createjs.Tween.get(spaceShip).to({x: -100, color:{}},1000, createjs.Ease.elasticInOut).call(function(){Session.set("answered",true);console.log("finished 1")});
+    }
 }
+
+function moonReaction(){
+    createjs.Tween.get(moon.mouth).to({scaleY:.3},500, createjs.Ease.elasticOut).call(function(e){
+        createjs.Tween.get(e.target).to({scaleY:1},500, createjs.Ease.Bounce)
+    });
+    createjs.Tween.get(moon.leftEye).to({y:-16.9},500, createjs.Ease.elasticInOut).call(function(e){
+        createjs.Tween.get(e.target).to({y:-19.9},500, createjs.Ease.elasticInOut)
+    });
+    createjs.Tween.get(moon.rightEye).to({y:-16.9},500, createjs.Ease.elasticInOut).call(function(e){
+        createjs.Tween.get(e.target).to({y:-19.9},500, createjs.Ease.elasticInOut)
+    });
+}
+
+//  METEOR
 
 if (Meteor.isClient) {
 
@@ -112,6 +200,10 @@ if (Meteor.isClient) {
         //console.log(1);
     },1000);
 
+    Template.startScreen.visible =  function(){
+        return true;
+    };
+
   Template.page.greeting = function () {
     return "Welcome to rekenruimte.";
   };
@@ -121,9 +213,10 @@ if (Meteor.isClient) {
         // template data, if any, is available in 'this'
         Session.set("defaultSelectedLesson",false);
         Session.set("selectedLesson", this._id);
-            console.log(this._id);
-        if (typeof console !== 'undefined')
-            console.log("You pressed the button");
+            //console.log(this._id);
+        if (typeof console !== 'undefined'){
+            //console.log("You pressed the button");
+        }
     }
   ,
     'click .inc' : function(){
@@ -164,7 +257,7 @@ if (Meteor.isClient) {
     Template.page.selectedLesson = function () {
         var lesson = Lessons.findOne(Session.get("selectedLesson"));
         var score = Scores.findOne({lesson_id:Session.get("selectedLesson")});
-        console.log(score);
+        //console.log(score);
         return lesson && lesson.name;
     };
 
@@ -178,7 +271,7 @@ if (Meteor.isServer) {
 }
 
 Template.userslist.users = function () {
-    console.log(Meteor.users.find().count());
+    //console.log(Meteor.users.find().count());
     var users = [];
     for(var user in Meteor.users.find().collection.docs){
         //console.log(Meteor.users.findOne({_id:user}));
