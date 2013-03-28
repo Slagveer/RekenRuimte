@@ -2,20 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="90cefa06-2644-42d0-9222-0ee2ca88f5ca" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/meteor/rekenruimte/public/font/facebolf-webfont.eot" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/meteor/rekenruimte/public/font/facebolf-webfont.ttf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/meteor/rekenruimte/public/font/facebolf-webfont.woff" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/meteor/rekenruimte/public/font/fontawesome-webfont.eot" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/meteor/rekenruimte/public/font/fontawesome-webfont.woff" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/meteor/rekenruimte/css/font-awesome-ie7.min.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/meteor/rekenruimte/css/font-awesome.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/meteor/rekenruimte/css/font-awesome.min.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/meteor/rekenruimte/public/font/facebolf-webfont.svg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/meteor/packages/jquery-animate-colors/LICENSE.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/meteor/packages/jquery-animate-colors/README.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/meteor/packages/jquery-animate-colors/lib/jquery.animate-colors.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/meteor/packages/jquery-animate-colors/package.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/meteor/packages/jquery-animate-colors/smart.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/meteor/rekenruimte/smart.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/meteor/rekenruimte/.meteor/.gitignore" afterPath="$PROJECT_DIR$/meteor/rekenruimte/.meteor/.gitignore" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/meteor/rekenruimte/.meteor/packages" afterPath="$PROJECT_DIR$/meteor/rekenruimte/.meteor/packages" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/meteor/rekenruimte/client/rekenruimte.html" afterPath="$PROJECT_DIR$/meteor/rekenruimte/client/rekenruimte.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/meteor/rekenruimte/client/rekenruimte.js" afterPath="$PROJECT_DIR$/meteor/rekenruimte/client/rekenruimte.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/meteor/rekenruimte/css/rekenruimte.less" afterPath="$PROJECT_DIR$/meteor/rekenruimte/css/rekenruimte.less" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/meteor/rekenruimte/server/server.js" afterPath="$PROJECT_DIR$/meteor/rekenruimte/server/server.js" />
     </list>
     <ignored path="RekenRuimte.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -37,19 +34,46 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="rekenruimte.js" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="rekenruimte.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/meteor/rekenruimte/client/rekenruimte.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="9" column="13" selection-start="329" selection-end="363" vertical-scroll-proportion="-4.9192247">
+            <state line="235" column="35" selection-start="9308" selection-end="9308" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="flashobjects.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/meteor/rekenruimte/client/lib/flashobjects.js">
+      <file leaf-file-name="jquery.animate-colors.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/meteor/packages/jquery-animate-colors/lib/jquery.animate-colors.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="472" column="26" selection-start="42871" selection-end="42871" vertical-scroll-proportion="0.0">
+            <state line="108" column="11" selection-start="4177" selection-end="4177" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="README.md" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/meteor/packages/jquery-animate-colors/README.md">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="16" column="2" selection-start="378" selection-end="378" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="smart.json" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/meteor/packages/jquery-animate-colors/smart.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="6" column="10" selection-start="588" selection-end="588" vertical-scroll-proportion="0.09719223">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="smart.json" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/meteor/rekenruimte/smart.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="5" column="30" selection-start="100" selection-end="100" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -58,7 +82,7 @@
       <file leaf-file-name="rekenruimte.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/meteor/rekenruimte/client/rekenruimte.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="71" column="32" selection-start="1780" selection-end="1780" vertical-scroll-proportion="-3.28">
+            <state line="71" column="37" selection-start="1785" selection-end="1785" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -77,24 +101,6 @@
         <entry file="file://$PROJECT_DIR$/meteor/rekenruimte/server/server.js">
           <provider selected="true" editor-type-id="text-editor">
             <state line="9" column="6" selection-start="257" selection-end="257" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="shared.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/meteor/rekenruimte/shared/shared.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="RekenRuimte.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/RekenRuimte.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -131,22 +137,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/meteor/rekenruimte/client/client.coffee" />
-        <option value="$PROJECT_DIR$/meteor/rekenruimte/server/server.coffee" />
-        <option value="$PROJECT_DIR$/meteor/rekenruimte/client/rekenruimte.css" />
-        <option value="$PROJECT_DIR$/meteor/rekenruimte/shared/shared.js" />
-        <option value="$PROJECT_DIR$/RekenRuimte.js" />
-        <option value="$PROJECT_DIR$/meteor/rekenruimte/client/flashobjects.js" />
-        <option value="$PROJECT_DIR$/meteor/rekenruimte/client/main.flashobjects.js" />
         <option value="$PROJECT_DIR$/meteor/rekenruimte/client/second/main.flashobjects.js" />
         <option value="$PROJECT_DIR$/meteor/rekenruimte/client/lib/main.flashobjects.js" />
         <option value="$PROJECT_DIR$/meteor/rekenruimte/client/lib/flashobjects.js" />
         <option value="$PROJECT_DIR$/meteor/rekenruimte/client/rekenruimte.less" />
         <option value="$PROJECT_DIR$/meteor/rekenruimte/server/server.js" />
-        <option value="$PROJECT_DIR$/meteor/rekenruimte/css/rekenruimte.less" />
         <option value="$PROJECT_DIR$/meteor/wordplay/client/wordplay.js" />
-        <option value="$PROJECT_DIR$/meteor/rekenruimte/client/rekenruimte.js" />
         <option value="$PROJECT_DIR$/meteor/rekenruimte/client/rekenruimte.html" />
+        <option value="$PROJECT_DIR$/meteor/rekenruimte/css/rekenruimte.less" />
+        <option value="$PROJECT_DIR$/meteor/rekenruimte/client/rekenruimte.js" />
+        <option value="$PROJECT_DIR$/meteor/packages/jquery-animate-colors/package.js" />
+        <option value="$PROJECT_DIR$/meteor/rekenruimte/smart.json" />
+        <option value="$PROJECT_DIR$/meteor/rekenruimte/.meteor/meteorite/packages/jquery-animate-colors/lib/jquery.animate-colors.js" />
+        <option value="$PROJECT_DIR$/meteor/rekenruimte/.meteor/packages" />
+        <option value="$PROJECT_DIR$/meteor/packages/jquery-animate-colors/lib/jquery.animate-colors.js" />
+        <option value="$PROJECT_DIR$/meteor/packages/jquery-animate-colors/README.md" />
+        <option value="$PROJECT_DIR$/meteor/packages/jquery-animate-colors/smart.json" />
       </list>
     </option>
   </component>
@@ -391,6 +397,28 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="shared" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="RekenRuimte" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="RekenRuimte" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="meteor" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="rekenruimte" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="server" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -531,49 +559,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="client" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="lib" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="second" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="RekenRuimte" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="RekenRuimte" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="meteor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="rekenruimte" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="client" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="lib" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="second" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="first" />
+              <option name="myItemId" value=".meteor" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -596,6 +582,10 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value=".meteor" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="meteorite" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -674,6 +664,68 @@
               <option name="myItemId" value="meteor" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="packages" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jquery-animate-colors" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="RekenRuimte" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="RekenRuimte" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="meteor" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="packages" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jquery-animate-colors" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lib" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="RekenRuimte" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="RekenRuimte" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="meteor" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="RekenRuimte" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="RekenRuimte" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="libs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
@@ -684,8 +736,8 @@
     <property name="WebServerToolWindowFactoryState" value="true" />
     <property name="options.lastSelected" value="project.propVCSSupport.Mappings" />
     <property name="FullScreen" value="false" />
-    <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.searchVisible" value="true" />
+    <property name="options.splitter.details.proportions" value="0.2" />
   </component>
   <component name="PublishConfig" serverName="RekenRuimte" serverId="cee6620e-17dd-4a7b-8e31-e49c98dc5657">
     <servers>
@@ -714,18 +766,18 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/meteor/rekenruimte/public/font" />
-      <recent name="$PROJECT_DIR$/meteor/rekenruimte/css" />
-      <recent name="$PROJECT_DIR$/meteor/rekenruimte/public" />
+      <recent name="$PROJECT_DIR$/meteor/rekenruimte/.meteor/meteorite/packages" />
+      <recent name="$PROJECT_DIR$/meteor/rekenruimte/.meteor/meteorite/packages/jquery-animate-colors/lib" />
+      <recent name="$PROJECT_DIR$/meteor/rekenruimte/.meteor" />
       <recent name="$PROJECT_DIR$/meteor/rekenruimte/client/lib" />
-      <recent name="$PROJECT_DIR$/meteor/rekenruimte/client/lib/second" />
+      <recent name="$PROJECT_DIR$/meteor/rekenruimte/public/font" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/meteor/rekenruimte/css" />
+      <recent name="$PROJECT_DIR$/meteor/packages/jquery-animate-colors/lib" />
+      <recent name="$PROJECT_DIR$/meteor/rekenruimte/.meteor/meteorite/packages" />
       <recent name="$PROJECT_DIR$/meteor/rekenruimte/client/lib" />
-      <recent name="$PROJECT_DIR$/meteor/rekenruimte/client/second" />
-      <recent name="$PROJECT_DIR$/meteor/rekenruimte/client/second/first" />
-      <recent name="$PROJECT_DIR$/meteor/rekenruimte/client/lib/first" />
+      <recent name="$PROJECT_DIR$/meteor/rekenruimte/client" />
+      <recent name="$PROJECT_DIR$/meteor/rekenruimte/client/lib/second/first" />
     </key>
   </component>
   <component name="RunManager">
@@ -770,23 +822,23 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="22" width="1920" height="1087" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32920536" sideWeight="0.49786553" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.26947704" sideWeight="0.66873705" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.27214515" sideWeight="0.66873705" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.33126295" sideWeight="0.49839914" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33126295" sideWeight="0.5026681" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="JsTestDriver Server" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32919255" sideWeight="0.49359658" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -848,16 +900,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/meteor/rekenruimte/client/lib/second/movieclip-0.6.0.min.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/meteor/rekenruimte/client/lib/flashobjects.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="472" column="26" selection-start="42871" selection-end="42871" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/meteor/rekenruimte/shared/shared.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
@@ -868,303 +910,21 @@
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/RekenRuimte.js">
+    <entry file="file://$PROJECT_DIR$/meteor/rekenruimte/smart.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="410" column="0" selection-start="0" selection-end="40684" vertical-scroll-proportion="0.0" />
+        <state line="5" column="30" selection-start="100" selection-end="100" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/meteor/leaderboard/leaderboard.js">
+    <entry file="file://$PROJECT_DIR$/meteor/rekenruimte/client/rekenruimte.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/meteor/leaderboard/leaderboard.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+        <state line="71" column="37" selection-start="1785" selection-end="1785" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/meteor/rekenruimte/public/font/facebolf-webfont.svg">
+    <entry file="file://$PROJECT_DIR$/meteor/rekenruimte/css/rekenruimte.less">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/meteor/rekenruimte/css/font-awesome.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="20" selection-start="1137" selection-end="1145" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/meteor/rekenruimte/css/font-awesome-ie7.min.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding>
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1358411150000" expanded="true" signature="-1:-1" placeholder="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/meteor/todos/client/todos.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="0" selection-start="197" selection-end="266" vertical-scroll-proportion="0.1453958">
-          <folding />
-        </state>
+        <state line="29" column="24" selection-start="865" selection-end="865" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/meteor/rekenruimte/server/server.js">
@@ -1174,30 +934,56 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/meteor/rekenruimte/css/rekenruimte.less">
+    <entry file="file://$PROJECT_DIR$/RekenRuimte.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="24" selection-start="865" selection-end="865" vertical-scroll-proportion="0.0">
+        <state line="410" column="0" selection-start="0" selection-end="40684" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/meteor/wordplay/client/wordplay.js">
+    <entry file="file://$PROJECT_DIR$/meteor/packages/jquery-animate-colors/LICENSE.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="130" column="24" selection-start="3193" selection-end="3197" vertical-scroll-proportion="0.73693085">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/meteor/rekenruimte/client/rekenruimte.html">
+    <entry file="file://$PROJECT_DIR$/meteor/packages/jquery-animate-colors/package.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="71" column="32" selection-start="1780" selection-end="1780" vertical-scroll-proportion="-3.28">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/meteor/rekenruimte/.meteor/packages">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="13" column="6" selection-start="258" selection-end="258" vertical-scroll-proportion="0.20766774">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/meteor/rekenruimte/client/rekenruimte.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="13" selection-start="329" selection-end="363" vertical-scroll-proportion="-4.9192247">
+        <state line="235" column="35" selection-start="9308" selection-end="9308" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/meteor/packages/jquery-animate-colors/lib/jquery.animate-colors.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="108" column="11" selection-start="4177" selection-end="4177" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/meteor/packages/jquery-animate-colors/README.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="16" column="2" selection-start="378" selection-end="378" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/meteor/packages/jquery-animate-colors/smart.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="10" selection-start="588" selection-end="588" vertical-scroll-proportion="0.09719223">
           <folding />
         </state>
       </provider>

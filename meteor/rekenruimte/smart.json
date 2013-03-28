@@ -1,0 +1,10 @@
+{
+    "meteor": {
+        "branch": "master"
+    },
+    "packages": {
+        "jquery-animate-colors" : {
+            "path": "/Users/pslagveer/IdeaProjects/RekenRuimte/meteor/packages/jquery-animate-colors"
+        }
+    }
+}

@@ -234,8 +234,10 @@ if (Meteor.isClient) {
             console.log(434344);
         },
         'mouseover' : function () {
-            //Session.set("activescreen", "lessonsscreen");
-            console.log(this);
+            $("#" + this._id).animate({backgroundColor: "0xc3c3c3"});
+        },
+        'mouseout' : function () {
+            Session.set("lessonhovered", this._id);
         }
     });
 

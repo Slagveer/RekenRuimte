@@ -1,0 +1,9 @@
+{
+  "name": "jquery-animate-colors",
+  "description": "AnimateColors - With jQuery's animate function, you can animate all kinds of css-properties. What's really missing from jQuery is animating colors. This plugin will add this feature. With this plugin, you can animate the following properties:color,backgroundColor,borderColor,borderBottomColor,borderLeftColor,borderRightColor,borderTopColor,outlineColor",
+  "homepage": "https://github.com/dandv/meteor-jquery-rateit",
+  "author": "Patric Slagveer <patric.slagveer@gmail.com> (http://slagveer.com)",
+  "version": "1.0.0",
+  "git": "",
+  "packages": {}
+}
