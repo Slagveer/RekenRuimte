@@ -4,6 +4,7 @@
 
 <body>
     {{> startScreen}}
+    {{> lessonsScreen}}
     {{> page}}
     {{> game}}
 </body>
@@ -18,16 +19,66 @@
     </div>
 </template>
 
+<template name="screenTitle">
+    <div class="container">
+        <div class="row">
+            <div class="span12 {{classname}}">
+                <h1 class="title">RekenRuimte</h1>
+            </div>
+        </div>
+    </div>
+</template>
+
 <template name="startScreen">
     {{#if visible}}
-        <div class="container">
+        {{> screenTitle}}
+        <div class="container startscreen">
             <div class="row">
-                <div class="span12">
-                    <h1 class="title">RekenRuimte</h1>
+                <div class="span2 offset5">
+                    <p>
+                        <button class="btn btn-large btn-block btn-primary startbutton" type="button">Start</button>
+                    </p>
                 </div>
             </div>
         </div>
     {{/if}}
+</template>
+
+<template name="lessonsScreen">
+    {{#if visible}}
+    {{> screenTitle}}
+
+    <div class="container lessonsscreen">
+        <div class="row">
+            <div class="span12">
+                <div class="lessons">
+                    <ul>
+                        {{#each lessons}}
+                        {{> lesson}}
+                        {{/each}}
+                    </ul>
+                </div>
+            </div>
+            {{#unless selectedLesson}}
+            <div class="none">Click a lesson to select</div>
+            {{/unless}}
+        </div>
+    </div>
+    {{/if}}
+</template>
+
+<template name="lesson">
+    <li class="lesson {{selected}}">
+        <div class="well {{hover}}">
+            <div class="row-fluid">
+                <span class="span7 name">{{name}}</span>
+                <span class="span2 offset3">....</span>
+            </div>
+            <div class="row-fluid">
+                <span class="span7 description">{{description}}</span>
+            </div>
+        </div>
+    </li>
 </template>
 
 <template name="page">
@@ -107,11 +158,7 @@
     {{/if}}
 </template>
 
-<template name="lesson">
-    <li class="lesson {{selected}}">
-        {{name}}
-    </li>
-</template>
+
 
 
 

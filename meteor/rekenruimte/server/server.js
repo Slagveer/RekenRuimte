@@ -11,7 +11,7 @@ Scores = new Meteor.Collection("scores");
     //Scores.remove({});
     if (Lessons.find().count() === 0) {
         var data = [
-            {name: "Maten I",correct:"Goed gedaan!",incorrect:"Helaas, het door jou gegeven antwoord (###) is niet goed. Het antwoord had moeten zijn: ",time:10,questions:
+            {name: "Maten I",description:"rekenen met maten",correct:"Goed gedaan!",incorrect:"Helaas, het door jou gegeven antwoord (###) is niet goed. Het antwoord had moeten zijn: ",time:10,questions:
                 [
                     {question:"9,2 m + 7,2 m",description:"Reken uit: geef je antwoord in decimeter",option1:"1640 dm",option2:"164 dm",option3:"16400 dm",answer:"164 dm",points:"1"},
                     {question:"8,4 m + 8,8 m",description:"Reken uit: geef je antwoord in decimeter",option1:"1720 dm",option2:"17,2 dm",option3:"172 dm",answer:"172 dm",points:"1"},
@@ -21,7 +21,7 @@ Scores = new Meteor.Collection("scores");
                     {question:"8,2 m + 4,1 m",description:"Reken uit: geef je antwoord in decimeter",option1:"123 dm",option2:"12,3 dm",option3:"12300 dm",answer:"123 dm",points:"1"}
                 ]
             },
-            {name: "Maten II",correct:"Goed gedaan!",incorrect:"Helaas, het door jou gegeven antwoord (###) is niet goed. Het antwoord had moeten zijn: ",time:8,questions:
+            {name: "Maten II",description:"lengtematen",correct:"Goed gedaan!",incorrect:"Helaas, het door jou gegeven antwoord (###) is niet goed. Het antwoord had moeten zijn: ",time:8,questions:
                 [
                     {question:"9,2 m + 7,2 m",description:"Reken uit: geef je antwoord in decimeter",option1:"1640 dm",option2:"164 dm",option3:"16400 dm",answer:"164 dm",points:"2"},
                     {question:"8,4 m + 8,8 m",description:"Reken uit: geef je antwoord in decimeter",option1:"1720 dm",option2:"17,2 dm",option3:"172 dm",answer:"172 dm",points:"2"},
@@ -31,7 +31,7 @@ Scores = new Meteor.Collection("scores");
                     {question:"8,2 m + 4,1 m",description:"Reken uit: geef je antwoord in decimeter",option1:"123 dm",option2:"12,3 dm",option3:"12300 dm",answer:"123 dm",points:"2"}
                 ]
             },
-            {name: "Maten III",correct:"Goed gedaan!",incorrect:"Helaas, het door jou gegeven antwoord (###) is niet goed. Het antwoord had moeten zijn: ",time:8,questions:
+            {name: "Maten III",description:"omtrek en oppervlakte",correct:"Goed gedaan!",incorrect:"Helaas, het door jou gegeven antwoord (###) is niet goed. Het antwoord had moeten zijn: ",time:8,questions:
                 [
                     {question:"9,2 m + 7,2 m",description:"Reken uit: geef je antwoord in decimeter",option1:"1640 dm",option2:"164 dm",option3:"16400 dm",answer:"164 dm",points:"3"},
                     {question:"8,4 m + 8,8 m",description:"Reken uit: geef je antwoord in decimeter",option1:"1720 dm",option2:"17,2 dm",option3:"172 dm",answer:"172 dm",points:"3"},
@@ -45,7 +45,7 @@ Scores = new Meteor.Collection("scores");
 
         var timestamp = (new Date()).getTime();
         for (var i = 0; i < data.length; i++) {
-            var list_id = Lessons.insert({name: data[i].name,correct:data[i].correct,incorrect:data[i].incorrect,time:data[i].time,questions:data[i].questions});
+            var list_id = Lessons.insert({name: data[i].name,description:data[i].description,correct:data[i].correct,incorrect:data[i].incorrect,time:data[i].time,questions:data[i].questions});
         }
     }
 

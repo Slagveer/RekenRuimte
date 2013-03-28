@@ -2,6 +2,8 @@ Lessons = new Meteor.Collection("lessons");
 Scores = new Meteor.Collection("scores");
 Session.set("defaultSelectedLesson",true);
 Session.set("startScreen",true);
+// Default active screen set
+Session.setDefault('activescreen', "startscreen");
 var spaceShips = [], moon, stars = [], starLength = 8;
 
 function init() {
@@ -200,9 +202,42 @@ if (Meteor.isClient) {
         //console.log(1);
     },1000);
 
-    Template.startScreen.visible =  function(){
-        return true;
+    Template.screenTitle.classname =  function () {
+        return (Session.get("activescreen") === "startscreen") ? "startscreen" : "";
     };
+
+    Template.startScreen.visible =  function () {
+        return Session.get("activescreen") === "startscreen";
+    };
+
+    Template.startScreen.events({
+        'click .startbutton' : function () {
+            Session.set("activescreen", "lessonsscreen");
+        }
+    });
+
+    Template.lessonsScreen.visible = function () {
+        return Session.get("activescreen") === "lessonsscreen";
+    };
+
+    Template.lessonsScreen.lessons = function () {
+        var lessons = Lessons.find({}, {sort: {score: -1, name: 1}});
+        if(Session.get("defaultSelectedLesson") === true && typeof lessons.fetch()[0] !== "undefined"){
+            Session.set("selectedLesson",Lessons.find({}, {sort: {score: -1, name: 1}}).fetch()[0]._id);
+        }
+        return lessons;
+    };
+
+    Template.lessonsScreen.events({
+        'click .lesson' : function () {
+            //Session.set("activescreen", "lessonsscreen");
+            console.log(434344);
+        },
+        'mouseover' : function () {
+            //Session.set("activescreen", "lessonsscreen");
+            console.log(this);
+        }
+    });
 
   Template.page.greeting = function () {
     return "Welcome to rekenruimte.";
