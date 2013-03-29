@@ -1,29 +1,25 @@
 Lessons = new Meteor.Collection("lessons");
 Scores = new Meteor.Collection("scores");
-Session.set("defaultSelectedLesson",true);
+Session.set("defaultSelectedLesson",false);
 Session.set("startScreen",true);
 // Default active screen set
 Session.setDefault('activescreen', "startscreen");
-var spaceShips = [], moon, stars = [], starLength = 8;
+var spaceShips = [], moon, stars = [], starLength = 8,stagecanvasWidth,stagecanvasHeight, gameInitialized = false;
 
-function init() {
-    canvas = document.getElementById("canvas");
-    console.log("INIT START");
-    var exportRoot = new lib.RekenRuimte();
+function initGame () {
+    gameInitialized = true;
+    var star, size,width = $(".gamescreen").width(),height = $(".gamescreen").height();
+    $("#gamecanvas").attr({width:width,height:height});
+    stagecanvasWidth = width;
+    stagecanvasHeight = height;
+    gameCanvas = document.getElementById("gamecanvas");//$("#gamecanvas")[0];
+    gamestage = new createjs.Stage(gameCanvas);
     moon = new lib.mcMoon();
-    stage = new createjs.Stage(canvas);
-
     moon.scaleY = .5;
     moon.scaleX = .5;
-    moon.x = 300;//canvas.width - moon.width;
+    moon.x = 300;
     moon.y = 50;
-
-    console.log(moon.mouth);
-
-    stage = new createjs.Stage(canvas);
-    //stage.addChild(exportRoot);
-    stage.addChild(moon);
-    var star, size;
+    gamestage.addChild(moon);
     for(var i = 0;i < starLength;i++){
         size = Math.random() * .7;
         star = new lib.mcStar();
@@ -31,120 +27,28 @@ function init() {
         star.scaleY = size;
         star.x = 300 * Math.random();
         star.y = 100 * Math.random();
-        stage.addChild(star);
-        createjs.Tween.get(star,{loop: true}).to({rotation: 360},10000, createjs.Ease.easeInOut).call(function(){console.log("finished")});
+        gamestage.addChild(star);
+        createjs.Tween.get(star,{loop: true}).to({rotation: 360},10000, createjs.Ease.easeInOut).call(function(){
+            console.log("star finished")
+        });
         stars.push(star);
     }
-    //moon.mouth.setTransform(2.5,27.1);
-
-    stage.update();
-
+    gamestage.update();
     createjs.Ticker.setFPS(24);
     createjs.Ticker.addListener(window);
 }
 
-function tick(){
-
-
-
-    if(typeof Lessons.findOne({_id:Session.get("selectedLesson")}) !== "undefined"){
-
-
-        if(spaceShips.length === 0){
-
-            var questionsLength = Lessons.findOne({_id:Session.get("selectedLesson")}).questions.length, questionIndex = Math.floor(Math.random() * questionsLength);
-            Session.set("questionIndex", questionIndex);
-            Session.set("question", Lessons.findOne({_id:Session.get("selectedLesson")}).questions[questionIndex]);
-
-            var s = new lib.mcSpaceShip();
-            s.y = 100;
-            s.x = 650;
-            s.scaleY = .5;
-            s.scaleX = .5;
-            s.ship.text.text = Lessons.findOne({_id:Session.get("selectedLesson")}).questions[questionIndex].option1;
-            s.ship_1.textCorrect.text = Lessons.findOne({_id:Session.get("selectedLesson")}).questions[questionIndex].option1;
-            s.ship_2.textIncorrect.text = Lessons.findOne({_id:Session.get("selectedLesson")}).questions[questionIndex].option1;
-            //console.log(s);
-            s.onClick = handleClick;
-            stage.addChild(s);
-            createjs.Tween.get(s).wait(Math.random() * 500).to({x: 500},1000, createjs.Ease.elasticInOut).call(function(){console.log("finished")});
-
-            spaceShips.push(s);
-
-            s = new lib.mcSpaceShip();
-            s.y = 220;
-            s.x = 650;
-            s.scaleY = .5;
-            s.scaleX = .5;
-            s.ship.text.text = Lessons.findOne({_id:Session.get("selectedLesson")}).questions[questionIndex].option2;
-            s.ship_1.textCorrect.text = Lessons.findOne({_id:Session.get("selectedLesson")}).questions[questionIndex].option2;
-            s.ship_2.textIncorrect.text = Lessons.findOne({_id:Session.get("selectedLesson")}).questions[questionIndex].option2;
-            s.onClick = handleClick;
-            stage.addChild(s);
-            createjs.Tween.get(s).wait(Math.random() * 500).to({x: 500},1000, createjs.Ease.elasticInOut).call(function(){console.log("finished")});
-
-            spaceShips.push(s);
-
-            s = new lib.mcSpaceShip();
-            s.y = 350;
-            s.x = 650;
-            s.scaleY = .5;
-            s.scaleX = .5;
-            s.ship.text.text = Lessons.findOne({_id:Session.get("selectedLesson")}).questions[questionIndex].option3;
-            s.ship_1.textCorrect.text = Lessons.findOne({_id:Session.get("selectedLesson")}).questions[questionIndex].option3;
-            s.ship_2.textIncorrect.text = Lessons.findOne({_id:Session.get("selectedLesson")}).questions[questionIndex].option3;
-            s.onClick = handleClick;
-            stage.addChild(s);
-            createjs.Tween.get(s).wait(Math.random() * 500).to({x: 500},1000, createjs.Ease.elasticInOut).call(function(){console.log("finished")});
-
-            spaceShips.push(s);
-            Session.set("answered",false);
-        }
-
-        if(Session.get("answered") === true){
-            for (var i=spaceShips.length-1; i>=0; i--) {
-                var spaceShip = spaceShips[i];
-                createjs.Tween.get(spaceShip).to({x: -100, color:{}},1000, createjs.Ease.elasticInOut).call(function(){
-                    //console.log(spaceShips.length)
-                });
-            }
-        }
-        //if(Session.get("answered") === false){
-        for (var i=spaceShips.length-1; i>=0; i--) {
-            var spaceShip = spaceShips[i];
-
-            // add gravity to the Y velocity if it's falling:
-            //if (spaceShip.falling) { spaceShip.velY += 3; }
-            spaceShip.x += Math.random() * -2;
-            //spaceShip.y += -0.5;
-
-            if (spaceShip.x < -100 || spaceShip.y > 550) {
-
-                spaceShips.splice(i,1);
-                stage.removeChild(spaceShip);
-                var score = Scores.findOne({lesson_id:Session.get("selectedLesson"),user_id:Meteor.userId()});
-                if(typeof score !== "undefined"){
-                    //console.info(score.score);
-                    Scores.update(score._id, {$inc: {score: 0}});
-                }else{
-                    //Scores.insert({lesson_id:Session.get("selectedLesson"),user_id:Meteor.userId(),score:1,timestamp:(new Date()).getTime()});
-                    Meteor.call('createScore', {
-                        user_id: Meteor.userId(),
-                        lesson_id: Session.get("selectedLesson"),
-                        score: 0
-                    }, function (error, score) {
-                        if (! error) {
-                            console.log(error);
-                        }
-                    });
-                }
-                // add +100 points if it fell or -500 if it escaped
-                //updateScore(spaceShip.y > 400 ? 100 : -500);
-            }
-        }
-
-    }
-    stage.update();
+function createSpaceShip (xPos,yPos,questionIndex,handle,option) {
+    var spaceship = new lib.mcSpaceShip();
+    spaceship.y = yPos;
+    spaceship.x = xPos;
+    spaceship.scaleY = .5;
+    spaceship.scaleX = .5;
+    spaceship.ship.text.text = Lessons.findOne({_id:Session.get("selectedLesson")}).questions[questionIndex][option];
+    spaceship.ship_1.textCorrect.text = Lessons.findOne({_id:Session.get("selectedLesson")}).questions[questionIndex][option];
+    spaceship.ship_2.textIncorrect.text = Lessons.findOne({_id:Session.get("selectedLesson")}).questions[questionIndex][option];
+    spaceship.onClick = handle;
+    return spaceship;
 }
 
 function handleClick(eventObj) {
@@ -178,6 +82,78 @@ function handleClick(eventObj) {
     }
 }
 
+function tick(){
+    var spaceShip,questionsLength, questionIndex,score;
+    if(typeof Lessons.findOne({_id:Session.get("selectedLesson")}) !== "undefined"){
+        if(spaceShips.length === 0){
+            questionsLength = Lessons.findOne({_id:Session.get("selectedLesson")}).questions.length;
+            questionIndex = Math.floor(Math.random() * questionsLength);
+            Session.set("questionIndex", questionIndex);
+            Session.set("question", Lessons.findOne({_id:Session.get("selectedLesson")}).questions[questionIndex]);
+
+            //  SPACESHIP 1
+            var spaceShip = createSpaceShip(stagecanvasWidth + 100,100,questionIndex,handleClick,"option1");
+            gamestage.addChild(spaceShip);
+            createjs.Tween.get(spaceShip).wait(Math.random() * 500).to({x: stagecanvasWidth - 100},1000, createjs.Ease.elasticInOut).call(function(){
+                //
+            });
+            spaceShips.push(spaceShip);
+
+            //  SPACESHIP 2
+            spaceShip = createSpaceShip(stagecanvasWidth + 100,220,questionIndex,handleClick,"option2");
+            gamestage.addChild(spaceShip);
+            createjs.Tween.get(spaceShip).wait(Math.random() * 500).to({x: stagecanvasWidth - 100},1000, createjs.Ease.elasticInOut).call(function(){
+                //
+            });
+            spaceShips.push(spaceShip);
+
+            //  SPACESHIP 3
+            spaceShip = createSpaceShip(stagecanvasWidth + 100,350,questionIndex,handleClick,"option3");
+            gamestage.addChild(spaceShip);
+            createjs.Tween.get(spaceShip).wait(Math.random() * 500).to({x: stagecanvasWidth - 100},1000, createjs.Ease.elasticInOut).call(function(){
+                //
+            });
+            spaceShips.push(spaceShip);
+
+            Session.set("answered",false);
+        }
+
+        if(Session.get("answered") === true){
+            for (var i=spaceShips.length-1; i>=0; i--) {
+                var spaceShip = spaceShips[i];
+                createjs.Tween.get(spaceShip).to({x: -100, color:{}},1000, createjs.Ease.elasticInOut).call(function(){
+                    //
+                });
+            }
+        }
+
+        for (var i=spaceShips.length-1; i>=0; i--) {
+            spaceShip = spaceShips[i];
+            spaceShip.x += Math.random() * -2;
+            if (spaceShip.x < -100 || spaceShip.y > 550) {
+                spaceShips.splice(i,1);
+                gamestage.removeChild(spaceShip);
+                score = Scores.findOne({lesson_id:Session.get("selectedLesson"),user_id:Meteor.userId()});
+                if(typeof score !== "undefined"){
+                    Scores.update(score._id, {$inc: {score: 0}});
+                }else{
+                    Meteor.call('createScore', {
+                        user_id: Meteor.userId(),
+                        lesson_id: Session.get("selectedLesson"),
+                        score: 0
+                    }, function (error, score) {
+                        if (! error) {
+                            console.log(error);
+                        }
+                    });
+                }
+            }
+        }
+
+    }
+    gamestage.update();
+}
+
 function moonReaction(){
     createjs.Tween.get(moon.mouth).to({scaleY:.3},500, createjs.Ease.elasticOut).call(function(e){
         createjs.Tween.get(e.target).to({scaleY:1},500, createjs.Ease.Bounce)
@@ -195,17 +171,36 @@ function moonReaction(){
 if (Meteor.isClient) {
 
     Meteor.startup(function () {
-        init();
+        //initGame();
     });
 
     Meteor.setInterval(function(){
-        //console.log(1);
+        if(gameInitialized === false && Session.get("activescreen") === "gamescreen"){
+            initGame();
+        }
     },1000);
 
+    /* SCREENS */
+
+
+    // TITLE
     Template.screenTitle.classname =  function () {
         return (Session.get("activescreen") === "startscreen") ? "startscreen" : "";
     };
 
+    Template.screenTitle.events({
+        'click .home' : function () {
+            Session.set("activescreen", "startscreen");
+        },
+        'mouseover .home' : function () {
+            $(".title .home").animate({color: "#c3c3c3"},{ queue: false, duration: 200 });
+        },
+        'mouseout .home' : function () {
+            $(".title .home").animate({color: "#fff"},{ queue: false, duration: 200 });
+        }
+    });
+
+    // STARTSCREEN
     Template.startScreen.visible =  function () {
         return Session.get("activescreen") === "startscreen";
     };
@@ -216,6 +211,7 @@ if (Meteor.isClient) {
         }
     });
 
+    // LESSONSSCREEN
     Template.lessonsScreen.visible = function () {
         return Session.get("activescreen") === "lessonsscreen";
     };
@@ -230,18 +226,54 @@ if (Meteor.isClient) {
 
     Template.lessonsScreen.events({
         'click .lesson' : function () {
-            //Session.set("activescreen", "lessonsscreen");
-            console.log(434344);
+            Session.set("selectedLesson", this._id);
+            Session.set("activescreen", "gamescreen");
         },
-        'mouseover' : function () {
-            $("#" + this._id).animate({backgroundColor: "0xc3c3c3"});
+        'mouseover .lesson' : function () {
+            if(Session.get("selectedLesson") !== this._id){
+                $("#" + this._id).animate({backgroundColor: "#c3c3c3"},{ queue: false, duration: 200 });
+            }
         },
-        'mouseout' : function () {
-            Session.set("lessonhovered", this._id);
+        'mouseout .lesson' : function () {
+            if(Session.get("selectedLesson") !== this._id){
+                $("#" + this._id).animate({backgroundColor: "#fff"},{ queue: false, duration: 200 });
+            }
+        },
+        'click .backbutton' : function () {
+            Session.set("selectedLesson","");
+            Session.set("activescreen", "startscreen");
         }
     });
 
-  Template.page.greeting = function () {
+    Template.lesson.helpers({
+        selected: function () {
+            return (Session.get("selectedLesson") === this._id) ? "selected" : "";
+        }
+    });
+
+    // GAMESCREEN
+    Template.gameScreen.visible =  function () {
+        return Session.get("activescreen") === "gamescreen";
+    };
+
+    Template.questioncontent.question =  function () {
+        if(typeof Session.get("question") !== "undefined"){
+            if(typeof Session.get("activescreen") !== "undefined"){
+                return Session.get("question").question;
+            }
+        }
+    };
+
+    Template.questioncontent.description =  function () {
+        if(typeof Session.get("question") !== "undefined"){
+            if(typeof Session.get("activescreen") !== "undefined"){
+                return Session.get("question").description;
+            }
+        }
+    };
+
+
+    Template.page.greeting = function () {
     return "Welcome to rekenruimte.";
   };
 

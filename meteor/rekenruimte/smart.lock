@@ -6,13 +6,19 @@
   },
   "dependencies": {
     "basePackages": {
-      "jquery-animate-colors": {
-        "path": "../packages/jquery-animate-colors"
+      "jquery-ui-core": {
+        "path": "../packages/jquery-ui-core"
+      },
+      "jquery-ui-effect": {
+        "path": "../packages/jquery-ui-effect"
       }
     },
     "packages": {
-      "jquery-animate-colors": {
-        "path": "../packages/jquery-animate-colors"
+      "jquery-ui-core": {
+        "path": "../packages/jquery-ui-core"
+      },
+      "jquery-ui-effect": {
+        "path": "../packages/jquery-ui-effect"
       }
     }
   }

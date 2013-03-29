@@ -3,8 +3,11 @@
         "branch": "master"
     },
     "packages": {
-        "jquery-animate-colors" : {
-            "path": "/Users/pslagveer/IdeaProjects/RekenRuimte/meteor/packages/jquery-animate-colors"
+        "jquery-ui-core" : {
+            "path": "/Users/pslagveer/IdeaProjects/RekenRuimte/meteor/packages/jquery-ui-core"
+        },
+        "jquery-ui-effect" : {
+            "path": "/Users/pslagveer/IdeaProjects/RekenRuimte/meteor/packages/jquery-ui-effect"
         }
     }
 }
