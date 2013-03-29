@@ -1,6 +1,6 @@
-# jQueryUICore - jQuery UI is a curated set of user interface interactions, effects, widgets, and themes built on top of the jQuery JavaScript Library
+# jQueryUIEffect - jQuery UI is a curated set of user interface interactions, effects, widgets, and themes built on top of the jQuery JavaScript Library
 
-[jQueryUICore](http://jqueryui.com/)
+[jQueryUIEffect](http://jqueryui.com/)
 
 ## How to install 
 1. `npm install -g meteorite` (if not already installed)

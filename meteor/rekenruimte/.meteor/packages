@@ -12,3 +12,5 @@ bootstrap
 accounts-password
 less
 jquery
+jquery-ui-core
+jquery-ui-effect

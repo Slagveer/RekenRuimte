@@ -1,6 +1,6 @@
-# AnimateColors - Color animation jQuery-plugin
+# jQueryUICore - jQuery UI is a curated set of user interface interactions, effects, widgets, and themes built on top of the jQuery JavaScript Library
 
-[AnimateColors](http://jqueryui.com/)
+[jQueryUICore](http://jqueryui.com/)
 
 ## How to install 
 1. `npm install -g meteorite` (if not already installed)

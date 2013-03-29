@@ -14,26 +14,45 @@ body{
 }
 
 .container{
-    .title{
+    &.title .icon{
+        color: #fff;
+        cursor: pointer;
+    }
+    .game-title{
         text-align: center;
         color: #fff;
         font-size: 64px;
         font-family: facebook_letter_facesregular;
     }
-    &.startscreen{
+    .startpicture{
         background: url("../startscreen.png") no-repeat 50% 60px;
         height: 380px;
     }
     &.lessonsscreen{
         .lesson{
+            cursor: pointer;
             font-family: facebook_letter_facesregular;
             color: #000;
+            &.selected div{
+                background-color: #333;
+                color: #fff;
+            }
             .name{
-                font-size: 40px;
+                font-size: 30px;
             }
             .description{
                 font-size: 20px;
             }
+        }
+    }
+    &.questioncontent{
+        text-align: center;
+        .title,.description{
+            color:#fff;
+            font-size: 35px;
+        }
+        .description{
+            font-size: 15px;
         }
     }
 }

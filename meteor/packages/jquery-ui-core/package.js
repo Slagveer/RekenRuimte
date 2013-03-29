@@ -1,5 +1,5 @@
 Package.describe({
-  summary: "AnimateColors - Color animation jQuery-plugin"
+  summary: "jQueryUICore - jQuery UI is a curated set of user interface interactions, effects, widgets, and themes built on top of the jQuery JavaScript Library"
 });
 
 Package.on_use(function (api) {

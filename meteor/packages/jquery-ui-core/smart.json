@@ -4,6 +4,6 @@
   "homepage": "http://jqueryui.com/",
   "author": "Patric Slagveer <patric.slagveer@gmail.com> (http://slagveer.com)",
   "version": "1.0.0",
-  "git": "https://github.com/jquery/jquery-ui-core",
+  "git": "https://github.com/jquery/jquery-ui/tree/master/ui",
   "packages": {}
 }
