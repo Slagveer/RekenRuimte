@@ -1,12 +1,18 @@
 Lessons = new Meteor.Collection("lessons");
 Scores = new Meteor.Collection("scores");
-Session.set("defaultSelectedLesson",false);
-Session.set("startScreen",true);
+
+Session.setDefault("defaultSelectedLesson",false);
+Session.setDefault("resetTimer",false);
+Session.setDefault("startScreen",true);
 // Default active screen set
 Session.setDefault('activescreen', "startscreen");
-var spaceShips = [], moon, stars = [], starLength = 8,stagecanvasWidth,stagecanvasHeight, gameInitialized = false;
+Session.setDefault('gamePaused', false);
+Session.setDefault('gameStopped', false);
+var spaceShips = [], moon, stars = [], starLength = 8,stagecanvasWidth,stagecanvasHeight, gameInitialized = false, deltaX = -2;
 
 function initGame () {
+    Session.set("gameStopped", false);
+    deltaX = -2;
     gameInitialized = true;
     var star, size,width = $(".gamescreen").width(),height = $(".gamescreen").height();
     $("#gamecanvas").attr({width:width,height:height});
@@ -26,10 +32,10 @@ function initGame () {
         star.scaleX = size;
         star.scaleY = size;
         star.x = 300 * Math.random();
-        star.y = 100 * Math.random();
+        star.y = 120 * Math.random();
         gamestage.addChild(star);
         createjs.Tween.get(star,{loop: true}).to({rotation: 360},10000, createjs.Ease.easeInOut).call(function(){
-            console.log("star finished")
+            //console.log("star finished")
         });
         stars.push(star);
     }
@@ -85,7 +91,7 @@ function handleClick(eventObj) {
 function tick(){
     var spaceShip,questionsLength, questionIndex,score;
     if(typeof Lessons.findOne({_id:Session.get("selectedLesson")}) !== "undefined"){
-        if(spaceShips.length === 0){
+        if(spaceShips.length === 0 && Session.get("gameStopped") === false){
             questionsLength = Lessons.findOne({_id:Session.get("selectedLesson")}).questions.length;
             questionIndex = Math.floor(Math.random() * questionsLength);
             Session.set("questionIndex", questionIndex);
@@ -116,6 +122,7 @@ function tick(){
             spaceShips.push(spaceShip);
 
             Session.set("answered",false);
+            Session.set("resetTimer",true);
         }
 
         if(Session.get("answered") === true){
@@ -129,7 +136,7 @@ function tick(){
 
         for (var i=spaceShips.length-1; i>=0; i--) {
             spaceShip = spaceShips[i];
-            spaceShip.x += Math.random() * -2;
+            spaceShip.x += Math.random() * deltaX;
             if (spaceShip.x < -100 || spaceShip.y > 550) {
                 spaceShips.splice(i,1);
                 gamestage.removeChild(spaceShip);
@@ -175,13 +182,29 @@ if (Meteor.isClient) {
     });
 
     Meteor.setInterval(function(){
+        if(Session.get("resetTimer") === true){
+            Session.set("timer",Session.get("time"));
+            Session.set("resetTimer",false);
+        }else{
+            if(typeof Session.get("timer") !== "undefined"){
+                if(Session.get("gamePaused") === false){
+                    if(Session.get("timer") - 1 < 0){
+                        if(Session.get("answered") === false){
+                            Session.set("answer", false);
+                            Session.set("answered",true);
+                        }
+                    }else{
+                        Session.set("timer",Session.get("timer") - 1);
+                    }
+                }
+            }
+        }
         if(gameInitialized === false && Session.get("activescreen") === "gamescreen"){
             initGame();
         }
     },1000);
 
     /* SCREENS */
-
 
     // TITLE
     Template.screenTitle.classname =  function () {
@@ -197,6 +220,15 @@ if (Meteor.isClient) {
         },
         'mouseout .home' : function () {
             $(".title .home").animate({color: "#fff"},{ queue: false, duration: 200 });
+        },
+        'click .user' : function () {
+            Session.set("activescreen", "usersscreen");
+        },
+        'mouseover .user' : function () {
+            $(".title .user").animate({color: "#c3c3c3"},{ queue: false, duration: 200 });
+        },
+        'mouseout .user' : function () {
+            $(".title .user").animate({color: "#fff"},{ queue: false, duration: 200 });
         }
     });
 
@@ -228,6 +260,13 @@ if (Meteor.isClient) {
         'click .lesson' : function () {
             Session.set("selectedLesson", this._id);
             Session.set("activescreen", "gamescreen");
+            Session.set("time", this.time);
+            Session.set("gamePaused",false);
+            Session.set("resetTimer",true);
+            Session.set("answer", false);
+            Session.set("answered",false);
+            gameInitialized = false;
+            deltaX = 0;
         },
         'mouseover .lesson' : function () {
             if(Session.get("selectedLesson") !== this._id){
@@ -251,14 +290,82 @@ if (Meteor.isClient) {
         }
     });
 
+    //  USERSSCREEN
+
+    Template.usersScreen.visible = function () {
+        return Session.get("activescreen") === "usersscreen";
+    };
+
+    Template.usersScreen.users = function () {
+        return Meteor.users.find({}).fetch();
+    };
+
+    Template.user.username = function(){
+        return this.username;
+    }
+
+    Template.user.helpers({
+        userSelected: function () {
+            return (this._id === Meteor.userId()) ? true : false;
+        }
+    });
+
     // GAMESCREEN
     Template.gameScreen.visible =  function () {
         return Session.get("activescreen") === "gamescreen";
     };
 
+    Template.gameScreen.events({
+        'click .pausebutton' : function () {
+            Session.set("gamePaused",true);
+            deltaX = 0;
+        },
+        'click .backbutton' : function () {
+            Session.set("gamePaused",true);
+            deltaX = 0;
+            //Session.set("activescreen", "lessonsscreen");
+        },
+        'click .stopbutton' : function () {
+            var processSpaceShipsDeferred = [];
+            Session.set("gamePaused",false);
+            Session.set("gameStopped",true);
+            for (var i=spaceShips.length-1; i>=0; i--) {
+                var spaceShip = spaceShips[i];
+                processSpaceShipsDeferred.push(removeSpaceShips(spaceShip,i));
+            }
+            $.when.apply($, processSpaceShipsDeferred).then(function(){
+                Session.set("activescreen", "lessonsscreen");
+            });
+
+        }
+    });
+
+    function removeSpaceShips(spaceShip){
+        var def = $.Deferred();
+        createjs.Tween.get(spaceShip).to({x: -100, color:{}},1000, createjs.Ease.elasticInOut).call(function(){
+            def.resolve();
+        });
+        return def.promise();
+    }
+
+    Template.gamepausecontent.events({
+        'click .continuebutton' : function () {
+            Session.set("gamePaused",false);
+            deltaX = -2;
+        }
+    });
+
+    Template.gamestopcontent.events({
+        'click .continuebutton' : function () {
+            Session.set("gamePaused",false);
+            deltaX = -2;
+        }
+    });
+
     Template.questioncontent.question =  function () {
         if(typeof Session.get("question") !== "undefined"){
-            if(typeof Session.get("activescreen") !== "undefined"){
+            if(typeof Session.get("activescreen") !== "undefined"){console.log(44);
+                //$( ".questioncontent .question" ).effect( "shake", {}, 500, function(){} );
                 return Session.get("question").question;
             }
         }
@@ -271,6 +378,23 @@ if (Meteor.isClient) {
             }
         }
     };
+
+    Template.gameScoreContent.score =  function () {
+        var scoreObject =  (Session.get("selectedLesson") !== null) ? Scores.findOne({lesson_id:Session.get("selectedLesson"),user_id:Meteor.userId()}) : {};
+        if(typeof scoreObject !== "undefined"){
+            return Scores.findOne({lesson_id:Session.get("selectedLesson"),user_id:Meteor.userId()}).score + " punten";
+        }else{
+            return "0 punten";
+        }
+    }
+
+    Template.gameScoreContent.time =  function () {
+        if(typeof Session.get("timer") !== "undefined"){
+            return Session.get("timer") + " seconden";
+        }else{
+            return "";
+        }
+    }
 
 
     Template.page.greeting = function () {
@@ -337,21 +461,6 @@ if (Meteor.isServer) {
     // code to run on server at startup
 
   });
-}
-
-Template.userslist.users = function () {
-    //console.log(Meteor.users.find().count());
-    var users = [];
-    for(var user in Meteor.users.find().collection.docs){
-        //console.log(Meteor.users.findOne({_id:user}));
-        users.push(Meteor.users.findOne({_id:user}));
-    }
-    return users;
-};
-
-Template.user.username = function(){
-    //console.log(Meteor.userId());
-    return this.username;
 }
 
 Template.user.userLoggedIn = function(){

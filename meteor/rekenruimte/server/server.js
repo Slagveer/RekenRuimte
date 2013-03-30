@@ -1,5 +1,6 @@
 Lessons = new Meteor.Collection("lessons");
 Scores = new Meteor.Collection("scores");
+
 // Scores --
 //           {done: Boolean,
 //           score: number,
@@ -9,6 +10,7 @@ Scores = new Meteor.Collection("scores");
 
     //Lessons.remove({});
     //Scores.remove({});
+    //Meteor.users.remove();
     if (Lessons.find().count() === 0) {
         var data = [
             {name: "Maten: lengtematen 1",description:"Splits de lengtemaat",correct:"Goed gedaan!",incorrect:"Helaas, het door jou gegeven antwoord (###) is niet goed. Het antwoord had moeten zijn: ",time:10,questions:
@@ -85,6 +87,10 @@ Scores = new Meteor.Collection("scores");
 
     Meteor.publish('scores', function () {
         return Scores.find();
+    });
+
+    Meteor.publish(null, function () {
+        return Meteor.users.find({},{fields:{username:1,profile:1}});
     });
 
     Accounts.config({sendVerificationEmail:false,forbidClientAccountCreation:true});
