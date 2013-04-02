@@ -4,14 +4,18 @@ Scores = new Meteor.Collection("scores");
 Session.setDefault("defaultSelectedLesson",false);
 Session.setDefault("resetTimer",false);
 Session.setDefault("startScreen",true);
+Session.setDefault("scored",0);
+Session.setDefault("questions",[]);
 // Default active screen set
 Session.setDefault('activescreen', "startscreen");
 Session.setDefault('gamePaused', false);
 Session.setDefault('gameStopped', false);
-var spaceShips = [], moon, stars = [], starLength = 8,stagecanvasWidth,stagecanvasHeight, gameInitialized = false, deltaX = -2;
+var spaceShips = [], moon, stars = [], starLength = 8,stagecanvasWidth,stagecanvasHeight, gameInitialized = false, deltaX = -2, questions = [];
+$('.home').tooltip({animation:true});
 
 function initGame () {
     Session.set("gameStopped", false);
+    Session.set("scored",0);
     deltaX = -2;
     gameInitialized = true;
     var star, size,width = $(".gamescreen").width(),height = $(".gamescreen").height();
@@ -67,7 +71,8 @@ function handleClick(eventObj) {
             var score = Scores.findOne({lesson_id:Session.get("selectedLesson"),user_id:Meteor.userId()});
             if(typeof score !== "undefined"){
                 //console.info(score.score);
-                Scores.update(score._id, {$inc: {score: Number(Session.get("question").points)}});
+                Session.set("scored",Session.get("scored") + parseInt(Session.get("question").points));
+                //Scores.update(score._id, {$inc: {score: Number(Session.get("question").points)}});
             }else{
                 Meteor.call('createScore', {
                     user_id: Meteor.userId(),
@@ -83,46 +88,62 @@ function handleClick(eventObj) {
             spaceShip.gotoAndPlay("incorrect");
             Session.set("answer", false);
         }
-
-        createjs.Tween.get(spaceShip).to({x: -100, color:{}},1000, createjs.Ease.elasticInOut).call(function(){Session.set("answered",true);console.log("finished 1")});
+        Session.set("answered",true);
+        createjs.Tween.get(spaceShip).to({x: -100, color:{}},1000, createjs.Ease.elasticInOut).call(function(){console.log("finished 1")});
     }
 }
 
 function tick(){
     var spaceShip,questionsLength, questionIndex,score;
+
     if(typeof Lessons.findOne({_id:Session.get("selectedLesson")}) !== "undefined"){
         if(spaceShips.length === 0 && Session.get("gameStopped") === false){
             questionsLength = Lessons.findOne({_id:Session.get("selectedLesson")}).questions.length;
-            questionIndex = Math.floor(Math.random() * questionsLength);
-            Session.set("questionIndex", questionIndex);
-            Session.set("question", Lessons.findOne({_id:Session.get("selectedLesson")}).questions[questionIndex]);
+            if(questions.length !== questionsLength){
+                questionIndex = Math.floor(Math.random() * questionsLength);
+                Session.set("question", Lessons.findOne({_id:Session.get("selectedLesson")}).questions[questionIndex]);
 
-            //  SPACESHIP 1
-            var spaceShip = createSpaceShip(stagecanvasWidth + 100,100,questionIndex,handleClick,"option1");
-            gamestage.addChild(spaceShip);
-            createjs.Tween.get(spaceShip).wait(Math.random() * 500).to({x: stagecanvasWidth - 100},1000, createjs.Ease.elasticInOut).call(function(){
-                //
-            });
-            spaceShips.push(spaceShip);
+                while(questions.indexOf(questionIndex) > -1){console.log(3242423);
+                    questionIndex = Math.floor(Math.random() * questionsLength);
+                    Session.set("questionIndex", questionIndex);
+                    Session.set("question", Lessons.findOne({_id:Session.get("selectedLesson")}).questions[questionIndex]);
+                }
+                questions.push(questionIndex);
 
-            //  SPACESHIP 2
-            spaceShip = createSpaceShip(stagecanvasWidth + 100,220,questionIndex,handleClick,"option2");
-            gamestage.addChild(spaceShip);
-            createjs.Tween.get(spaceShip).wait(Math.random() * 500).to({x: stagecanvasWidth - 100},1000, createjs.Ease.elasticInOut).call(function(){
-                //
-            });
-            spaceShips.push(spaceShip);
+                //  SPACESHIP 1
+                var spaceShip = createSpaceShip(stagecanvasWidth + 100,100,questionIndex,handleClick,"option1");
+                gamestage.addChild(spaceShip);
+                createjs.Tween.get(spaceShip).wait(Math.random() * 500).to({x: stagecanvasWidth - 100},1000, createjs.Ease.elasticInOut).call(function(){
+                    //
+                });
+                spaceShips.push(spaceShip);
 
-            //  SPACESHIP 3
-            spaceShip = createSpaceShip(stagecanvasWidth + 100,350,questionIndex,handleClick,"option3");
-            gamestage.addChild(spaceShip);
-            createjs.Tween.get(spaceShip).wait(Math.random() * 500).to({x: stagecanvasWidth - 100},1000, createjs.Ease.elasticInOut).call(function(){
-                //
-            });
-            spaceShips.push(spaceShip);
+                //  SPACESHIP 2
+                spaceShip = createSpaceShip(stagecanvasWidth + 100,220,questionIndex,handleClick,"option2");
+                gamestage.addChild(spaceShip);
+                createjs.Tween.get(spaceShip).wait(Math.random() * 500).to({x: stagecanvasWidth - 100},1000, createjs.Ease.elasticInOut).call(function(){
+                    //
+                });
+                spaceShips.push(spaceShip);
 
-            Session.set("answered",false);
-            Session.set("resetTimer",true);
+                //  SPACESHIP 3
+                spaceShip = createSpaceShip(stagecanvasWidth + 100,350,questionIndex,handleClick,"option3");
+                gamestage.addChild(spaceShip);
+                createjs.Tween.get(spaceShip).wait(Math.random() * 500).to({x: stagecanvasWidth - 100},1000, createjs.Ease.elasticInOut).call(function(){
+                    //
+                });
+                spaceShips.push(spaceShip);
+
+                Session.set("answered",false);
+                Session.set("resetTimer",true);
+                Session.set("lessonFinished", false);
+            }else{
+                Session.set("lessonFinished", true);
+                //Session.set("activescreen", "lessonsscreen");
+                $('#gameEndModal').modal();
+                //questions = [];
+
+            }
         }
 
         if(Session.get("answered") === true){
@@ -304,11 +325,67 @@ if (Meteor.isClient) {
         return this.username;
     }
 
+    Template.usersScreen.events({
+        'click .user' : function () {
+            Session.set("selectedUser", this._id);
+            Session.set("activescreen", "userdetailsscreen");
+
+        },
+        'mouseover .user' : function () {
+            if(Session.get("selectedUser") !== this._id){
+                $("#" + this._id).animate({backgroundColor: "#c3c3c3"},{ queue: false, duration: 200 });
+            }
+        },
+        'mouseout .user' : function () {
+            if(Session.get("selectedUser") !== this._id){
+                $("#" + this._id).animate({backgroundColor: "#fff"},{ queue: false, duration: 200 });
+            }
+        },
+        'click .backbutton' : function () {
+            Session.set("selectedUser","");
+            Session.set("activescreen", "usersscreen");
+        }
+    });
+
     Template.user.helpers({
         userSelected: function () {
             return (this._id === Meteor.userId()) ? true : false;
         }
     });
+
+    //  USERDETAILSSCREEN
+    Template.userDetailsScreen.visible = function () {
+        return Session.get("activescreen") === "userdetailsscreen";
+    };
+
+    Template.userDetailsScreen.lessons = function () {
+        var lessons = Lessons.find({}, {sort: {score: -1, name: 1}});
+        return lessons;
+    };
+
+    Template.userDetailsScreen.events({
+        'click .backbutton' : function () {
+            Session.set("activescreen", "usersscreen");
+
+        }
+    });
+
+    Template.userDetails.score = function () {
+        var scoreObject = Scores.findOne({lesson_id:this._id,user_id:Session.get("selectedUser")});
+        if(typeof scoreObject !== "undefined"){
+            return scoreObject.score;
+        }else{
+            return "***"
+        }
+    };
+
+    Template.userDetailsScreen.user = function () {
+        var user;
+        if(typeof Session.get("selectedUser") !== "undefined"){
+            user = Meteor.users.findOne({_id:Session.get("selectedUser")});
+            return (typeof user !== "undefined") ? user.username : "";
+        }
+    };
 
     // GAMESCREEN
     Template.gameScreen.visible =  function () {
@@ -327,6 +404,7 @@ if (Meteor.isClient) {
         },
         'click .stopbutton' : function () {
             var processSpaceShipsDeferred = [];
+            Session.set("scored",0);
             Session.set("gamePaused",false);
             Session.set("gameStopped",true);
             for (var i=spaceShips.length-1; i>=0; i--) {
@@ -362,10 +440,26 @@ if (Meteor.isClient) {
         }
     });
 
+    Template.gameEndContent.score =  function () {
+        if(typeof Session.get("scored") !== "undefined"){
+            return Session.get("scored");
+        }
+    };
+
+    Template.gameEndContent.events({
+        'click .continuebutton' : function () {
+            // TODO: Scores.update(score._id, {$inc: {score: Number(Session.get("question").points)}});
+            Session.set("activescreen", "lessonsscreen");
+            Session.set("gamePaused",false);
+            Session.set("gameStopped",true);
+            questions = [];
+        }
+    });
+
     Template.questioncontent.question =  function () {
         if(typeof Session.get("question") !== "undefined"){
-            if(typeof Session.get("activescreen") !== "undefined"){console.log(44);
-                //$( ".questioncontent .question" ).effect( "shake", {}, 500, function(){} );
+            if(typeof Session.get("activescreen") !== "undefined"){
+                $( ".questioncontent .question" ).fadeIn();
                 return Session.get("question").question;
             }
         }

@@ -2,12 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="90cefa06-2644-42d0-9222-0ee2ca88f5ca" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/meteor/rekenruimte/.meteor/packages" afterPath="$PROJECT_DIR$/meteor/rekenruimte/.meteor/packages" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/meteor/rekenruimte/client/rekenruimte.html" afterPath="$PROJECT_DIR$/meteor/rekenruimte/client/rekenruimte.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/meteor/rekenruimte/client/rekenruimte.js" afterPath="$PROJECT_DIR$/meteor/rekenruimte/client/rekenruimte.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/meteor/rekenruimte/css/rekenruimte.less" afterPath="$PROJECT_DIR$/meteor/rekenruimte/css/rekenruimte.less" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/meteor/rekenruimte/server/server.js" afterPath="$PROJECT_DIR$/meteor/rekenruimte/server/server.js" />
     </list>
     <ignored path="RekenRuimte.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -32,7 +29,7 @@
       <file leaf-file-name="rekenruimte.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/meteor/rekenruimte/client/rekenruimte.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="367" column="18" selection-start="13800" selection-end="13800" vertical-scroll-proportion="0.46440306">
+            <state line="457" column="0" selection-start="17117" selection-end="17117" vertical-scroll-proportion="0.4479737">
               <folding />
             </state>
           </provider>
@@ -41,7 +38,7 @@
       <file leaf-file-name="rekenruimte.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/meteor/rekenruimte/client/rekenruimte.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="198" column="36" selection-start="6485" selection-end="6490" vertical-scroll-proportion="-24.375">
+            <state line="196" column="60" selection-start="6394" selection-end="6394" vertical-scroll-proportion="-15.291667">
               <folding />
             </state>
           </provider>
@@ -50,7 +47,7 @@
       <file leaf-file-name="rekenruimte.less" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/meteor/rekenruimte/css/rekenruimte.less">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="31" column="22" selection-start="880" selection-end="880" vertical-scroll-proportion="-10.884615">
+            <state line="54" column="31" selection-start="1535" selection-end="1535" vertical-scroll-proportion="-20.115385">
               <folding />
             </state>
           </provider>
@@ -135,8 +132,8 @@
         <option value="$PROJECT_DIR$/meteor/packages/jquery-ui-effect/smart.json" />
         <option value="$PROJECT_DIR$/meteor/packages/jquery-ui-core/smart.json" />
         <option value="$PROJECT_DIR$/meteor/packages/jquery-ui-effect/package.js" />
-        <option value="$PROJECT_DIR$/meteor/rekenruimte/css/rekenruimte.less" />
         <option value="$PROJECT_DIR$/meteor/rekenruimte/server/server.js" />
+        <option value="$PROJECT_DIR$/meteor/rekenruimte/css/rekenruimte.less" />
         <option value="$PROJECT_DIR$/meteor/rekenruimte/client/rekenruimte.html" />
         <option value="$PROJECT_DIR$/meteor/rekenruimte/client/rekenruimte.js" />
       </list>
@@ -934,12 +931,32 @@
     </task>
     <servers />
   </component>
+  <component name="TodoView" selected-index="0">
+    <todo-panel id="selected-file">
+      <are-packages-shown value="false" />
+      <are-modules-shown value="false" />
+      <flatten-packages value="false" />
+      <is-autoscroll-to-source value="false" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="false" />
+      <are-modules-shown value="false" />
+      <flatten-packages value="false" />
+      <is-autoscroll-to-source value="false" />
+    </todo-panel>
+    <todo-panel id="default-changelist">
+      <are-packages-shown value="false" />
+      <are-modules-shown value="false" />
+      <flatten-packages value="false" />
+      <is-autoscroll-to-source value="false" />
+    </todo-panel>
+  </component>
   <component name="ToolWindowManager">
     <frame x="0" y="22" width="1920" height="1087" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32919255" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.27534685" sideWeight="0.6708075" order="0" side_tool="false" content_ui="combo" />
@@ -1074,13 +1091,6 @@
         <state line="417" column="57" selection-start="32769" selection-end="32769" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/meteor/rekenruimte/css/rekenruimte.less">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="31" column="22" selection-start="880" selection-end="880" vertical-scroll-proportion="-10.884615">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/meteor/rekenruimte/server/server.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="92" column="69" selection-start="9173" selection-end="9173" vertical-scroll-proportion="0.0">
@@ -1088,16 +1098,23 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/meteor/rekenruimte/css/rekenruimte.less">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="54" column="31" selection-start="1535" selection-end="1535" vertical-scroll-proportion="-20.115385">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/meteor/rekenruimte/client/rekenruimte.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="198" column="36" selection-start="6485" selection-end="6490" vertical-scroll-proportion="-24.375">
+        <state line="196" column="60" selection-start="6394" selection-end="6394" vertical-scroll-proportion="-15.291667">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/meteor/rekenruimte/client/rekenruimte.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="367" column="18" selection-start="13800" selection-end="13800" vertical-scroll-proportion="0.46440306">
+        <state line="457" column="0" selection-start="17117" selection-end="17117" vertical-scroll-proportion="0.4479737">
           <folding />
         </state>
       </provider>

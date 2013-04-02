@@ -28,7 +28,7 @@ body{
         background: url("../startscreen.png") no-repeat 50% 60px;
         height: 380px;
     }
-    &.lessonsscreen, &.usersscreen{
+    &.lessonsscreen, &.usersscreen, &.userdetailsscreen{
         .lesson, .user{
             cursor: pointer;
             font-family: facebook_letter_facesregular;
@@ -43,6 +43,22 @@ body{
             .description{
                 font-size: 20px;
             }
+            .score{
+                font-size: 30px;
+                line-height: 60px;
+            }
+        }
+        .user-title{
+            font-size: 30px;
+            font-family: facebook_letter_facesregular;
+            color: #fff;
+            text-align: center;
+        }
+        .user{
+            .name{
+                font-size: 65px;
+                line-height: 65px;
+            }
         }
     }
     &.questioncontent{
@@ -55,7 +71,7 @@ body{
             font-size: 25px;
         }
     }
-    &.gamepausemodal,&.gamestopmodal{
+    &.gamepausemodal,&.gamestopmodal,&.gameendmodal{
         .alert{
             color: #fff;
             h4{
@@ -66,6 +82,13 @@ body{
             }
             p{
                 text-align: center;
+                &.result{
+                    line-height:30px;
+                }
+                &.score{
+                    font-size: 30px;
+                    font-family: facebook_letter_facesregular;
+                }
             }
         }
         width:400px;
