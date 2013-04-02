@@ -478,7 +478,7 @@ if (Meteor.isClient) {
         if(typeof scoreObject !== "undefined"){
             return Scores.findOne({lesson_id:Session.get("selectedLesson"),user_id:Meteor.userId()}).score + " punten";
         }else{
-            return "0 punten";
+            return "0 punten"; 
         }
     }
 
