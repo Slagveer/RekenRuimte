@@ -187,7 +187,7 @@
             <div class="row-fluid">
                 <span class="span7">
                     <div class="row-fluid">
-                        <span class="span7 name">{{name}}</span>
+                        <span class="span7 name">{{name}}</span><i class="icon-star" style="color:green"></i><i class="icon-star"></i>
                     </div>
                     <div class="row-fluid">
                         <span class="span7 description">{{description}}</span>
@@ -208,12 +208,23 @@
         {{> screenTitle}}
         <div class="container gamescreen">
             {{> questioncontent}}
+            <div class="row">
+                <div class="span12">
+                    &nbsp;
+                </div>
+            </div>
             {{> gameScoreContent}}
+            <div class="row">
+                <div class="span12">
+                    &nbsp;
+                </div>
+            </div>
             <div class="row">
                 <div class="span12">
                     <canvas id="gamecanvas" width="550" height="400" style="background-color:#000000"></canvas>
                 </div>
             </div>
+            {{> gameProgressContent}}
         </div>
         <div class="container">
             <div class="row">
@@ -293,8 +304,19 @@
 <template name="gameScoreContent">
     <div class="container gamescorecontent">
         <div class="row">
-            <div class="span4 offset1 score">{{time}}</div>
-            <div class="span4 offset3 score">{{score}}</div>
+            <!--<div class="span4 offset1 score">{{time}}</div>
+            <div class="span4 offset3 score">{{score}}</div>-->
+            <div class="span4 offset8 score">{{score}}</div>
+        </div>
+    </div>
+</template>
+
+<template name="gameProgressContent">
+    <div class="container gameprogresscontent">
+        <div class="row">
+            <div class="span12 progress progress">
+                <div class="bar" style="width: {{progress}};"></div>
+            </div>
         </div>
     </div>
 </template>

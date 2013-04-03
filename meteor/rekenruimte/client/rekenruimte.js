@@ -5,6 +5,7 @@ Session.setDefault("defaultSelectedLesson",false);
 Session.setDefault("resetTimer",false);
 Session.setDefault("startScreen",true);
 Session.setDefault("scored",0);
+Session.setDefault("time-seconds",0);
 Session.setDefault("questions",[]);
 // Default active screen set
 Session.setDefault('activescreen', "startscreen");
@@ -18,7 +19,7 @@ function initGame () {
     Session.set("scored",0);
     deltaX = -2;
     gameInitialized = true;
-    var star, size,width = $(".gamescreen").width(),height = $(".gamescreen").height();
+    var star, size,width = $(".gamescreen").width(),height = 450;//$(".gamescreen").height();
     $("#gamecanvas").attr({width:width,height:height});
     stagecanvasWidth = width;
     stagecanvasHeight = height;
@@ -52,8 +53,8 @@ function createSpaceShip (xPos,yPos,questionIndex,handle,option) {
     var spaceship = new lib.mcSpaceShip();
     spaceship.y = yPos;
     spaceship.x = xPos;
-    spaceship.scaleY = .5;
-    spaceship.scaleX = .5;
+    spaceship.scaleY = .7;
+    spaceship.scaleX = .7;
     spaceship.ship.text.text = Lessons.findOne({_id:Session.get("selectedLesson")}).questions[questionIndex][option];
     spaceship.ship_1.textCorrect.text = Lessons.findOne({_id:Session.get("selectedLesson")}).questions[questionIndex][option];
     spaceship.ship_2.textIncorrect.text = Lessons.findOne({_id:Session.get("selectedLesson")}).questions[questionIndex][option];
@@ -72,6 +73,7 @@ function handleClick(eventObj) {
             if(typeof score !== "undefined"){
                 //console.info(score.score);
                 Session.set("scored",Session.get("scored") + parseInt(Session.get("question").points));
+                Session.set("time-seconds",Session.get("time-seconds") + parseInt(Session.get("time")));
                 //Scores.update(score._id, {$inc: {score: Number(Session.get("question").points)}});
             }else{
                 Meteor.call('createScore', {
@@ -103,7 +105,7 @@ function tick(){
                 questionIndex = Math.floor(Math.random() * questionsLength);
                 Session.set("question", Lessons.findOne({_id:Session.get("selectedLesson")}).questions[questionIndex]);
 
-                while(questions.indexOf(questionIndex) > -1){console.log(3242423);
+                while(questions.indexOf(questionIndex) > -1){
                     questionIndex = Math.floor(Math.random() * questionsLength);
                     Session.set("questionIndex", questionIndex);
                     Session.set("question", Lessons.findOne({_id:Session.get("selectedLesson")}).questions[questionIndex]);
@@ -113,7 +115,7 @@ function tick(){
                 //  SPACESHIP 1
                 var spaceShip = createSpaceShip(stagecanvasWidth + 100,100,questionIndex,handleClick,"option1");
                 gamestage.addChild(spaceShip);
-                createjs.Tween.get(spaceShip).wait(Math.random() * 500).to({x: stagecanvasWidth - 100},1000, createjs.Ease.elasticInOut).call(function(){
+                createjs.Tween.get(spaceShip).wait(Math.random() * 500).to({x: stagecanvasWidth - 500},1000, createjs.Ease.elasticInOut).call(function(){
                     //
                 });
                 spaceShips.push(spaceShip);
@@ -121,7 +123,7 @@ function tick(){
                 //  SPACESHIP 2
                 spaceShip = createSpaceShip(stagecanvasWidth + 100,220,questionIndex,handleClick,"option2");
                 gamestage.addChild(spaceShip);
-                createjs.Tween.get(spaceShip).wait(Math.random() * 500).to({x: stagecanvasWidth - 100},1000, createjs.Ease.elasticInOut).call(function(){
+                createjs.Tween.get(spaceShip).wait(Math.random() * 500).to({x: 300},1000, createjs.Ease.elasticInOut).call(function(){
                     //
                 });
                 spaceShips.push(spaceShip);
@@ -129,7 +131,7 @@ function tick(){
                 //  SPACESHIP 3
                 spaceShip = createSpaceShip(stagecanvasWidth + 100,350,questionIndex,handleClick,"option3");
                 gamestage.addChild(spaceShip);
-                createjs.Tween.get(spaceShip).wait(Math.random() * 500).to({x: stagecanvasWidth - 100},1000, createjs.Ease.elasticInOut).call(function(){
+                createjs.Tween.get(spaceShip).wait(Math.random() * 500).to({x: stagecanvasWidth - 200},1000, createjs.Ease.elasticInOut).call(function(){
                     //
                 });
                 spaceShips.push(spaceShip);
@@ -157,7 +159,7 @@ function tick(){
 
         for (var i=spaceShips.length-1; i>=0; i--) {
             spaceShip = spaceShips[i];
-            spaceShip.x += Math.random() * deltaX;
+            //spaceShip.x += Math.random() * deltaX;
             if (spaceShip.x < -100 || spaceShip.y > 550) {
                 spaceShips.splice(i,1);
                 gamestage.removeChild(spaceShip);
@@ -448,7 +450,10 @@ if (Meteor.isClient) {
 
     Template.gameEndContent.events({
         'click .continuebutton' : function () {
-            // TODO: Scores.update(score._id, {$inc: {score: Number(Session.get("question").points)}});
+            var scoreObject = Scores.findOne({lesson_id:Session.get("selectedLesson"),user_id:Meteor.userId()});
+            if(scoreObject.score < Session.get("scored")){
+                Scores.update(scoreObject._id, {$set: {score: Number(Session.get("scored"))}});
+            }
             Session.set("activescreen", "lessonsscreen");
             Session.set("gamePaused",false);
             Session.set("gameStopped",true);
@@ -478,7 +483,7 @@ if (Meteor.isClient) {
         if(typeof scoreObject !== "undefined"){
             return Scores.findOne({lesson_id:Session.get("selectedLesson"),user_id:Meteor.userId()}).score + " punten";
         }else{
-            return "0 punten"; 
+            return "0 punten";
         }
     }
 
@@ -487,6 +492,14 @@ if (Meteor.isClient) {
             return Session.get("timer") + " seconden";
         }else{
             return "";
+        }
+    }
+
+    Template.gameProgressContent.progress =  function () {
+        if(typeof Session.get("timer") !== "undefined"){
+            return 100 - (Session.get("timer") * 10) + "%";
+        }else{
+            return "0%";
         }
     }
 
