@@ -13,10 +13,21 @@ body{
     background-color: #000;
 }
 
+a,a:hover{
+    color:#fff;
+}
+
 .container{
     &.title .icon{
         color: #fff;
         cursor: pointer;
+        &.enabled{
+
+        }
+        &.disabled{
+            cursor:default;
+            color: #3c3c3c;
+        }
     }
     .game-title{
         text-align: left;
@@ -24,9 +35,17 @@ body{
         font-size: 64px;
         font-family: facebook_letter_facesregular;
     }
-    .startpicture{
-        background: url("../startscreen.png") no-repeat 50% 60px;
-        height: 380px;
+    &.startscreen{
+        .startpicture{
+            background: url("../startscreen.png") no-repeat 50% 60px;
+            height: 380px;
+        }
+        .info{
+            text-align: center;
+            color: #fff;
+            font-size: 25px;
+            line-height: 35px;
+        }
     }
     &.lessonsscreen, &.usersscreen, &.userdetailsscreen{
         .lesson, .user{
@@ -91,6 +110,7 @@ body{
                 }
                 &.score{
                     font-size: 30px;
+                    line-height: 35px;
                     font-family: facebook_letter_facesregular;
                 }
             }

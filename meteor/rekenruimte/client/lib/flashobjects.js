@@ -7,18 +7,21 @@
         this.initialize();
 
         // Laag 1
-        this.instance = new lib.mcStar();
-        this.instance.setTransform(421,59);
+        this.instance = new lib.mcNotify();
+        this.instance.setTransform(99,62,1,1,0,0,0,2,0.7);
 
-        this.instance_1 = new lib.mcMoon();
-        this.instance_1.setTransform(301,325);
+        this.instance_1 = new lib.mcStar();
+        this.instance_1.setTransform(421,59);
+
+        this.instance_2 = new lib.mcMoon();
+        this.instance_2.setTransform(301,325);
 
         this.spaceShip = new lib.mcSpaceShip();
         this.spaceShip.setTransform(275,123.1,1,1,0,0,0,0,1);
 
-        this.addChild(this.spaceShip,this.instance_1,this.instance);
+        this.addChild(this.spaceShip,this.instance_2,this.instance_1,this.instance);
     }).prototype = p = new cjs.Container();
-    p.nominalBounds = new cjs.Rectangle(59,32.6,432.1,378);
+    p.nominalBounds = new cjs.Rectangle(-3.9,32.6,495,378);
 
 
 // symbols:
@@ -44,6 +47,21 @@
         this.addChild(this.shape_1);
     }).prototype = p = new cjs.Container();
     p.nominalBounds = new cjs.Rectangle(-26.9,-25.4,54.1,51.1);
+
+
+    (lib.mcNotify = function() {
+        this.initialize();
+
+        // Laag 1
+        this.text = new cjs.Text("DUMMY", "47px Arial", "#FFFFFF");
+        this.text.textAlign = "center";
+        this.text.lineHeight = 59;
+        this.text.lineWidth = 202;
+        this.text.setTransform(0,-27.5);
+
+        this.addChild(this.text);
+    }).prototype = p = new cjs.Container();
+    p.nominalBounds = new cjs.Rectangle(-100.9,-27.5,206,56.5);
 
 
     (lib.mcNose = function() {
@@ -384,11 +402,11 @@
         this.initialize();
 
         // text
-        this.textIncorrect = new cjs.Text("454", "47px Arial");
+        this.textIncorrect = new cjs.Text("454 dm", "47px Arial");
         this.textIncorrect.textAlign = "center";
         this.textIncorrect.lineHeight = 57;
-        this.textIncorrect.lineWidth = 107;
-        this.textIncorrect.setTransform(209.5,47.9);
+        this.textIncorrect.lineWidth = 238;
+        this.textIncorrect.setTransform(202,80);
 
         // ship
         this.instance_16 = new lib.SpaceShipInCorrect("synched",0);
@@ -403,11 +421,11 @@
         this.initialize();
 
         // text
-        this.textCorrect = new cjs.Text("454", "47px Arial");
+        this.textCorrect = new cjs.Text("454 dm", "47px Arial");
         this.textCorrect.textAlign = "center";
         this.textCorrect.lineHeight = 57;
-        this.textCorrect.lineWidth = 107;
-        this.textCorrect.setTransform(209.5,47.9);
+        this.textCorrect.lineWidth = 238;
+        this.textCorrect.setTransform(202,80);
 
         // ship
         this.instance_17 = new lib.SpaceShipCorrect("synched",0);
@@ -422,17 +440,17 @@
         this.initialize();
 
         // text
-        this.text = new cjs.Text("454", "47px Arial");
-        this.text.textAlign = "center";
-        this.text.lineHeight = 59;
-        this.text.lineWidth = 107;
-        this.text.setTransform(209.5,47.9);
+        this.text_1 = new cjs.Text("454 dm", "47px Arial");
+        this.text_1.textAlign = "center";
+        this.text_1.lineHeight = 59;
+        this.text_1.lineWidth = 238;
+        this.text_1.setTransform(202,80);
 
         // ship
         this.instance_18 = new lib.SpaceShip("synched",0);
         this.instance_18.setTransform(216,68.5,1,1,0,0,0,216,88.5);
 
-        this.addChild(this.instance_18,this.text);
+        this.addChild(this.instance_18,this.text_1);
     }).prototype = p = new cjs.Container();
     p.nominalBounds = new cjs.Rectangle(0,-19.9,432.1,179.1);
 
