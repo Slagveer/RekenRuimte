@@ -11,7 +11,7 @@ Session.setDefault("questions",[]);
 Session.setDefault('activescreen', "startscreen");
 Session.setDefault('gamePaused', false);
 Session.setDefault('gameStopped', false);
-var spaceShips = [], moon, stars = [], starLength = 8,stagecanvasWidth,stagecanvasHeight, gameInitialized = false, deltaX = -2, questions = [];
+var spaceShips = [], moon, good, stars = [], starLength = 8,stagecanvasWidth,stagecanvasHeight, gameInitialized = false, deltaX = -2, questions = [];
 $('.home').tooltip({animation:true});
 
 function initGame () {
@@ -44,6 +44,14 @@ function initGame () {
         });
         stars.push(star);
     }
+    good = new lib.mcNotify();
+    good.text.text = "GOEDZO!";
+    good.text.font = "90px facebook_letter_facesregular";
+    good.x = width/2;
+    good.y = 550;
+    good.color = "#ff0000";
+    gamestage.addChild(good);
+
     gamestage.update();
     createjs.Ticker.setFPS(24);
     createjs.Ticker.addListener(window);
@@ -55,9 +63,12 @@ function createSpaceShip (xPos,yPos,questionIndex,handle,option) {
     spaceship.x = xPos;
     spaceship.scaleY = .7;
     spaceship.scaleX = .7;
-    spaceship.ship.text.text = Lessons.findOne({_id:Session.get("selectedLesson")}).questions[questionIndex][option];
+    spaceship.ship.text_1.text = Lessons.findOne({_id:Session.get("selectedLesson")}).questions[questionIndex][option];
+    spaceship.ship.text_1.font = "47px facebook_letter_facesregular";
     spaceship.ship_1.textCorrect.text = Lessons.findOne({_id:Session.get("selectedLesson")}).questions[questionIndex][option];
+    spaceship.ship_1.textCorrect.font = "47px facebook_letter_facesregular";
     spaceship.ship_2.textIncorrect.text = Lessons.findOne({_id:Session.get("selectedLesson")}).questions[questionIndex][option];
+    spaceship.ship_2.textIncorrect.font = "47px facebook_letter_facesregular";
     spaceship.onClick = handle;
     return spaceship;
 }
@@ -66,14 +77,18 @@ function handleClick(eventObj) {
     var spaceShip = eventObj.target;
     moonReaction();
     if(Session.get("answered") === false){
-        if(Session.get("question").answer === spaceShip.ship.text.text){
+        if(Session.get("question").answer === spaceShip.ship.text_1.text){
             spaceShip.gotoAndPlay("correct");
             Session.set("answer", true);
             var score = Scores.findOne({lesson_id:Session.get("selectedLesson"),user_id:Meteor.userId()});
             if(typeof score !== "undefined"){
                 //console.info(score.score);
+                good.text.text = "GOEDZO!";
+                createjs.Tween.get(good,{loop: false}).to({y:400},600, createjs.Ease.easeInOut).call(function(){
+                    setTimeout(function(){createjs.Tween.get(good,{loop: false}).to({y:700},700, createjs.Ease.easeInOut)},300);
+                });
                 Session.set("scored",Session.get("scored") + parseInt(Session.get("question").points));
-                Session.set("time-seconds",Session.get("time-seconds") + parseInt(Session.get("time")));
+                Session.set("time-seconds",Session.get("time-seconds") + (parseInt(Session.get("time")) - Session.get("timer")));
                 //Scores.update(score._id, {$inc: {score: Number(Session.get("question").points)}});
             }else{
                 Meteor.call('createScore', {
@@ -87,6 +102,10 @@ function handleClick(eventObj) {
                 });
             }
         }else{
+            good.text.text = "JAMMER!";
+            createjs.Tween.get(good,{loop: false}).to({y:400},600, createjs.Ease.easeInOut).call(function(){
+                setTimeout(function(){createjs.Tween.get(good,{loop: false}).to({y:700},700, createjs.Ease.easeInOut)},300);
+            });
             spaceShip.gotoAndPlay("incorrect");
             Session.set("answer", false);
         }
@@ -236,22 +255,28 @@ if (Meteor.isClient) {
 
     Template.screenTitle.events({
         'click .home' : function () {
-            Session.set("activescreen", "startscreen");
+            if(Session.get("activescreen") !== "gamescreen" && Session.get("activescreen") !== "startscreen"){Session.set("activescreen", "startscreen")};
         },
         'mouseover .home' : function () {
-            $(".title .home").animate({color: "#c3c3c3"},{ queue: false, duration: 200 });
+            if(Session.get("activescreen") !== "gamescreen" && Session.get("activescreen") !== "startscreen"){$(".title .home").animate({color: "#c3c3c3"},{ queue: false, duration: 200 })};
         },
         'mouseout .home' : function () {
-            $(".title .home").animate({color: "#fff"},{ queue: false, duration: 200 });
+            if(Session.get("activescreen") !== "gamescreen" && Session.get("activescreen") !== "startscreen"){$(".title .home").animate({color: "#fff"},{ queue: false, duration: 200 })};
         },
         'click .user' : function () {
-            Session.set("activescreen", "usersscreen");
+            if(Session.get("activescreen") !== "gamescreen" && Session.get("activescreen") !== "startscreen"){Session.set("activescreen", "usersscreen")};
         },
         'mouseover .user' : function () {
-            $(".title .user").animate({color: "#c3c3c3"},{ queue: false, duration: 200 });
+            if(Session.get("activescreen") !== "gamescreen" && Session.get("activescreen") !== "startscreen"){$(".title .user").animate({color: "#c3c3c3"},{ queue: false, duration: 200 })};
         },
         'mouseout .user' : function () {
-            $(".title .user").animate({color: "#fff"},{ queue: false, duration: 200 });
+            if(Session.get("activescreen") !== "gamescreen" && Session.get("activescreen") !== "startscreen"){$(".title .user").animate({color: "#fff"},{ queue: false, duration: 200 })};
+        }
+    });
+
+    Template.screenTitle.helpers({
+        state: function () {
+            return (Session.get("activescreen") === "gamescreen" || Session.get("activescreen") === "startscreen") ? "disabled" : "enabled";
         }
     });
 
@@ -262,7 +287,15 @@ if (Meteor.isClient) {
 
     Template.startScreen.events({
         'click .startbutton' : function () {
-            Session.set("activescreen", "lessonsscreen");
+            if(Meteor.userId()){
+                Session.set("activescreen", "lessonsscreen");
+            }
+        }
+    });
+
+    Template.startScreen.helpers({
+        state: function () {
+            return (Meteor.userId()) ? "enabled" : "disabled";
         }
     });
 
@@ -377,9 +410,18 @@ if (Meteor.isClient) {
         if(typeof scoreObject !== "undefined"){
             return scoreObject.score;
         }else{
-            return "***"
+            return "***";
         }
     };
+
+    Template.userDetails.time =  function () {
+        var scoreObject = Scores.findOne({lesson_id:this._id,user_id:Session.get("selectedUser")});
+        if(typeof scoreObject !== "undefined"){
+            return scoreObject.time;
+        }else{
+            return "***";
+        }
+    }
 
     Template.userDetailsScreen.user = function () {
         var user;
@@ -448,11 +490,21 @@ if (Meteor.isClient) {
         }
     };
 
+    Template.gameEndContent.seconds =  function () {
+        var sec =  Session.get("time-seconds");
+        if(typeof sec !== "undefined"){
+            return sec;
+        }else{
+            return "";
+        }
+    };
+
     Template.gameEndContent.events({
         'click .continuebutton' : function () {
             var scoreObject = Scores.findOne({lesson_id:Session.get("selectedLesson"),user_id:Meteor.userId()});
             if(scoreObject.score < Session.get("scored")){
-                Scores.update(scoreObject._id, {$set: {score: Number(Session.get("scored"))}});
+                //Scores.update(scoreObject._id, {$set: {score: Number(Session.get("scored"))}});
+                Scores.update(scoreObject._id, {$set: {score: Number(Session.get("scored")),time: Session.get("time-seconds")}});
             }
             Session.set("activescreen", "lessonsscreen");
             Session.set("gamePaused",false);
@@ -479,13 +531,13 @@ if (Meteor.isClient) {
     };
 
     Template.gameScoreContent.score =  function () {
-        var scoreObject =  (Session.get("selectedLesson") !== null) ? Scores.findOne({lesson_id:Session.get("selectedLesson"),user_id:Meteor.userId()}) : {};
+        var scoreObject =  Session.get("scored");
         if(typeof scoreObject !== "undefined"){
-            return Scores.findOne({lesson_id:Session.get("selectedLesson"),user_id:Meteor.userId()}).score + " punten";
+            return Session.get("scored") + " punten";
         }else{
             return "0 punten";
         }
-    }
+    };
 
     Template.gameScoreContent.time =  function () {
         if(typeof Session.get("timer") !== "undefined"){
@@ -502,105 +554,7 @@ if (Meteor.isClient) {
             return "0%";
         }
     }
-
-
-    Template.page.greeting = function () {
-    return "Welcome to rekenruimte.";
-  };
-
-  Template.page.events({
-    'click .lesson' : function () {
-        // template data, if any, is available in 'this'
-        Session.set("defaultSelectedLesson",false);
-        Session.set("selectedLesson", this._id);
-            //console.log(this._id);
-        if (typeof console !== 'undefined'){
-            //console.log("You pressed the button");
-        }
-    }
-  ,
-    'click .inc' : function(){
-        //console.log(Meteor.userId());
-        var score = Scores.findOne({lesson_id:Session.get("selectedLesson"),user_id:Meteor.userId()});
-
-        if(typeof score !== "undefined"){
-            console.info(score.score);
-            Scores.update(score._id, {$inc: {score: 5}});
-        }else{
-            //Scores.insert({lesson_id:Session.get("selectedLesson"),user_id:Meteor.userId(),score:1,timestamp:(new Date()).getTime()});
-            Meteor.call('createScore', {
-                user_id: Meteor.userId(),
-                lesson_id: Session.get("selectedLesson"),
-                score: 1,
-            }, function (error, score) {
-                if (! error) {
-                   console.log(error);
-                }
-            });
-        }
-//           done: Boolean,
-//           score: number,
-//           lesson_id: String,
-//           user_id: String,
-//           timestamp: Number}
-    }
-  });
-
-    Template.page.lessons = function () {
-        var lessons = Lessons.find({}, {sort: {score: -1, name: 1}});
-        if(Session.get("defaultSelectedLesson") === true && typeof lessons.fetch()[0] !== "undefined"){
-            Session.set("selectedLesson",Lessons.find({}, {sort: {score: -1, name: 1}}).fetch()[0]._id);
-        }
-        return lessons;
-    };
-
-    Template.page.selectedLesson = function () {
-        var lesson = Lessons.findOne(Session.get("selectedLesson"));
-        var score = Scores.findOne({lesson_id:Session.get("selectedLesson")});
-        //console.log(score);
-        return lesson && lesson.name;
-    };
-
 }
-
-if (Meteor.isServer) {
-  Meteor.startup(function () {
-    // code to run on server at startup
-
-  });
-}
-
-Template.user.userLoggedIn = function(){
-    return this._id === Meteor.userId();
-}
-
-Template.user.score = function(){
-    var scoreRecord = Scores.findOne({user_id:this._id,lesson_id:Session.get("selectedLesson")});
-    return (typeof scoreRecord !== "undefined")? scoreRecord.score : "";
-}
-
-Template.user.highestScore = function(){
-    var highestScore;
-    if(Session.get("selectedLesson")){
-        highestScore = Scores.findOne({lesson_id:Session.get("selectedLesson")},{sort: {score: -1}});
-        if(typeof highestScore !== "undefined"){
-            if(Scores.find({lesson_id:Session.get("selectedLesson"),score:highestScore.score,user_id:this._id}).count() > 0){
-                return "highestScore";
-            }
-        }
-    }
-
-    return "";
-}
-
-Template.lesson.selected =  function(){
-
-};
-
-Template.lesson.score =  function(){
-    return Scores.findOne({lesson_id:Session.get("selectedLesson"),user_id:Meteor.userId()}).score.toString();
-};
-
 
 Meteor.subscribe("directory");
 Meteor.subscribe("lessons");

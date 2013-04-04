@@ -125,12 +125,12 @@ Scores = new Meteor.Collection("scores");
     });
 
     Scores.allow({
-        insert: function (userId, score) {
+        insert: function (userId, score, time) {
             return false; // no cowboy inserts -- use createParty method
         },
         update: function (userId, score, fields, modifier) {
 
-            var allowed = ["lesson_id", "user_id", "score"];
+            var allowed = ["lesson_id", "user_id", "score", "time"];
             if (_.difference(fields, allowed).length)
                 return false; // tried to write to forbidden field
 
@@ -139,8 +139,8 @@ Scores = new Meteor.Collection("scores");
             // future Meteor will have a schema system to makes that easier.
             return true;
         },
-        remove: function (userId, score) {
-            // You can only remove parties that you created and nobody is going to.
+        remove: function (userId, score, time) {
+            // You can only remove scores that you own.
             return score.user_id === userId;
         }
     });
