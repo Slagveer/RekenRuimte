@@ -1,5 +1,6 @@
 Lessons = new Meteor.Collection("lessons");
 Scores = new Meteor.Collection("scores");
+Ranking = new Meteor.Collection("ranking");
 
 // Scores --
 //           {done: Boolean,
@@ -10,6 +11,7 @@ Scores = new Meteor.Collection("scores");
 
     //Lessons.remove({});
     //Scores.remove({});
+    //Ranking.remove({});
     //Meteor.users.remove();
     if (Lessons.find().count() === 0) {
         var data = [
@@ -89,6 +91,10 @@ Scores = new Meteor.Collection("scores");
         return Scores.find();
     });
 
+    Meteor.publish('ranking', function () {
+        return Ranking.find();
+    });
+
     Meteor.publish(null, function () {
         return Meteor.users.find({},{fields:{username:1,profile:1}});
     });
@@ -145,6 +151,27 @@ Scores = new Meteor.Collection("scores");
         }
     });
 
+    Ranking.allow({
+        insert: function (lessonId,userId,score,time) {
+            return false; // no cowboy inserts -- use createParty method
+        },
+        update: function (userId, score, fields, modifier) {
+
+            var allowed = [];
+            if (_.difference(fields, allowed).length)
+                return false; // tried to write to forbidden field
+
+            // A good improvement would be to validate the type of the new
+            // value of the field (and if a string, the length.) In the
+            // future Meteor will have a schema system to makes that easier.
+            return true;
+        },
+        remove: function () {
+            // You can only remove scores that you own.
+            return false;
+        }
+    });
+
     Meteor.methods({
         // options should include: title, description, x, y, public
         createScore: function (options) {
@@ -164,5 +191,26 @@ Scores = new Meteor.Collection("scores");
             options = options || {};
             //console.log(Scores.findOne({user_id:options.user_id,lesson_id:options.lesson_id},{fields: {score: 1}}));
             return Scores.findOne({user_id:options.user_id,lesson_id:options.lesson_id});
+        },
+        setRanking: function (options) {
+            var found = false, users = [];
+            Ranking.remove({});
+            var scores = Scores.find({},{sort: {lesson_id: 1, score: -1, time: 1}}),uniqueScores;
+            if (typeof scores !== "undefined"){
+                scores = scores.fetch();
+                uniqueScores = _.unique(scores);
+                for(var i= 0,l=uniqueScores.length;i<l;i++){
+                    for(var j= 0,ll=scores.length;j<ll;j++){
+                        if(uniqueScores[i].lesson_id === scores[j].lesson_id && uniqueScores[i].score === scores[j].score && uniqueScores[i].time === scores[j].time){
+                            if(users.indexOf(scores[j].user_id) === -1){
+                                users.push(scores[j].user_id);
+                            }
+                        }
+                    }
+                    Ranking.insert({lesson_id: uniqueScores[i].lesson_id, score: uniqueScores[i].score, time: uniqueScores[i].time,users: users});
+                    users = [];
+                }
+            }
+            return {};
         }
     });
