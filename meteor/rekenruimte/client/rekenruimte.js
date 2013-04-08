@@ -94,7 +94,6 @@ function handleClick(eventObj) {
             Session.set("answer", true);
             Session.set("scored",Session.get("scored") + parseInt(Session.get("question").points));
             Session.set("time-seconds",parseInt(Session.get("time-seconds")) + (parseInt(Session.get("time")) - Session.get("timer") + 1));
-            console.info(Session.get("time-seconds"));
             var score = Scores.findOne({lesson_id:Session.get("selectedLesson"),user_id:Meteor.userId()});
             if(typeof score !== "undefined"){
                 //console.info(score.score);
@@ -128,7 +127,6 @@ function handleClick(eventObj) {
         Session.set("answered",true);
         createjs.Tween.get(spaceShip).to({x: -100, color:{}},1000, createjs.Ease.elasticInOut).call(function(){console.log("finished 1")});
     }
-    console.info(Session.get("time-seconds"));
 }
 
 function tick(){
@@ -288,6 +286,15 @@ if (Meteor.isClient) {
         },
         'mouseout .user' : function () {
             if(Session.get("activescreen") !== "gamescreen" && Session.get("activescreen") !== "startscreen"){$(".title .user").animate({color: "#fff"},{ queue: false, duration: 200 })};
+        },
+        'click .trash' : function () {
+            if(Session.get("activescreen") !== "gamescreen" && Session.get("activescreen") !== "startscreen"){Session.set("activescreen", "usersscreen");Meteor.call('resetResults');};
+        },
+        'mouseover .trash' : function () {
+            if(Session.get("activescreen") !== "gamescreen" && Session.get("activescreen") !== "startscreen"){$(".title .trash").animate({color: "#c3c3c3"},{ queue: false, duration: 200 })};
+        },
+        'mouseout .trash' : function () {
+            if(Session.get("activescreen") !== "gamescreen" && Session.get("activescreen") !== "startscreen"){$(".title .trash").animate({color: "#fff"},{ queue: false, duration: 200 })};
         }
     });
 
@@ -428,6 +435,20 @@ if (Meteor.isClient) {
         },
         'mouseover .ranking' : function (event) {
             $(event.target).popover('toggle');
+        },
+        'click .play' : function () {
+            Session.set("selectedLesson", this._id);
+            Session.set("activescreen", "gamescreen");
+            Session.set("time", this.time);
+            Session.set("gamePaused",false);
+            Session.set("resetTimer",true);
+            Session.set("answer", false);
+            Session.set("answered",false);
+            gameInitialized = false;
+            deltaX = 0;
+        },
+        'mouseover .play' : function (event) {
+            $(event.target).popover('toggle');
         }
     });
 
@@ -460,8 +481,23 @@ if (Meteor.isClient) {
             return "";
         },
         motivation: function () {
-            var score = Scores.findOne({lesson_id:this._id,user_id:Session.get("selectedUser")._id});
-            return (typeof score === "undefined") ?  "Deze moet " + Session.get("selectedUser").username + " nog doen!" : Session.get("selectedUser").username + " is de beste!";
+            var rankings = Ranking.find({lesson_id:this._id}).fetch(), ranking, rank;
+            for(var j= 0,ll=rankings.length;j<ll;j++){
+                if(rankings[j].users.indexOf(Session.get("selectedUser")._id) > -1){
+                    rank = j + 1;
+                    if(Meteor.userId() === Session.get("selectedUser")._id){
+                        if(rank === 1){
+                            ranking = (rankings[j].users.length > 1) ? "Je staat gezamelijk op de " + rank + "e plaats": "Je bent de beste!";
+                        }else{
+                            ranking = (rankings[j].users.length > 1) ? "Je staat gezamelijk op de " + rank + "e plaats": "Kom op, je kan veel beter!";
+                        }
+                    }else{
+                        ranking = (rankings[j].users.length > 1) ? Session.get("selectedUser").username + " staat gezamelijk op de " + rank : Session.get("selectedUser").username + " is de beste";
+                    }
+                    j = ll;
+                }
+            }
+            return (typeof ranking !== "undefined") ?  ranking : "Deze moet " + Session.get("selectedUser").username + " nog doen!";
         }
     });
 

@@ -212,5 +212,9 @@ Ranking = new Meteor.Collection("ranking");
                 }
             }
             return {};
+        },
+        resetResults: function(){
+            Scores.remove({});
+            Ranking.remove({});
         }
     });
