@@ -101,19 +101,19 @@ Ranking = new Meteor.Collection("ranking");
 
     Accounts.config({sendVerificationEmail:false,forbidClientAccountCreation:true});
     if(!Meteor.users.findOne({username:"admin"})){
-        Accounts.createUser({username:"admin",password:"admin",email:"digitalrox@gmail.com",profile:{name:"administrators"}});
+        //Accounts.createUser({username:"admin",password:"admin",email:"digitalrox@gmail.com",profile:{name:"administrators"}});
     }
 
     if (Meteor.users.find().count() === 0) {
         var users = [
-            {username:"admin",password:"admin",email:"patric.slagveer@gmail.com",profile:{name:"admin"}},
-            {username:"joan",password:"123456",email:"joan.rogers.slagveer@gmail.com",profile:{name:"joan admin"}},
-            {username:"patric",password:"123456",email:"patric.slagveer@gmail.com",profile:{name:"patric admin"}},
-            {username:"marcus",password:"123456",email:"marcus.slagveer@gmail.com",profile:{name:"marcus"}},
-            {username:"oscar",password:"123456",email:"oscar.slagveer@gmail.com",profile:{name:"oscar"}},
-            {username:"curtis",password:"123456",email:"curtis.slagveer@gmail.com",profile:{name:"curtis"}},
-            {username:"derrick",password:"123456",email:"derrick.slagveer@gmail.com",profile:{name:"derrick"}}
-        ]
+            {username:"admin",password:"admin",email:"slagveer@gmail.com",profile:{name:"admin",role:"administrator"}},
+            {username:"joan",password:"123456",email:"joan.rogers.slagveer@gmail.com",profile:{name:"joan admin",role:"administrator"}},
+            {username:"patric",password:"123456",email:"patric.slagveer@gmail.com",profile:{name:"patric admin",role:"administrator"}},
+            {username:"marcus",password:"123456",email:"marcus.slagveer@gmail.com",profile:{name:"marcus",role:"gamer"}},
+            {username:"oscar",password:"123456",email:"oscar.slagveer@gmail.com",profile:{name:"oscar",role:"gamer"}},
+            {username:"curtis",password:"123456",email:"curtis.slagveer@gmail.com",profile:{name:"curtis",role:"gamer"}},
+            {username:"derrick",password:"123456",email:"derrick.slagveer@gmail.com",profile:{name:"derrick",role:"gamer"}}
+        ];
         for (var i = 0,l =  users.length; i < l; i++){
             Accounts.createUser(users[i]);
         }
@@ -121,7 +121,7 @@ Ranking = new Meteor.Collection("ranking");
 
     // Validate username, sending a specific error message on failure.
     Accounts.validateNewUser(function (user) {
-        if (user.username && user.username.length >= 3)
+        if (user.username && user.username.length >= 5)
             return true;
         throw new Meteor.Error(403, "Username must have at least 3 characters");
     });
@@ -129,6 +129,16 @@ Ranking = new Meteor.Collection("ranking");
     Accounts.validateNewUser(function (user) {
         return user.username !== "root";
     });
+
+    Accounts.onCreateUser(function(options, user) {
+        var d6 = function () { return Math.floor(Random.fraction() * 6) + 1; };
+        user.dexterity = d6() + d6() + d6();
+        // We still want the default hook's 'profile' behavior.
+        if (options.profile)
+            user.profile = options.profile;
+        return user;
+    });
+
 
     Scores.allow({
         insert: function (userId, score, time) {
@@ -213,8 +223,9 @@ Ranking = new Meteor.Collection("ranking");
             }
             return {};
         },
-        resetResults: function(){
+        resetResults: function () {
             Scores.remove({});
             Ranking.remove({});
+            Meteor.users.remove();
         }
     });

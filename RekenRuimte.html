@@ -7,6 +7,7 @@
 <script src="libs/easeljs-0.5.0.min.js"></script>
 <script src="libs/tweenjs-0.3.0.min.js"></script>
 <script src="libs/movieclip-0.5.0.min.js"></script>
+<script src="libs/preloadjs-0.2.0.min.js"></script>
 <script src="RekenRuimte.js"></script>
 
 <script>
@@ -14,6 +15,23 @@ var canvas, stage, exportRoot;
 
 function init() {
 	canvas = document.getElementById("canvas");
+	images = images||{};
+
+	var manifest = [
+		{src:"images/Image_0.png", id:"Image_0"}
+	];
+
+	var loader = new createjs.PreloadJS(false);
+	loader.onFileLoad = handleFileLoad;
+	loader.onComplete = handleComplete;
+	loader.loadManifest(manifest);
+}
+
+function handleFileLoad(o) {
+	if (o.type == "image") { images[o.id] = o.result; }
+}
+
+function handleComplete() {
 	exportRoot = new lib.RekenRuimte();
 
 	stage = new createjs.Stage(canvas);

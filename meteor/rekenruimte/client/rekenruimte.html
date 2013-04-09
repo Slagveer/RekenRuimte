@@ -16,7 +16,7 @@
     <div class="container">
         <div class="row">
             <div class="span12">
-                <canvas id="canvas" width="550" height="400" style="background-color:#000000"></canvas>
+                <canvas id="canvas" width="550" height="400" style="background-color:#3399CC"></canvas>
             </div>
         </div>
     </div>
@@ -25,16 +25,26 @@
 <template name="screenTitle">
     <div class="container title">
         <div class="row">
-            <div class="span1 icon home {{state}}" data-placement="top" data-toggle="tooltip" data-original-title="Home"><i class="icon-home icon-4x"></i></div>
-            <div class="span1 icon user {{state}}"><i class="icon-user icon-4x"></i></div>
-            <div class="span1 icon trash {{state}}"><i class="icon-trash icon-4x"></i></div>
-            <div class="span1"></div>
-            <div class="span6">
-                <h1 class="game-title">RekenRuimte</h1>
-            </div>
-            <div class="span2">
-                {{loginButtons align="right"}}
-            </div>
+            {{#if notStartScreen}}
+                <div class="span1 icon home {{state}}" data-placement="top" data-toggle="tooltip" data-original-title="Home"><i class="icon-home icon-4x"></i></div>
+                <div class="span1 icon user {{state}}"><i class="icon-user icon-4x"></i></div>
+                {{#if administratorRole}}
+                    <div class="span1 icon trash {{state}}"><i class="icon-trash icon-4x"></i></div>
+                {{else}}
+                    <div class="span1"></div>
+                {{/if}}
+                <div class="span1"></div>
+                <div class="span6">
+                    <h1 class="game-title">RekenRuimte</h1>
+                </div>
+                <div class="span2">
+                    {{loginButtons align="right"}}
+                </div>
+            {{else}}
+                <div class="span2 offset10">
+                    {{loginButtons align="right"}}
+                </div>
+            {{/if}}
         </div>
     </div>
 </template>
@@ -113,7 +123,7 @@
                     <div class="lessons">
                         <ul>
                             {{#each users}}
-                            {{> user}}
+                                {{> user}}
                             {{/each}}
                         </ul>
                     </div>
@@ -166,7 +176,7 @@
                     <div class="lessons">
                         <ul>
                             {{#each lessons}}
-                            {{> userDetails}}
+                                {{> userDetails}}
                             {{/each}}
                         </ul>
                     </div>
@@ -197,9 +207,12 @@
                 </span>
                 <span class="span3 score">Score: {{score}} <span class="seconden">({{time}} sec.)</span></span>
                 <span class="span1"><i class="icon-info-sign icon-4x ranking" data-title="{{ranking}}" data-content="{{motivation}}" data-trigger="hover" data-placement="top" ></i></span>
-                <span class="span1"><i class="icon-play icon-4x play" data-title="Speel het nu!" data-content="Succes" data-trigger="hover" data-placement="top" ></i></span>
+                <span class="span1"><i class="icon-play icon-4x play" data-title="Speel het nu!" data-content="succes" data-trigger="hover" data-placement="top" ></i></span>
             </div>
         </div>
+        {{#if firstPlace}}
+            <div class="cup">&nbsp;</div>
+        {{/if}}
     </li>
 </template>
 
@@ -224,7 +237,7 @@
             </div>
             <div class="row">
                 <div class="span12">
-                    <canvas id="gamecanvas" width="550" height="400" style="background-color:#000000"></canvas>
+                    <canvas id="gamecanvas" width="550" height="400" style="background-color:#3399CC;border:4px solid #fff;"></canvas>
                 </div>
             </div>
             {{> gameProgressContent}}
@@ -265,12 +278,19 @@
 
 <template name="gamepausecontent">
     <div id="gamePauseModal" class="container gamepausemodal modal hide fade">
-        <div class="alert fade in btn-primary">
-            <h4>Pause</h4>
-            <p>Zo weer verder, maar wacht niet te lang!</p>
-            <p>
-                <a href="#" class="btn continuebutton" data-dismiss="modal" aria-hidden="true">Ga weer verder</a>
-            </p>
+        <div class="row-fluid">
+            <div class="span12">
+                <div class="alert fade in btn-primary">
+                    <h4>Pause</h4>
+                    <div class="row">
+                        <div class="span12">&nbsp;</div>
+                    </div>
+                    <p>Zo weer verder, maar wacht niet te lang!</p>
+                    <p>
+                        <a href="#" class="btn continuebutton" data-dismiss="modal" aria-hidden="true">Ga weer verder</a>
+                    </p>
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -319,7 +339,9 @@
     <div class="container gameprogresscontent">
         <div class="row">
             <div class="span12 progress progress">
-                <div class="bar" style="width: {{progress}};"></div>
+                <div class="bar bar-success" style="width: {{progressSucces}};"></div>
+                <div class="bar bar-warning" style="width: {{progressWarning}};"></div>
+                <div class="bar bar-danger" style="width: {{progressDanger}};"></div>
             </div>
         </div>
     </div>
