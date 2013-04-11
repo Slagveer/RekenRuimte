@@ -2,11 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="90cefa06-2644-42d0-9222-0ee2ca88f5ca" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RekenRuimte.fla" afterPath="$PROJECT_DIR$/RekenRuimte.fla" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RekenRuimte.js" afterPath="$PROJECT_DIR$/RekenRuimte.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/meteor/rekenruimte/client/rekenruimte.html" afterPath="$PROJECT_DIR$/meteor/rekenruimte/client/rekenruimte.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/meteor/rekenruimte/client/rekenruimte.js" afterPath="$PROJECT_DIR$/meteor/rekenruimte/client/rekenruimte.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/meteor/rekenruimte/css/rekenruimte.less" afterPath="$PROJECT_DIR$/meteor/rekenruimte/css/rekenruimte.less" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/meteor/rekenruimte/server/server.js" afterPath="$PROJECT_DIR$/meteor/rekenruimte/server/server.js" />
     </list>
@@ -30,10 +27,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="rekenruimte.js" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="rekenruimte.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/meteor/rekenruimte/client/rekenruimte.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="862" column="42" selection-start="37161" selection-end="37161" vertical-scroll-proportion="0.43333334">
+            <state line="862" column="42" selection-start="37161" selection-end="37161" vertical-scroll-proportion="-15.0">
               <folding />
             </state>
           </provider>
@@ -57,10 +54,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="rekenruimte.html" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="rekenruimte.html" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/meteor/rekenruimte/client/rekenruimte.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="263" column="34" selection-start="9047" selection-end="9047" vertical-scroll-proportion="-15.12">
+            <state line="20" column="18" selection-start="426" selection-end="426" vertical-scroll-proportion="0.34246576">
               <folding />
             </state>
           </provider>
@@ -69,7 +66,7 @@
       <file leaf-file-name="rekenruimte.less" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/meteor/rekenruimte/css/rekenruimte.less">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="146" column="9" selection-start="3703" selection-end="3703" vertical-scroll-proportion="-30.73077">
+            <state line="107" column="24" selection-start="2547" selection-end="2547" vertical-scroll-proportion="-33.96154">
               <folding />
             </state>
           </provider>
@@ -96,7 +93,7 @@
       <file leaf-file-name="server.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/meteor/rekenruimte/server/server.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="210" column="82" selection-start="13536" selection-end="13536" vertical-scroll-proportion="-3.4615386">
+            <state line="121" column="44" selection-start="10510" selection-end="10517" vertical-scroll-proportion="-8.076923">
               <folding />
             </state>
           </provider>
@@ -154,10 +151,10 @@
         <option value="$PROJECT_DIR$/meteor/packages/jquery-ui-effect/package.js" />
         <option value="$PROJECT_DIR$/RekenRuimte.js" />
         <option value="$PROJECT_DIR$/meteor/rekenruimte/client/lib/flashobjects.js" />
-        <option value="$PROJECT_DIR$/meteor/rekenruimte/server/server.js" />
-        <option value="$PROJECT_DIR$/meteor/rekenruimte/client/rekenruimte.html" />
-        <option value="$PROJECT_DIR$/meteor/rekenruimte/css/rekenruimte.less" />
         <option value="$PROJECT_DIR$/meteor/rekenruimte/client/rekenruimte.js" />
+        <option value="$PROJECT_DIR$/meteor/rekenruimte/server/server.js" />
+        <option value="$PROJECT_DIR$/meteor/rekenruimte/css/rekenruimte.less" />
+        <option value="$PROJECT_DIR$/meteor/rekenruimte/client/rekenruimte.html" />
       </list>
     </option>
   </component>
@@ -1069,30 +1066,30 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/meteor/rekenruimte/client/rekenruimte.html">
+    <entry file="file://$PROJECT_DIR$/meteor/rekenruimte/client/rekenruimte.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="263" column="34" selection-start="9047" selection-end="9047" vertical-scroll-proportion="-15.12">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/meteor/rekenruimte/css/rekenruimte.less">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="146" column="9" selection-start="3703" selection-end="3703" vertical-scroll-proportion="-30.73077">
+        <state line="862" column="42" selection-start="37161" selection-end="37161" vertical-scroll-proportion="-15.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/meteor/rekenruimte/server/server.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="210" column="82" selection-start="13536" selection-end="13536" vertical-scroll-proportion="-3.4615386">
+        <state line="121" column="44" selection-start="10510" selection-end="10517" vertical-scroll-proportion="-8.076923">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/meteor/rekenruimte/client/rekenruimte.js">
+    <entry file="file://$PROJECT_DIR$/meteor/rekenruimte/css/rekenruimte.less">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="862" column="42" selection-start="37161" selection-end="37161" vertical-scroll-proportion="0.43333334">
+        <state line="107" column="24" selection-start="2547" selection-end="2547" vertical-scroll-proportion="-33.96154">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/meteor/rekenruimte/client/rekenruimte.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="20" column="18" selection-start="426" selection-end="426" vertical-scroll-proportion="0.34246576">
           <folding />
         </state>
       </provider>

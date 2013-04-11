@@ -11,7 +11,28 @@
         {{> notificationsScreen}}
         {{> gameScreen}}
     {{/if}}
+    {{>copyright}}
 </body>
+
+<template name="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="span12 copyright">
+                © Slagveer.Com
+            </div>
+        </div>
+    </div>
+</template>
+
+<template name="test">
+    <div class="container">
+        <div class="row">
+            <div class="span12 test">
+                Probeer het eens met het dummy account: username:"tester" password:"abcdefg", succes!!!
+            </div>
+        </div>
+    </div>
+</template>
 
 <template name="game">
     <div class="container">
@@ -70,6 +91,7 @@
             </div>
         </div>
     {{/if}}
+    {{>test}}
 </template>
 
 <template name="lessonsScreen">

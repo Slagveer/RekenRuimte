@@ -118,7 +118,8 @@ if (Meteor.users.find().count() === 0) {
         {username:"oscar",password:"123456",email:"oscar.slagveer@gmail.com",profile:{name:"oscar",role:"gamer"}},
         {username:"curtis",password:"123456",email:"curtis.slagveer@gmail.com",profile:{name:"curtis",role:"gamer"}},
         {username:"aurang",password:"123456",email:"*******@gmail.com",profile:{name:"aurang",role:"gamer"}},
-        {username:"derrick",password:"123456",email:"derrick.slagveer@gmail.com",profile:{name:"derrick",role:"gamer"}}
+        {username:"derrick",password:"123456",email:"derrick.slagveer@gmail.com",profile:{name:"derrick",role:"gamer"}},
+        {username:"tester",password:"abcdefg",email:"tester@gmail.com",profile:{name:"tester",role:"gamer"}}
     ];
     for (var i = 0,l =  users.length; i < l; i++){
         Accounts.createUser(users[i]);
