@@ -1,6 +1,9 @@
+var rekenruimte = rekenruimte || {};
+
 Lessons = new Meteor.Collection("lessons");
 Scores = new Meteor.Collection("scores");
 Ranking = new Meteor.Collection("ranking");
+Results = new Meteor.Collection("results");
 
 Session.setDefault("defaultSelectedLesson",false);
 Session.setDefault("resetTimer",false);
@@ -8,6 +11,7 @@ Session.setDefault("startScreen",true);
 Session.setDefault("scored",0);
 Session.setDefault("time-seconds",0);
 Session.setDefault("questions",[]);
+Session.setDefault("notifications",[]);
 // Default active screen set
 Session.setDefault('activescreen', "startscreen");
 Session.setDefault('gamePaused', false);
@@ -21,8 +25,46 @@ Deps.autorun(function () {
     });
     if (oldest){
         //Session.set("oldest", oldest.name);
-        console.log(oldest);
+        //console.log(oldest);
     }
+});
+
+Meteor.autosubscribe(function() {
+    Scores.find().observe({
+        added: function(item){
+            var rankings;
+            Session.set("userScoredId",{user_id:item.user_id,lesson_id:item.lesson_id});
+        }
+    });
+    Ranking.find().observe({
+        added: function(item){
+            var rankings,notifications,date,guid;
+            if(typeof Session.get("userScoredId") !== "undefined" && Meteor.userId() !== Session.get("userScoredId").user_id){
+                rankings = Ranking.find({lesson_id:Session.get("userScoredId").lesson_id}).fetch();
+                for(var j= 0,ll=rankings.length;j<ll;j++){
+                    if(rankings[j].users.indexOf(Session.get("userScoredId").user_id) > -1){
+                        //Todo alert((j + 1) + "e plaats");
+                        date = (function(){
+                            var today = new Date(), dd = today.getDate(),mm = today.getMonth()+ 1,yyyy = today.getFullYear(),
+                                hh = today.getHours(), mi = today.getMinutes(), ss = today.getSeconds();
+                            if(dd<10){dd='0'+dd} if(mm<10){mm='0'+mm} if(hh<10){hh='0'+hh}if(mi<10){mi='0'+mi}if(ss<10){ss='0'+ss}
+                            today = mm+'/'+dd+'/'+yyyy+' '+hh+':'+mm+':'+ss;
+                            return today;
+                        })();
+                        guid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+                            var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
+                            return v.toString(16);
+                        });
+                        notifications = Session.get("notifications");
+                        notifications.push({id:guid,message:"Op " + date + " staat " + Meteor.users.findOne({_id:Session.get("userScoredId").user_id}).username + " op de " + (j + 1) + "e plaats"});
+                        Session.set("notifications",notifications);
+                        Session.set("userScoredId",undefined);
+                        j = ll;
+                    }
+                }
+            }
+        }
+    });
 });
 
 function initGame () {
@@ -101,18 +143,79 @@ function moveRock (rock) {
     });
 }
 
+rekenruimte.functions = (function(){
+    // Random float between
+    function randomFloatBetween( $min, $max, $precision ) {
+        if( typeof( $precision ) == 'undefined') {
+            $precision = 2;
+        }
+        return parseFloat( Math.min( $min + ( Math.random() * ( $max - $min ) ), $max ).toFixed( $precision ) );
+    };
+
+    return {
+        randomFloatBetween : randomFloatBetween
+    }
+})();
+
+rekenruimte.questions = (function(){
+    function generateSizeQuestion( question, size ) {
+        var values =  [
+            {value : rekenruimte.functions.randomFloatBetween(0,10,1)},
+            {value : rekenruimte.functions.randomFloatBetween(0,10,1)},
+            {value : rekenruimte.functions.randomFloatBetween(0,10,1)}
+        ],
+            value1 = values[rekenruimte.functions.randomFloatBetween(0,2,0)].value, value2 = values[rekenruimte.functions.randomFloatBetween(0,2,0)].value,
+            answer =  ((value1 + value2) * 10).toFixed(1),
+            options =  [
+                {value : answer},
+                {value : parseFloat(values[rekenruimte.functions.randomFloatBetween(0,2,0)].value + values[rekenruimte.functions.randomFloatBetween(0,2,0)].value + 3).toFixed(1)},
+                {value : parseFloat((values[rekenruimte.functions.randomFloatBetween(0,2,0)].value * 10) + values[rekenruimte.functions.randomFloatBetween(0,2,0)].value + 1).toFixed(1)}
+            ],
+            getIndex = function(ops){
+            return (function(ops){
+                var index = rekenruimte.functions.randomFloatBetween(0,2,0);
+                if(ops.indexOf(index) === -1){
+                    ops.push(index);
+                    return index;
+                }else{
+                    return getIndex(ops);
+                }
+            })(ops);
+            },
+            question = {
+                title : value1 + " m + " + value2 + " m",
+                description : "Reken uit: geef je antwoord in decimeter",
+                answer : parseFloat(answer),
+                sum: value1 + " + " + value2,
+                option1 : parseFloat(options[getIndex(options)].value),
+                option2 : parseFloat(options[getIndex(options)].value),
+                option3 : parseFloat(options[getIndex(options)].value)
+            }
+        //console.info(question);
+        return question;
+    }
+
+    return {
+        generateSizeQuestion : generateSizeQuestion
+    }
+})();
+
+
 function createSpaceShip (xPos,yPos,questionIndex,handle,option) {
     var spaceship = new lib.mcSpaceShip();
     spaceship.y = yPos;
     spaceship.x = xPos;
     spaceship.scaleY = .7;
     spaceship.scaleX = .7;
-    spaceship.spaceShip.spaceText.text = Lessons.findOne({_id:Session.get("selectedLesson")}).questions[questionIndex][option];
+    //spaceship.spaceShip.spaceText.text = Lessons.findOne({_id:Session.get("selectedLesson")}).questions[questionIndex][option];
+    spaceship.spaceShip.spaceText.text = Session.get("question")[option];
     spaceship.spaceShip.spaceText.font = "47px facebook_letter_facesregular";
     spaceship.spaceShip.spaceText.color = "#000000";
-    spaceship.correctSpaceShip.correctSpaceText.text = Lessons.findOne({_id:Session.get("selectedLesson")}).questions[questionIndex][option];
+    //spaceship.correctSpaceShip.correctSpaceText.text = Lessons.findOne({_id:Session.get("selectedLesson")}).questions[questionIndex][option];
+    spaceship.correctSpaceShip.correctSpaceText.text = Session.get("question")[option];
     spaceship.correctSpaceShip.correctSpaceText.font = "47px facebook_letter_facesregular";
-    spaceship.inCorrectSpaceShip.inCorrectSpaceText.text = Lessons.findOne({_id:Session.get("selectedLesson")}).questions[questionIndex][option];
+    //spaceship.inCorrectSpaceShip.inCorrectSpaceText.text = Lessons.findOne({_id:Session.get("selectedLesson")}).questions[questionIndex][option];
+    spaceship.inCorrectSpaceShip.inCorrectSpaceText.text = Session.get("question")[option];
     spaceship.inCorrectSpaceShip.inCorrectSpaceText.font = "47px facebook_letter_facesregular";
     spaceship.onClick = handle;
     return spaceship;
@@ -124,25 +227,40 @@ function createRocketShip (xPos,yPos,questionIndex,handle,option) {
     rocketship.x = xPos;
     rocketship.scaleY = .7;
     rocketship.scaleX = .7;
-    rocketship.rocketShip.rocketText.text = Lessons.findOne({_id:Session.get("selectedLesson")}).questions[questionIndex][option];
+    //rocketship.rocketShip.rocketText.text = Lessons.findOne({_id:Session.get("selectedLesson")}).questions[questionIndex][option];
+    rocketship.rocketShip.rocketText.text = Session.get("question")[option];
     rocketship.rocketShip.rocketText.font = "47px facebook_letter_facesregular";
-    rocketship.correctRocketShip.correctRocketText.text = Lessons.findOne({_id:Session.get("selectedLesson")}).questions[questionIndex][option];
+    //rocketship.correctRocketShip.correctRocketText.text = Lessons.findOne({_id:Session.get("selectedLesson")}).questions[questionIndex][option];
+    rocketship.correctRocketShip.correctRocketText.text = Session.get("question")[option];
     rocketship.correctRocketShip.correctRocketText.font = "47px facebook_letter_facesregular";
-    rocketship.inCorrectRocketShip.inCorrectRocketText.text = Lessons.findOne({_id:Session.get("selectedLesson")}).questions[questionIndex][option];
+    //rocketship.inCorrectRocketShip.inCorrectRocketText.text = Lessons.findOne({_id:Session.get("selectedLesson")}).questions[questionIndex][option];
+    rocketship.inCorrectRocketShip.inCorrectRocketText.text = Session.get("question")[option];
     rocketship.inCorrectRocketShip.inCorrectRocketText.font = "47px facebook_letter_facesregular";
     rocketship.onClick = handle;
     return rocketship;
 }
 
 function handleClick(eventObj) {
-    var ship = eventObj.target;
+    var ship = eventObj.target, results;
     moonReaction();
     if(Session.get("answered") === false){
+        results = (typeof Session.get("results") === "undefined") ? [] : Session.get("results");
+        if(ship.spaceShip){
+            results.push({answer:ship.spaceShip.spaceText.text,result:Session.get("question").answer === ship.spaceShip.spaceText.text,question:Session.get("question")});
+        }else{
+            results.push({answer:ship.rocketShip.rocketText.text,result:Session.get("question").answer === ship.rocketShip.rocketText.text,question:Session.get("question")});
+        }
+        Session.set("results",results);
         if(typeof ship.spaceShip !== "undefined" && Session.get("question").answer === ship.spaceShip.spaceText.text || typeof ship.rocketShip !== "undefined" && Session.get("question").answer === ship.rocketShip.rocketText.text){
             ship.gotoAndPlay("correct");
             Session.set("answer", true);
-            Session.set("scored",Session.get("scored") + parseInt(Session.get("question").points));
+            Session.set("scored",Session.get("scored") + parseInt(Lessons.findOne({_id:Session.get("selectedLesson")}).points));
             Session.set("time-seconds",parseInt(Session.get("time-seconds")) + (parseInt(Session.get("time")) - Session.get("timer") + 1));
+            good.text.text = "GOEDZO!";
+            createjs.Tween.get(good,{loop: false}).to({y:400},600, createjs.Ease.easeInOut).call(function(){
+                setTimeout(function(){createjs.Tween.get(good,{loop: false}).to({y:700},700, createjs.Ease.easeInOut)},300);
+            });
+            /*ToDo
             var score = Scores.findOne({lesson_id:Session.get("selectedLesson"),user_id:Meteor.userId()});
             if(typeof score !== "undefined"){
                 //console.info(score.score);
@@ -163,7 +281,7 @@ function handleClick(eventObj) {
                     }
                 });
 
-            }
+            }*/
         }else{
             Session.set("time-seconds",parseInt(Session.get("time-seconds")) + (parseInt(Session.get("time")) - Session.get("timer") + 1));
             good.text.text = "JAMMER!";
@@ -185,20 +303,27 @@ function tick(){
         if(spaceShips.length === 0 && Session.get("gameStopped") === false){
             moveRock(rock);
             moveRock(rock2);
-            questionsLength = Lessons.findOne({_id:Session.get("selectedLesson")}).questions.length;
+            questionsLength = Lessons.findOne({_id:Session.get("selectedLesson")}).questions;
             if(questions.length !== questionsLength){
-                questionIndex = Math.floor(Math.random() * questionsLength);
-                Session.set("question", Lessons.findOne({_id:Session.get("selectedLesson")}).questions[questionIndex]);
+                //questionIndex = Math.floor(Math.random() * questionsLength);
+                //Session.set("question", Lessons.findOne({_id:Session.get("selectedLesson")}).questions[questionIndex]);
+                Session.set("question", rekenruimte.questions.generateSizeQuestion(Lessons.findOne({_id:Session.get("selectedLesson")})));
 
-                while(questions.indexOf(questionIndex) > -1){
+                /*while(questions.indexOf(questionIndex) > -1){
                     questionIndex = Math.floor(Math.random() * questionsLength);
                     Session.set("questionIndex", questionIndex);
                     Session.set("question", Lessons.findOne({_id:Session.get("selectedLesson")}).questions[questionIndex]);
-                }
-                questions.push(questionIndex);
+                }*/
+                //questions.push(questionIndex);
+                questions.push(Session.get("question"));
 
                 //  SPACESHIP 1
                 var spaceShip = (Math.random() > 0.5) ? createSpaceShip(stagecanvasWidth + 100,100,questionIndex,handleClick,"option1") : createRocketShip(stagecanvasWidth + 100,100,questionIndex,handleClick,"option1");
+
+                //QUESTION
+
+                //QUESTION
+
                 gamestage.addChild(spaceShip);
                 createjs.Tween.get(spaceShip).wait(Math.random() * 500).to({x: stagecanvasWidth - 500},1000, createjs.Ease.elasticInOut).call(function(){
                     //
@@ -249,7 +374,8 @@ function tick(){
                 spaceShips.splice(i,1);
                 gamestage.removeChild(spaceShip);
                 score = Scores.findOne({lesson_id:Session.get("selectedLesson"),user_id:Meteor.userId()});
-                if(typeof score !== "undefined"){
+                //TODO:KAN WORDEN VERWIJDERD NIET MEER NODIG
+                /*if(typeof score !== "undefined"){
                     Scores.update(score._id, {$inc: {score: 0}});
                 }else{
                     Meteor.call('createScore', {
@@ -261,7 +387,7 @@ function tick(){
                             console.log(error);
                         }
                     });
-                }
+                }*/
             }
         }
 
@@ -294,6 +420,7 @@ if (Meteor.isClient) {
     });
 
     Meteor.setInterval(function(){
+        var results;
         if(Session.get("resetTimer") === true){
             Session.set("timer",Session.get("time"));
             Session.set("resetTimer",false);
@@ -302,6 +429,9 @@ if (Meteor.isClient) {
                 if(Session.get("gamePaused") === false){
                     if(Session.get("timer") - 1 < 0){
                         if(Session.get("answered") === false){
+                            results = (typeof Session.get("results") === "undefined") ? [] : Session.get("results");
+                            results.push({answer:"leeg",result:false,question:Session.get("question")});
+                            Session.set("results",results);
                             Session.set("time-seconds",parseInt(Session.get("time-seconds")) + (parseInt(Session.get("time")) - Session.get("timer")));
                             Session.set("answer", false);
                             Session.set("answered",true);
@@ -351,6 +481,15 @@ if (Meteor.isClient) {
         },
         'mouseout .trash' : function () {
             if(Session.get("activescreen") !== "gamescreen" && Session.get("activescreen") !== "startscreen"){$(".title .trash").animate({color: "#fff"},{ queue: false, duration: 200 })};
+        },
+        'click .notification' : function () {
+            if(Session.get("activescreen") !== "gamescreen" && Session.get("activescreen") !== "startscreen"){$(".notification").find(".badge").text("");Session.set("activescreen", "notificationsscreen")};
+        },
+        'mouseover .notification' : function () {
+            if(Session.get("activescreen") !== "gamescreen" && Session.get("activescreen") !== "startscreen"){$(".title .notification").animate({color: "#3399CC"},{ queue: false, duration: 200 })};
+        },
+        'mouseout .notification' : function () {
+            if(Session.get("activescreen") !== "gamescreen" && Session.get("activescreen") !== "startscreen"){$(".title .notification").animate({color: "#fff"},{ queue: false, duration: 200 })};
         }
     });
 
@@ -365,6 +504,13 @@ if (Meteor.isClient) {
         },
         notStartScreen: function () {
             return (Session.get("activescreen") !== "startscreen");
+        },
+        notifications:  function () {
+            return Session.get("notifications").length;
+        },
+        badgevisible: function () {
+            var notifications = Session.get("notifications");
+            return (notifications.length === 0) ? false : true;
         }
     });
 
@@ -393,10 +539,10 @@ if (Meteor.isClient) {
     };
 
     Template.lessonsScreen.lessons = function () {
-        var lessons = Lessons.find({}, {sort: {score: -1, name: 1}});
-        if(Session.get("defaultSelectedLesson") === true && typeof lessons.fetch()[0] !== "undefined"){
+        var lessons = Lessons.find({}, {sort: {index: 1}});
+        /*if(Session.get("defaultSelectedLesson") === true && typeof lessons.fetch()[0] !== "undefined"){
             Session.set("selectedLesson",Lessons.find({}, {sort: {score: -1, name: 1}}).fetch()[0]._id);
-        }
+        }*/
         return lessons;
     };
 
@@ -556,7 +702,11 @@ if (Meteor.isClient) {
                             ranking = (rankings[j].users.length > 1) ? "Je staat gezamelijk op de " + rank + "e plaats": "Kom op, je kan veel beter!";
                         }
                     }else{
-                        ranking = (rankings[j].users.length > 1) ? Session.get("selectedUser").username + " staat gezamelijk op de " + rank : Session.get("selectedUser").username + " is de beste";
+                        if(rank === 1){
+                            ranking = (rankings[j].users.length > 1) ? Session.get("selectedUser").username + " staat gezamelijk op de " + rank + "e plaats": Session.get("selectedUser").username + " is de beste!";
+                        }else{
+                            ranking = (rankings[j].users.length > 1) ? Session.get("selectedUser").username + " staat gezamelijk op de " + rank  + "e plaats": Session.get("selectedUser").username + " zo zo...";
+                        }
                     }
                     j = ll;
                 }
@@ -578,6 +728,54 @@ if (Meteor.isClient) {
                 }
             }
         }
+    });
+
+    //  NOTIFICATIONSSCREEN
+
+    Template.notificationsScreen.visible = function () {
+        return Session.get("activescreen") === "notificationsscreen";
+    };
+
+    Template.notificationsScreen.notifications = function () {
+        return Session.get("notifications");
+    };
+
+    Template.note.message = function(){
+        return this.message;
+    }
+
+    Template.note.id = function(){
+        return this.id;
+    }
+
+    Template.notificationsScreen.events({
+        'mouseover .note' : function () {
+            $("#" + this._id).animate({backgroundColor: "#3399CC"},{ queue: false, duration: 200 });
+        },
+        'mouseout .note' : function () {
+            $("#" + this._id).animate({backgroundColor: "#fff"},{ queue: false, duration: 200 });
+        },
+        'click .backbutton' : function () {
+            Session.set("activescreen", "lessonsscreen");
+            Session.set("notifications",[]);
+        },
+        'click .note' : function (event) {
+            var notifications = Session.get("notifications");
+            for(var i= 0,l=notifications.length;i<l;i++){
+                if(notifications[i].id === this.id){console.log(notifications.splice(i,1));
+                    notifications.slice(i,1);
+                    i = l;
+                }
+            }
+            Session.set("notifications", notifications);
+            if(notifications.length === 0){
+                Session.set("activescreen", "lessonsscreen");
+            }
+        }
+    });
+
+    Template.note.helpers({
+
     });
 
     // GAMESCREEN
@@ -651,11 +849,44 @@ if (Meteor.isClient) {
     Template.gameEndContent.events({
         'click .continuebutton' : function () {
             var scoreObject = Scores.findOne({lesson_id:Session.get("selectedLesson"),user_id:Meteor.userId()});
-            if(scoreObject.score < Session.get("scored") || (scoreObject.score === Session.get("scored") && Session.get("time-seconds") < scoreObject.time)){
+            if(typeof scoreObject === "undefined"){
+                Meteor.call('createScore', {
+                    user_id: Meteor.userId(),
+                    lesson_id: Session.get("selectedLesson"),
+                    score: Number(Session.get("scored")),
+                    time: Number(Session.get("time-seconds"))
+                }, function (error, score) {
+                    if (error) {
+                        console.log(error);
+                    }
+                });
+                Meteor.call('setRanking');
+            }else if(typeof scoreObject !== "undefined" && (scoreObject.score < Session.get("scored") || (scoreObject.score === Session.get("scored") && Session.get("time-seconds") < scoreObject.time))){
                 //Scores.update(scoreObject._id, {$set: {score: Number(Session.get("scored"))}});
                 Scores.update(scoreObject._id, {$set: {score: Number(Session.get("scored")),time: Session.get("time-seconds")}});
                 Meteor.call('setRanking');
+            }else{
+                Meteor.call('createScore', {
+                    user_id: Meteor.userId(),
+                    lesson_id: Session.get("selectedLesson"),
+                    score: Number(Session.get("scored")),
+                    time: Number(Session.get("time-seconds"))
+                }, function (error, score) {
+                    if (error) {
+                        console.log(error);
+                    }
+                });
+                Meteor.call('setRanking');
             }
+            Meteor.call('createResult', {
+                user_id: Meteor.userId(),
+                lesson_id: Session.get("selectedLesson"),
+                result: Session.get("results")
+            }, function (error, score) {
+                if (error) {
+                    console.log(error);
+                }
+            });
             Session.set("activescreen", "lessonsscreen");
             Session.set("gamePaused",false);
             Session.set("gameStopped",true);
@@ -663,11 +894,11 @@ if (Meteor.isClient) {
         }
     });
 
-    Template.questioncontent.question =  function () {
+    Template.questioncontent.title =  function () {
         if(typeof Session.get("question") !== "undefined"){
             if(typeof Session.get("activescreen") !== "undefined"){
                 $( ".questioncontent .question" ).fadeIn();
-                return Session.get("question").question;
+                return Session.get("question").title;
             }
         }
     };
@@ -756,6 +987,6 @@ Meteor.subscribe("directory");
 Meteor.subscribe("lessons");
 Meteor.subscribe("scores");
 Meteor.subscribe("ranking");
-Meteor.subscribe("rankingScores");
+Meteor.subscribe("results");
 Meteor.subscribe("users");
 Accounts.ui.config({passwordSignupFields:"USERNAME_ONLY"});
