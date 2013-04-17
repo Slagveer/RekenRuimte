@@ -16,7 +16,10 @@ Results = new Meteor.Collection("results");
     //Meteor.users.remove();
 if (Lessons.find().count() === 0) {
     var data = [
-        {name:"Maten: rekenen met maten decimeter",description:"Kies de juiste lengtemaat",questions:6,correct:"Goed gedaan!",incorrect:"Helaas, het door jou gegeven antwoord (###) is niet goed. Het antwoord had moeten zijn: ",time:10,points:1}/*,questions:
+        {name:"Maten: rekenen met maten decimeter",description:"Kies de juiste lengtemaat",callId:"level1",questions:6,correct:"Goed gedaan!",incorrect:"Helaas, het door jou gegeven antwoord (###) is niet goed. Het antwoord had moeten zijn: ",time:10,points:1},
+        {name:"Maten: rekenen met maten decimeter",description:"Zoek de maten bij elkaar",callId:"level2",questions:6,correct:"Goed gedaan!",incorrect:"Helaas, het door jou gegeven antwoord (###) is niet goed. Het antwoord had moeten zijn: ",time:10,points:1}
+
+        /*,questions:
             [
                 {question:"9,2 m + 7,2 m",description:"Reken uit: geef je antwoord in decimeter",option1:"1640",option2:"164",option3:"16400",answer:"164",points:"1"},
                 {question:"8,4 m + 8,8 m",description:"Reken uit: geef je antwoord in decimeter",option1:"1720",option2:"17,2",option3:"172",answer:"172",points:"1"},
@@ -80,7 +83,7 @@ if (Lessons.find().count() === 0) {
 
     var timestamp = (new Date()).getTime();
     for (var i = 0; i < data.length; i++) {
-        var list_id = Lessons.insert({index:i,name: data[i].name,description:data[i].description,correct:data[i].correct,incorrect:data[i].incorrect,time:data[i].time,questions:data[i].questions, points:data[i].points});
+        var list_id = Lessons.insert({index:i,name: data[i].name,description:data[i].description,callId:data[i].callId,correct:data[i].correct,incorrect:data[i].incorrect,time:data[i].time,questions:data[i].questions, points:data[i].points});
     }
 }
 
@@ -230,7 +233,7 @@ Meteor.methods({
         return Scores.findOne({user_id:options.user_id,lesson_id:options.lesson_id});
     },
     setRanking: function (options) {
-        var found = false, users = [];
+        var found = false, users = [], ranking = {};
         Ranking.remove({});
         var scores = Scores.find({},{sort: {lesson_id: 1, score: -1, time: 1}}),uniqueScores;
         if (typeof scores !== "undefined"){
@@ -244,7 +247,10 @@ Meteor.methods({
                         }
                     }
                 }
-                Ranking.insert({lesson_id: uniqueScores[i].lesson_id, score: uniqueScores[i].score, time: uniqueScores[i].time,users: users});
+                ranking = {lesson_id: uniqueScores[i].lesson_id, score: uniqueScores[i].score, time: uniqueScores[i].time,users: users};
+                if(typeof Ranking.findOne(ranking) === "undefined"){
+                    Ranking.insert({lesson_id: uniqueScores[i].lesson_id, score: uniqueScores[i].score, time: uniqueScores[i].time,users: users});
+                }
                 users = [];
             }
         }
