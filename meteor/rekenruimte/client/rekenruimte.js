@@ -1,4 +1,39 @@
-var rekenruimte = rekenruimte || {};
+//"use strict";
+
+var rekenruimte = rekenruimte || (function(){
+    var stage = {}, canvas;
+
+    function _init(){
+        var width = $(".gamescreen").width(),height = 450;
+        $("#gamecanvas").attr({width:width,height:height});
+        stagecanvasWidth = width;
+        stagecanvasHeight = height;
+        canvas = document.getElementById("gamecanvas");
+        stage = new createjs.Stage(canvas);
+
+        return stage;
+    }
+
+    function _initGameLevel(){
+        Session.set("answered",true);
+        Session.set("gameStopped", false);
+        Session.set("scored",0);
+        Session.set("time-seconds",0);
+    }
+
+    function _setBackgroundColor (color) {
+        canvas.style.background = color;
+    }
+
+    return {
+        init : _init,
+        initGameLevel : _initGameLevel,
+        setBackgroundColor : _setBackgroundColor
+
+    }
+})(), config = {
+    FPS: 24
+};
 
 Lessons = new Meteor.Collection("lessons");
 Scores = new Meteor.Collection("scores");
@@ -194,7 +229,9 @@ if (Meteor.isClient) {
         }
         if(gameInitialized === false && Session.get("activescreen") === "gamescreen"){
             //initLevel1();
-            rekenruimte.levels["init" + Lessons.findOne({_id:Session.get("selectedLesson")}).callId].call();
+            if(typeof Lessons.findOne({_id:Session.get("selectedLesson")}) !== "undefined"){
+                rekenruimte.levels["init" + Lessons.findOne({_id:Session.get("selectedLesson")}).callId].call();
+            }
         }
     },1000);
 

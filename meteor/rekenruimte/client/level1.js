@@ -171,7 +171,7 @@ function handleClick(eventObj) {
     }
 }
 
-function tickLeve1(){
+function tickLevel1(){
     var spaceShip,questionsLength, questionIndex,score;
 
     if(typeof Lessons.findOne({_id:Session.get("selectedLesson")}) !== "undefined"){

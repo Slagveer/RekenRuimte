@@ -1,26 +1,22 @@
 var ship, blur, rekenruimte = rekenruimte || {};
 
 rekenruimte.level2 = rekenruimte.level2 || (function() {
-    var _shake = false, _bigShipInterval = {}, _good = {}, _ship, leftButton, rightButton, forwardButton,
+    var shake = true, _bigShipInterval = {}, _good = {}, ship, leftButton, rightButton, forwardButton, stage,
         pos1 = 250, pos2 = 550, pos3 = 550;
 
-    function init () {
-        var size,width = $(".gamescreen").width(),height = 450, mask, bigShipInterval, bg, marker, shake = true;
-        Session.set("answered",true);
-        Session.set("gameStopped", false);
-        Session.set("scored",0);
-        Session.set("time-seconds",0);
+    function _init () {
+        var size,width = $(".gamescreen").width(),height = 450, mask, bigShipInterval, bg, marker;
+        stage = rekenruimte.init();
+        rekenruimte.initGameLevel();
         Session.set("nextQuestion",true);
-        rekenruimte.startLevel();
-        deltaX = -2;
-        gameInitialized = true;
 
-        $("#gamecanvas").attr({width:width,height:height});
+        /*$("#gamecanvas").attr({width:width,height:height});
         stagecanvasWidth = width;
         stagecanvasHeight = height;
         gameCanvas = document.getElementById("gamecanvas");
-        gameCanvas.style.background ='#000';
-        gamestage = new createjs.Stage(gameCanvas);
+        //gameCanvas.style.background ='#000';
+        rekenruimte.setBackgroundColor("#0FFFF0");
+        gamestage = new createjs.Stage(gameCanvas);*/
 
         mask = new createjs.Shape();
         mask.graphics.beginStroke("#000").setStrokeStyle(5,"round").drawRoundRect(0,0,1200,450,60).closePath();
@@ -35,7 +31,7 @@ rekenruimte.level2 = rekenruimte.level2 || (function() {
         bg.scaleX = 1;
         bg.x = 50;
         bg.y = 60;
-        gamestage.addChild(bg);
+        stage.addChild(bg);
 
         bg.mask = mask;
 
@@ -44,7 +40,7 @@ rekenruimte.level2 = rekenruimte.level2 || (function() {
         planet.scaleX = .5;
         planet.x = 250;
         planet.y = 50;
-        gamestage.addChild(planet);
+        stage.addChild(planet);
 
         createjs.Tween.get(planet,{loop: true}).to({scaleX: 2.5, scaleY: 2.5, x: -50, y: 500},5000, createjs.Ease.easeInOut).call(function(){
             //
@@ -57,7 +53,7 @@ rekenruimte.level2 = rekenruimte.level2 || (function() {
         planet2.scaleX = .5;
         planet2.x = 750;
         planet2.y = -50;
-        gamestage.addChild(planet2);
+        stage.addChild(planet2);
 
         createjs.Tween.get(planet2,{loop: true}).wait(1800).to({scaleX: 3.5, scaleY: 3.5, x: 850, y: 700},5000, createjs.Ease.easeInOut).call(function(){
             //
@@ -65,14 +61,14 @@ rekenruimte.level2 = rekenruimte.level2 || (function() {
 
         planet2.mask = mask;
 
-        gamestage.addChild(mask);
+        stage.addChild(mask);
 
         ship = new lib.mcBigShip();
         ship.scaleY = .7;
         ship.scaleX = .7;
-        ship.x = 550;
+        ship.x = 150;
         ship.y = 230;
-        gamestage.addChild(ship);
+        stage.addChild(ship);
 
         rekenruimte.level2.bigShipInterval = Meteor.setInterval(function(){
             var value = Math.random();
@@ -105,7 +101,7 @@ rekenruimte.level2 = rekenruimte.level2 || (function() {
         leftButton.x = 150;
         leftButton.y = 400;
         leftButton.onClick = handleButton;
-        gamestage.addChild(leftButton);
+        stage.addChild(leftButton);
 
         forwardButton = new lib.mcFwdButton();
         forwardButton.scaleY = .7;
@@ -113,7 +109,7 @@ rekenruimte.level2 = rekenruimte.level2 || (function() {
         forwardButton.x = 580;
         forwardButton.y = 400;
         forwardButton.onClick = handleButton;
-        gamestage.addChild(forwardButton);
+        stage.addChild(forwardButton);
 
         rightButton = new lib.mcRhtButton();
         rightButton.scaleY = .7;
@@ -121,7 +117,7 @@ rekenruimte.level2 = rekenruimte.level2 || (function() {
         rightButton.x = 980;
         rightButton.y = 400;
         rightButton.onClick = handleButton;
-        gamestage.addChild(rightButton);
+        stage.addChild(rightButton);
 
         rekenruimte.level2.good = new lib.mcNotify();
         rekenruimte.level2.good.text.text = "GOEDZO!";
@@ -129,22 +125,65 @@ rekenruimte.level2 = rekenruimte.level2 || (function() {
         rekenruimte.level2.good.x = width/2;
         rekenruimte.level2.good.y = 550;
         rekenruimte.level2.good.color = "#ff0000";
-        gamestage.addChild(rekenruimte.level2.good);
+        stage.addChild(rekenruimte.level2.good);
 
         Session.set("nextQuestion", true);
 
-        gamestage.update();
+        stage.update();
         createjs.Ticker.setFPS(config.FPS);
         createjs.Ticker.addListener(window);
     }
 
+    function _tick () {
+        if(typeof Lessons.findOne({_id:Session.get("selectedLesson")}) !== "undefined"){
+            if(Session.get("nextQuestion") === true && Session.get("gameStopped") === false){
+                questionsLength = Lessons.findOne({_id:Session.get("selectedLesson")}).questions;
+                if(questions.length !== questionsLength && Session.get("gameStopped") === false){
+                    Session.set("nextQuestion", false);
+                    Session.set("question", rekenruimte.questions.generateSizeQuestion(Lessons.findOne({_id:Session.get("selectedLesson")})));
+                    questions.push(Session.get("question"));
+
+                    ship.bigShip.hallText1.text = Session.get("question")["option1"];
+                    ship.bigShip.hallText1.font = "47px facebook_letter_facesregular";
+                    ship.bigShip.hallText1.color = "#FFF";
+
+                    ship.bigShip.hallText2.text = Session.get("question")["option2"];
+                    ship.bigShip.hallText2.font = "47px facebook_letter_facesregular";
+                    ship.bigShip.hallText2.color = "#FFF";
+
+                    ship.bigShip.hallText3.text = Session.get("question")["option3"];
+                    ship.bigShip.hallText3.font = "47px facebook_letter_facesregular";
+                    ship.bigShip.hallText3.color = "#FFF";
+
+                    Session.set("answered",false);
+                    Session.set("resetTimer",true);
+                    Session.set("lessonFinished", false);
+
+                }else{
+                    Meteor.clearInterval(rekenruimte.level2.bigShipInterval);
+                    Session.set("lessonFinished", true);
+                    $('#gameEndModal').modal();
+                }
+            }
+
+            if(Session.get("answered") === true){
+                Session.set("nextQuestion", true);
+            }
+        }
+        gamestage.update();
+    }
+
     return {
-        shake : _shake,
         bigShipInterval : _bigShipInterval,
         good : _good,
-        ship : _ship
+        init : _init,
+        tick : _tick
     }
 }());
+
+rekenruimte.level2.stage = function(){
+    return this.stage;
+}
 
 //level2.prototype.shake = level2.shake || true;
 //level2.good = level2.good || {};
@@ -154,10 +193,9 @@ rekenruimte.level2 = rekenruimte.level2 || (function() {
 function initLevel2 () {
     var size,width = $(".gamescreen").width(),height = 450, mask, bigShipInterval, bg, marker, leftButton, rightButton, forwardButton, pos1 = 250,
         pos2 = 550, pos3 = 550, shake = true;
-    Session.set("answered",true);
-    Session.set("gameStopped", false);
-    Session.set("scored",0);
-    Session.set("time-seconds",0);
+
+    rekenruimte.level2.init();
+
     Session.set("nextQuestion",true);
     deltaX = -2;
     gameInitialized = true;
@@ -168,6 +206,8 @@ function initLevel2 () {
     gameCanvas = document.getElementById("gamecanvas");
     gameCanvas.style.background ='#000';
     gamestage = new createjs.Stage(gameCanvas);
+
+    //rekenruimte.setBackgroundColor("#000");
 
     mask = new createjs.Shape();
     mask.graphics.beginStroke("#000").setStrokeStyle(5,"round").drawRoundRect(0,0,1200,450,60).closePath();
