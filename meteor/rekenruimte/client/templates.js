@@ -96,9 +96,9 @@ Template.lessonsScreen.visible = function () {
 };
 
 Template.lessonsScreen.lessons = function () {
-    var lessons = Lessons.find({}, {sort: {index: 1}});
+    var lessons = rekenruimte.lessons.find({}, {sort: {index: 1}});
     /*if(Session.get("defaultSelectedLesson") === true && typeof lessons.fetch()[0] !== "undefined"){
-     Session.set("selectedLesson",Lessons.find({}, {sort: {score: -1, name: 1}}).fetch()[0]._id);
+     Session.set("selectedLesson",rekenruimte.lessons.find({}, {sort: {score: -1, name: 1}}).fetch()[0]._id);
      }*/
     return lessons;
 };
@@ -185,7 +185,7 @@ Template.userDetailsScreen.visible = function () {
 };
 
 Template.userDetailsScreen.lessons = function () {
-    var lessons = Lessons.find({}, {sort: {score: -1, name: 1}});
+    var lessons = rekenruimte.lessons.find({}, {sort: {score: -1, name: 1}});
     return lessons;
 };
 
@@ -220,7 +220,7 @@ Template.userDetailsScreen.events({
 });
 
 Template.userDetails.score = function () {
-    var scoreObject = Scores.findOne({lesson_id:this._id,user_id:Session.get("selectedUser")._id});
+    var scoreObject = rekenruimte.scores.findOne({lesson_id:this._id,user_id:Session.get("selectedUser")._id});
     if(typeof scoreObject !== "undefined"){
         return scoreObject.score;
     }else{
@@ -229,7 +229,7 @@ Template.userDetails.score = function () {
 };
 
 Template.userDetails.time =  function () {
-    var scoreObject = Scores.findOne({lesson_id:this._id,user_id:Session.get("selectedUser")._id});
+    var scoreObject = rekenruimte.scores.findOne({lesson_id:this._id,user_id:Session.get("selectedUser")._id});
     if(typeof scoreObject !== "undefined"){
         return scoreObject.time;
     }else{
@@ -239,7 +239,7 @@ Template.userDetails.time =  function () {
 
 Template.userDetails.helpers({
     ranking: function () {
-        var rankings = Ranking.find({lesson_id:this._id}).fetch();
+        var rankings = rekenruimte.ranking.find({lesson_id:this._id}).fetch();
         for(var j= 0,ll=rankings.length;j<ll;j++){
             if(rankings[j].users.indexOf(Session.get("selectedUser")._id) > -1){
                 return j + 1 + "e plaats";
@@ -248,7 +248,7 @@ Template.userDetails.helpers({
         return "";
     },
     motivation: function () {
-        var rankings = Ranking.find({lesson_id:this._id}).fetch(), ranking, rank;
+        var rankings = rekenruimte.ranking.find({lesson_id:this._id}).fetch(), ranking, rank;
         for(var j= 0,ll=rankings.length;j<ll;j++){
             if(rankings[j].users.indexOf(Session.get("selectedUser")._id) > -1){
                 rank = j + 1;
@@ -271,7 +271,7 @@ Template.userDetails.helpers({
         return (typeof ranking !== "undefined") ?  ranking : "Deze moet " + Session.get("selectedUser").username + " nog doen!";
     },
     firstPlace: function () {
-        var rankings = Ranking.find({lesson_id:this._id}).fetch(), ranking, rank;
+        var rankings = rekenruimte.ranking.find({lesson_id:this._id}).fetch(), ranking, rank;
         for(var j= 0,ll=rankings.length;j<ll;j++){
             if(rankings[j].users.indexOf(Session.get("selectedUser")._id) > -1){
                 rank = j + 1;
@@ -362,7 +362,7 @@ Template.gameScreen.events({
         $.when.apply($, processSpaceShipsDeferred).then(function(){
             Session.set("activescreen", "lessonsscreen");
         });*/
-        rekenruimte[Lessons.findOne({_id:Session.get("selectedLesson")}).callId].stopLevel();
+        rekenruimte[rekenruimte.lessons.findOne({_id:Session.get("selectedLesson")}).callId].stopLevel();
     }
 });
 
@@ -397,7 +397,7 @@ Template.gameEndContent.seconds =  function () {
 
 Template.gameEndContent.events({
     'click .continuebutton' : function () {
-        var scoreObject = Scores.findOne({lesson_id:Session.get("selectedLesson"),user_id:Meteor.userId()});
+        var scoreObject = rekenruimte.scores.findOne({lesson_id:Session.get("selectedLesson"),user_id:Meteor.userId()});
         if(typeof scoreObject === "undefined"){
             Meteor.call('createScore', {
                 user_id: Meteor.userId(),
@@ -411,8 +411,8 @@ Template.gameEndContent.events({
             });
             Meteor.call('setRanking');
         }else if(typeof scoreObject !== "undefined" && (scoreObject.score < Session.get("scored") || (scoreObject.score === Session.get("scored") && Session.get("time-seconds") < scoreObject.time))){
-            //Scores.update(scoreObject._id, {$set: {score: Number(Session.get("scored"))}});
-            Scores.update(scoreObject._id, {$set: {score: Number(Session.get("scored")),time: Session.get("time-seconds")}});
+            //rekenruimte.scores.update(scoreObject._id, {$set: {score: Number(Session.get("scored"))}});
+            rekenruimte.scores.update(scoreObject._id, {$set: {score: Number(Session.get("scored")),time: Session.get("time-seconds")}});
             Meteor.call('setRanking');
         }else{
             /*Meteor.call('createScore', {

@@ -1,7 +1,8 @@
-//"use strict";
+"use strict";
 
 var rekenruimte = rekenruimte || (function(){
-    var stage = {}, canvas;
+    var stage = {}, canvas, _lessons = new Meteor.Collection("lessons"), _scores = new Meteor.Collection("scores"),
+        _ranking = new Meteor.Collection("ranking"), _results = new Meteor.Collection("results");
 
     function _init(){
         var width = $(".gamescreen").width(),height = 450;
@@ -25,20 +26,24 @@ var rekenruimte = rekenruimte || (function(){
         canvas.style.background = color;
     }
 
+    function _deleteStage () {console.log(stage);
+        delete this.stage;
+    }
+
     return {
+        lessons : _lessons,
+        scores : _scores,
+        ranking : _ranking,
+        results : _results,
         init : _init,
         initGameLevel : _initGameLevel,
-        setBackgroundColor : _setBackgroundColor
+        setBackgroundColor : _setBackgroundColor,
+        deleteStage : _deleteStage
 
     }
 })(), config = {
     FPS: 24
 };
-
-Lessons = new Meteor.Collection("lessons");
-Scores = new Meteor.Collection("scores");
-Ranking = new Meteor.Collection("ranking");
-Results = new Meteor.Collection("results");
 
 Session.setDefault("defaultSelectedLesson",false);
 Session.setDefault("resetTimer",false);
@@ -55,7 +60,7 @@ var spaceShips = [], moon, rock, rock2, spiral, planet, good, stars = [], starLe
 $('.home').tooltip({animation:true});
 
 Deps.autorun(function () {
-    var oldest = _.unique(Scores.find().fetch(), function (score) {
+    var oldest = _.unique(rekenruimte.scores.find().fetch(), function (score) {
         return score;
     });
     if (oldest){
@@ -65,16 +70,16 @@ Deps.autorun(function () {
 });
 
 Meteor.autosubscribe(function() {
-    Scores.find().observe({
+    rekenruimte.scores.find().observe({
         added: function(item){
             Session.set("userScoredId",{user_id:item.user_id,lesson_id:item.lesson_id});
         }
     });
-    Ranking.find().observe({
+    rekenruimte.ranking.find().observe({
         added: function(item){
             var rankings,notifications,date,guid;
             if(typeof Session.get("userScoredId") !== "undefined" && Meteor.userId() !== Session.get("userScoredId").user_id){
-                rankings = Ranking.find({lesson_id:Session.get("userScoredId").lesson_id}).fetch();
+                rankings = rekenruimte.ranking.find({lesson_id:Session.get("userScoredId").lesson_id}).fetch();
                 for(var j= 0,ll=rankings.length;j<ll;j++){
                     if(rankings[j].users.indexOf(Session.get("userScoredId").user_id) > -1){
                         //Todo alert((j + 1) + "e plaats");
@@ -100,35 +105,6 @@ Meteor.autosubscribe(function() {
         }
     });
 });
-
-rekenruimte.levels =  (function(){
-    function initlevel1(){
-        initLevel1();
-        return true;
-    };
-
-    function ticklevel1(){
-        tickLevel1();
-        return true;
-    }
-
-    function initlevel2(){
-        initLevel2();
-        return true;
-    };
-
-    function ticklevel2(){
-        tickLevel2();
-        return true;
-    }
-
-    return {
-        initlevel1: initlevel1,
-        ticklevel1: ticklevel1,
-        initlevel2: initlevel2,
-        ticklevel2: ticklevel2
-    }
-})();
 
 rekenruimte.functions = (function(){
     // Random float between
@@ -188,8 +164,7 @@ rekenruimte.questions = (function(){
 })();
 
 function tick(){
-    //rekenruimte.levels["tick" + Lessons.findOne({_id:Session.get("selectedLesson")}).callId].call();
-    rekenruimte[Lessons.findOne({_id:Session.get("selectedLesson")}).callId].tick.call();
+    rekenruimte[rekenruimte.lessons.findOne({_id:Session.get("selectedLesson")}).callId].tick.call();
 }
 
 //  METEOR
@@ -229,17 +204,13 @@ if (Meteor.isClient) {
         }
         if(gameInitialized === false && Session.get("activescreen") === "gamescreen"){
             //initLevel1();
-            if(typeof Lessons.findOne({_id:Session.get("selectedLesson")}) !== "undefined"){
+            if(typeof rekenruimte.lessons.findOne({_id:Session.get("selectedLesson")}) !== "undefined"){
                 //rekenruimte.levels["init" + Lessons.findOne({_id:Session.get("selectedLesson")}).callId].call();
-                rekenruimte[Lessons.findOne({_id:Session.get("selectedLesson")}).callId].init.call();
+                rekenruimte[rekenruimte.lessons.findOne({_id:Session.get("selectedLesson")}).callId].init.call();
                 gameInitialized = true;
             }
         }
     },1000);
-
-    /* SCREENS */
-
-
 }
 
 Meteor.subscribe("directory");

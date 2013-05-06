@@ -2,11 +2,24 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="90cefa06-2644-42d0-9222-0ee2ca88f5ca" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/meteor/rekenruimte/client/rekenruimte_level1.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/meteor/rekenruimte/client/templates.js" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/meteor/packages/jquery-ui-core/LICENSE.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/meteor/packages/jquery-ui-core/README.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/meteor/packages/jquery-ui-core/lib/jquery.ui.core.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/meteor/packages/jquery-ui-core/package.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/meteor/packages/jquery-ui-core/smart.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/meteor/packages/jquery-ui-effect/LICENSE.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/meteor/packages/jquery-ui-effect/README.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/meteor/packages/jquery-ui-effect/lib/jquery.ui.effect.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/meteor/packages/jquery-ui-effect/package.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/meteor/packages/jquery-ui-effect/smart.json" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RekenRuimte.fla" afterPath="$PROJECT_DIR$/RekenRuimte.fla" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RekenRuimte.js" afterPath="$PROJECT_DIR$/RekenRuimte.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/meteor/rekenruimte/client/rekenruimte.js" afterPath="$PROJECT_DIR$/meteor/rekenruimte/client/rekenruimte.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/meteor/rekenruimte/client/rekenruimte_level1.js" afterPath="$PROJECT_DIR$/meteor/rekenruimte/client/rekenruimte_level1.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/meteor/rekenruimte/client/rekenruimte_level2.js" afterPath="$PROJECT_DIR$/meteor/rekenruimte/client/rekenruimte_level2.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/meteor/rekenruimte/client/templates.js" afterPath="$PROJECT_DIR$/meteor/rekenruimte/client/templates.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/meteor/rekenruimte/server/server.js" afterPath="$PROJECT_DIR$/meteor/rekenruimte/server/server.js" />
     </list>
     <ignored path="RekenRuimte.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -28,10 +41,19 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="rekenruimte.js" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="rekenruimte.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/meteor/rekenruimte/client/rekenruimte.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="103" column="18" selection-start="4023" selection-end="4041" vertical-scroll-proportion="0.33257404">
+            <state line="34" column="25" selection-start="1049" selection-end="1049" vertical-scroll-proportion="16.636364">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="server.js" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/meteor/rekenruimte/server/server.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="19" column="22" selection-start="1028" selection-end="1028" vertical-scroll-proportion="0.33568904">
               <folding />
             </state>
           </provider>
@@ -49,7 +71,7 @@
       <file leaf-file-name="templates.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/meteor/rekenruimte/client/templates.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="357" column="10" selection-start="13153" selection-end="13153" vertical-scroll-proportion="-5.4615383">
+            <state line="362" column="12" selection-start="13502" selection-end="13547" vertical-scroll-proportion="-146.8077">
               <folding />
             </state>
           </provider>
@@ -67,7 +89,7 @@
       <file leaf-file-name="rekenruimte_level1.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/meteor/rekenruimte/client/rekenruimte_level1.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="232" column="88" selection-start="10642" selection-end="10642" vertical-scroll-proportion="-5.5">
+            <state line="258" column="38" selection-start="12060" selection-end="12060" vertical-scroll-proportion="-147.11539">
               <folding />
             </state>
           </provider>
@@ -85,7 +107,7 @@
       <file leaf-file-name="rekenruimte_level2.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/meteor/rekenruimte/client/rekenruimte_level2.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="7" column="62" selection-start="303" selection-end="348" vertical-scroll-proportion="-4.0384617">
+            <state line="242" column="8" selection-start="9712" selection-end="9738" vertical-scroll-proportion="-32.454544">
               <folding />
             </state>
           </provider>
@@ -103,16 +125,7 @@
       <file leaf-file-name="flashobjects.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/meteor/rekenruimte/client/lib/flashobjects.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="2009" column="20" selection-start="189607" selection-end="189607" vertical-scroll-proportion="-15.307693">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="level1.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/meteor/rekenruimte/client/level1.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="174" column="17" selection-start="8150" selection-end="8163" vertical-scroll-proportion="-58.576923">
+            <state line="2009" column="20" selection-start="189607" selection-end="189607" vertical-scroll-proportion="-927.4231">
               <folding />
             </state>
           </provider>
@@ -146,16 +159,16 @@
         <option value="$PROJECT_DIR$/meteor/packages/jquery-ui-effect/package.js" />
         <option value="$PROJECT_DIR$/meteor/rekenruimte/css/rekenruimte.less" />
         <option value="$PROJECT_DIR$/meteor/rekenruimte/client/rekenruimte.html" />
-        <option value="$PROJECT_DIR$/meteor/rekenruimte/server/server.js" />
-        <option value="$PROJECT_DIR$/meteor/rekenruimte/client/level1.js" />
         <option value="$PROJECT_DIR$/RekenRuimte.js" />
         <option value="$PROJECT_DIR$/meteor/rekenruimte/client/lib/flashobjects.js" />
         <option value="$PROJECT_DIR$/meteor/rekenruimte/client/lib/level2.js" />
         <option value="$PROJECT_DIR$/meteor/parties/client/templates.js" />
+        <option value="$PROJECT_DIR$/meteor/rekenruimte/client/level1.js" />
+        <option value="$PROJECT_DIR$/meteor/rekenruimte/client/templates.js" />
         <option value="$PROJECT_DIR$/meteor/rekenruimte/client/rekenruimte_level2.js" />
         <option value="$PROJECT_DIR$/meteor/rekenruimte/client/rekenruimte.js" />
-        <option value="$PROJECT_DIR$/meteor/rekenruimte/client/templates.js" />
         <option value="$PROJECT_DIR$/meteor/rekenruimte/client/rekenruimte_level1.js" />
+        <option value="$PROJECT_DIR$/meteor/rekenruimte/server/server.js" />
       </list>
     </option>
   </component>
@@ -476,90 +489,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="meteor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="parties" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="RekenRuimte" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="RekenRuimte" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="meteor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="parties" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="server" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="RekenRuimte" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="RekenRuimte" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="meteor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="parties" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="public" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="RekenRuimte" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="RekenRuimte" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="meteor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="parties" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="client" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="RekenRuimte" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="RekenRuimte" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="libs" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -689,14 +618,14 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="22" width="1920" height="1087" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32919255" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32919255" sideWeight="0.49359658" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.30202776" sideWeight="0.6708075" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.30202776" sideWeight="0.6708075" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33126295" sideWeight="0.5026681" order="7" side_tool="true" content_ui="tabs" />
@@ -777,26 +706,11 @@
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/meteor/packages/jquery-ui-effect/package.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="27" selection-start="278" selection-end="278" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/meteor/parties/client/client.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="2" selection-start="166" selection-end="333" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/meteor/rekenruimte/client/lib/BoxBlurFilter.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
         </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/meteor/rekenruimte/server/server.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="104" selection-start="865" selection-end="865" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/meteor/rekenruimte/client/rekenruimte.html">
@@ -825,44 +739,44 @@
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/meteor/rekenruimte/client/lib/flashobjects.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2009" column="20" selection-start="189607" selection-end="189607" vertical-scroll-proportion="-15.307693">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/meteor/rekenruimte/client/rekenruimte_level2.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="62" selection-start="303" selection-end="348" vertical-scroll-proportion="-4.0384617">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/meteor/rekenruimte/client/templates.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="357" column="10" selection-start="13153" selection-end="13153" vertical-scroll-proportion="-5.4615383">
+        <state line="362" column="12" selection-start="13502" selection-end="13547" vertical-scroll-proportion="-146.8077">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/meteor/rekenruimte/client/level1.js">
+    <entry file="file://$PROJECT_DIR$/meteor/rekenruimte/client/lib/flashobjects.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="174" column="17" selection-start="8150" selection-end="8163" vertical-scroll-proportion="-58.576923">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/meteor/rekenruimte/client/rekenruimte_level1.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="232" column="88" selection-start="10642" selection-end="10642" vertical-scroll-proportion="-5.5">
+        <state line="2009" column="20" selection-start="189607" selection-end="189607" vertical-scroll-proportion="-927.4231">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/meteor/rekenruimte/client/rekenruimte.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="103" column="18" selection-start="4023" selection-end="4041" vertical-scroll-proportion="0.33257404">
+        <state line="34" column="25" selection-start="1049" selection-end="1049" vertical-scroll-proportion="16.636364">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/meteor/rekenruimte/client/rekenruimte_level2.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="242" column="8" selection-start="9712" selection-end="9738" vertical-scroll-proportion="-32.454544">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/meteor/rekenruimte/client/rekenruimte_level1.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="258" column="38" selection-start="12060" selection-end="12060" vertical-scroll-proportion="-147.11539">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/meteor/rekenruimte/server/server.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="19" column="22" selection-start="1028" selection-end="1028" vertical-scroll-proportion="0.33568904">
           <folding />
         </state>
       </provider>

@@ -1,11 +1,13 @@
-var ship, blur, rekenruimte = rekenruimte || {};
+"use strict";
+
+var rekenruimte = rekenruimte || {};
 
 rekenruimte.level2 = rekenruimte.level2 || (function() {
     var shake = true, _bigShipInterval = {}, _good = {}, ship, leftButton, rightButton, forwardButton, stage,
         pos1 = 250, pos2 = 550, pos3 = 550;
 
     function _init () {
-        var size,width = $(".gamescreen").width(),height = 450, mask, bigShipInterval, bg, marker;
+        var size,width = $(".gamescreen").width(),height = 450, mask, bigShipInterval, bg, marker, planet, planet2;
 
         stage = rekenruimte.init();
         rekenruimte.initGameLevel();
@@ -130,12 +132,13 @@ rekenruimte.level2 = rekenruimte.level2 || (function() {
     }
 
     function _tick () {
-        if(typeof Lessons.findOne({_id:Session.get("selectedLesson")}) !== "undefined"){
+        var questionsLength, questionIndex;
+        if(typeof rekenruimte.lessons.findOne({_id:Session.get("selectedLesson")}) !== "undefined"){
             if(Session.get("nextQuestion") === true && Session.get("gameStopped") === false){
-                questionsLength = Lessons.findOne({_id:Session.get("selectedLesson")}).questions;
+                questionsLength = rekenruimte.lessons.findOne({_id:Session.get("selectedLesson")}).questions;
                 if(questions.length !== questionsLength && Session.get("gameStopped") === false){
                     Session.set("nextQuestion", false);
-                    Session.set("question", rekenruimte.questions.generateSizeQuestion(Lessons.findOne({_id:Session.get("selectedLesson")})));
+                    Session.set("question", rekenruimte.questions.generateSizeQuestion(rekenruimte.lessons.findOne({_id:Session.get("selectedLesson")})));
                     questions.push(Session.get("question"));
 
                     ship.bigShip.hallText1.text = Session.get("question")["option1"];
@@ -208,7 +211,7 @@ rekenruimte.level2 = rekenruimte.level2 || (function() {
                 Session.set("results",results);
                 if(Session.get("question").answer === ship.bigShip[btnProps.hallText].text){
                     Session.set("answer", true);
-                    Session.set("scored",Session.get("scored") + parseInt(Lessons.findOne({_id:Session.get("selectedLesson")}).points));
+                    Session.set("scored",Session.get("scored") + parseInt(rekenruimte.lessons.findOne({_id:Session.get("selectedLesson")}).points));
                     Session.set("time-seconds",parseInt(Session.get("time-seconds")) + (parseInt(Session.get("time")) - Session.get("timer") + 1));
                     rekenruimte.level2.good.text.text = "GOEDZO!";
                     createjs.Tween.get(rekenruimte.level2.good,{loop: false}).to({y:400},600, createjs.Ease.easeInOut).call(function(){
@@ -225,7 +228,7 @@ rekenruimte.level2 = rekenruimte.level2 || (function() {
                 createjs.Tween.get(ship,{loop: false}).to({scaleX: 0.2, scaleY: 0.2, x: 550, y: 230},600, createjs.Ease.easeInOut).call(function(){
                     Session.set("answered",true);
                     Session.set("nextQuestion", true);
-                    rekenruimte.level2.shake = true;
+                    shake = true;
                     createjs.Tween.get(ship,{loop: false}).to({scaleX: 0.7, scaleY: 0.7, x: 550, y: 230},600, createjs.Ease.easeInOut).call(function(){
 
                     });
@@ -236,7 +239,8 @@ rekenruimte.level2 = rekenruimte.level2 || (function() {
     }
 
     function stopLevel () {
-
+        Session.set("activescreen", "lessonsscreen");
+        rekenruimte.deleteStage();
     }
 
     return {

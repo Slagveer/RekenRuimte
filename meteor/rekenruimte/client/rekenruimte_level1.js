@@ -1,3 +1,5 @@
+"use strict";
+
 var rekenruimte = rekenruimte || {};
 
 rekenruimte.level1 = rekenruimte.level1 || (function() {
@@ -8,7 +10,7 @@ rekenruimte.level1 = rekenruimte.level1 || (function() {
 
         stage = rekenruimte.init();
         rekenruimte.initGameLevel();
-        rekenruimte.setBackgroundColor("#000");
+        rekenruimte.setBackgroundColor("#3399CC");
 
         spiral = new lib.mcSpiral();
         spiral.scaleY = 1;
@@ -23,6 +25,8 @@ rekenruimte.level1 = rekenruimte.level1 || (function() {
         planet.x = 200;
         planet.y = 150;
         stage.addChild(planet);
+
+        generateStars();
 
         moon = new lib.mcMoon();
         moon.scaleY = .5;
@@ -49,8 +53,6 @@ rekenruimte.level1 = rekenruimte.level1 || (function() {
 
         moveRock(rock2);
 
-        generateStars();
-
         rekenruimte.level1.good = new lib.mcNotify();
         rekenruimte.level1.good.text.text = "GOEDZO!";
         rekenruimte.level1.good.text.font = "90px facebook_letter_facesregular";
@@ -67,13 +69,13 @@ rekenruimte.level1 = rekenruimte.level1 || (function() {
     function _tick () {
         var spaceShip,questionsLength, questionIndex,score;
 
-        if(typeof Lessons.findOne({_id:Session.get("selectedLesson")}) !== "undefined"){
+        if(typeof rekenruimte.lessons.findOne({_id:Session.get("selectedLesson")}) !== "undefined"){
             if(spaceShips.length === 0 && Session.get("gameStopped") === false){
                 moveRock(rock);
                 moveRock(rock2);
-                questionsLength = Lessons.findOne({_id:Session.get("selectedLesson")}).questions;
+                questionsLength = rekenruimte.lessons.findOne({_id:Session.get("selectedLesson")}).questions;
                 if(questions.length !== questionsLength){
-                    Session.set("question", rekenruimte.questions.generateSizeQuestion(Lessons.findOne({_id:Session.get("selectedLesson")})));
+                    Session.set("question", rekenruimte.questions.generateSizeQuestion(rekenruimte.lessons.findOne({_id:Session.get("selectedLesson")})));
                     questions.push(Session.get("question"));
 
                     //  SPACESHIP 1
@@ -124,7 +126,7 @@ rekenruimte.level1 = rekenruimte.level1 || (function() {
     }
 
     function generateStars () {
-        var star;
+        var star, size;
         for(var i = 0;i < starLength;i++){
             size = Math.random() * .7;
             star = new lib.mcStar();
@@ -182,13 +184,13 @@ rekenruimte.level1 = rekenruimte.level1 || (function() {
     }
 
     function removeSpaceShips () {
-        var spaceShip;
+        var spaceShip, score;
         for (var i=spaceShips.length-1; i>=0; i--) {
             spaceShip = spaceShips[i];
             if (spaceShip.x < -100 || spaceShip.y > 550) {
                 spaceShips.splice(i,1);
                 stage.removeChild(spaceShip);
-                score = Scores.findOne({lesson_id:Session.get("selectedLesson"),user_id:Meteor.userId()});
+                score = rekenruimte.scores.findOne({lesson_id:Session.get("selectedLesson"),user_id:Meteor.userId()});
             }
         }
     }
@@ -226,7 +228,7 @@ rekenruimte.level1 = rekenruimte.level1 || (function() {
             if(typeof ship.spaceShip !== "undefined" && Session.get("question").answer === ship.spaceShip.spaceText.text || typeof ship.rocketShip !== "undefined" && Session.get("question").answer === ship.rocketShip.rocketText.text){
                 ship.gotoAndPlay("correct");
                 Session.set("answer", true);
-                Session.set("scored",Session.get("scored") + parseInt(Lessons.findOne({_id:Session.get("selectedLesson")}).points));
+                Session.set("scored",Session.get("scored") + parseInt(rekenruimte.lessons.findOne({_id:Session.get("selectedLesson")}).points));
                 Session.set("time-seconds",parseInt(Session.get("time-seconds")) + (parseInt(Session.get("time")) - Session.get("timer") + 1));
                 rekenruimte.level1.good.text.text = "GOEDZO!";
                 createjs.Tween.get(rekenruimte.level1.good,{loop: false}).to({y:400},600, createjs.Ease.easeInOut).call(function(){
@@ -254,6 +256,7 @@ rekenruimte.level1 = rekenruimte.level1 || (function() {
         }
         $.when.apply($, processSpaceShipsDeferred).then(function(){
             Session.set("activescreen", "lessonsscreen");
+            rekenruimte.deleteStage();
         });
     }
 
@@ -264,13 +267,3 @@ rekenruimte.level1 = rekenruimte.level1 || (function() {
         stopLevel : _stopLevel
     }
 })();
-
-function _initLevel1 () {
-    rekenruimte.level1.init();
-
-    gameInitialized = true;
-}
-
-function _tickLevel1(){
-    rekenruimte.level1.tick();
-}
