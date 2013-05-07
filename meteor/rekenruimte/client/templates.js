@@ -112,7 +112,7 @@ Template.lessonsScreen.events({
         Session.set("resetTimer",true);
         Session.set("answer", false);
         Session.set("answered",false);
-        gameInitialized = false;
+        rekenruimte.setGameInitialized(false);
         deltaX = 0;
     },
     'mouseover .lesson' : function () {

@@ -1,14 +1,13 @@
 "use strict";
 
-var rekenruimte = rekenruimte || {};
+this.rekenruimte = this.rekenruimte || {};
 
-rekenruimte.level2 = rekenruimte.level2 || (function() {
-    var shake = true, _bigShipInterval = {}, _good = {}, ship, leftButton, rightButton, forwardButton, stage,
-        pos1 = 250, pos2 = 550, pos3 = 550;
+this.rekenruimte.level2 = this.rekenruimte.level2 || (function() {
+    var shake = true, _bigShipInterval = {}, _good = {}, ship, leftButton, rightButton, forwardButton, stage, questions = [];
 
     function _init () {
         var size,width = $(".gamescreen").width(),height = 450, mask, bigShipInterval, bg, marker, planet, planet2;
-
+        questions = [];
         stage = rekenruimte.init();
         rekenruimte.initGameLevel();
         rekenruimte.setBackgroundColor("#000");
@@ -126,8 +125,10 @@ rekenruimte.level2 = rekenruimte.level2 || (function() {
 
         Session.set("nextQuestion", true);
 
-        stage.update();
-        createjs.Ticker.setFPS(config.FPS);
+        if(typeof stage !== "undefined"){
+            stage.update();
+        }
+        createjs.Ticker.setFPS(window.config.FPS);
         createjs.Ticker.addListener(window);
     }
 
@@ -138,7 +139,7 @@ rekenruimte.level2 = rekenruimte.level2 || (function() {
                 questionsLength = rekenruimte.lessons.findOne({_id:Session.get("selectedLesson")}).questions;
                 if(questions.length !== questionsLength && Session.get("gameStopped") === false){
                     Session.set("nextQuestion", false);
-                    Session.set("question", rekenruimte.questions.generateSizeQuestion(rekenruimte.lessons.findOne({_id:Session.get("selectedLesson")})));
+                    Session.set("question", rekenruimte.generateSizeQuestion(rekenruimte.lessons.findOne({_id:Session.get("selectedLesson")})));
                     questions.push(Session.get("question"));
 
                     ship.bigShip.hallText1.text = Session.get("question")["option1"];
@@ -239,6 +240,7 @@ rekenruimte.level2 = rekenruimte.level2 || (function() {
     }
 
     function stopLevel () {
+        Meteor.clearInterval(rekenruimte.level2.bigShipInterval);
         Session.set("activescreen", "lessonsscreen");
         rekenruimte.deleteStage();
     }

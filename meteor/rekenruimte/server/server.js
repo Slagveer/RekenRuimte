@@ -1,5 +1,5 @@
 "use strict";
-
+if (Meteor.isServer) {
 var rekenruimte = rekenruimte || (function(){
     var stage = {}, canvas, _lessons = new Meteor.Collection("lessons"), _scores = new Meteor.Collection("scores"),
         _ranking = new Meteor.Collection("ranking"), _results = new Meteor.Collection("results");
@@ -13,8 +13,9 @@ var rekenruimte = rekenruimte || (function(){
 
 if (rekenruimte.lessons.find().count() === 0) {
     var data = [
-        {name:"Maten: rekenen met maten decimeter",description:"Kies de juiste lengtemaat",callId:"level1",questions:6,correct:"Goed gedaan!",incorrect:"Helaas, het door jou gegeven antwoord (###) is niet goed. Het antwoord had moeten zijn: ",time:10,points:1},
-        {name:"Maten: rekenen met maten decimeter",description:"Kies de juiste lengtemaat",callId:"level2",questions:6,correct:"Goed gedaan!",incorrect:"Helaas, het door jou gegeven antwoord (###) is niet goed. Het antwoord had moeten zijn: ",time:10,points:1}
+        {name:"Maten: rekenen met ruimteschip maten decimeter",description:"Kies de juiste lengtemaat",callId:"level1",questions:6,correct:"Goed gedaan!",incorrect:"Helaas, het door jou gegeven antwoord (###) is niet goed. Het antwoord had moeten zijn: ",time:10,points:1},
+        {name:"Maten: rekenen met ruimtehal maten decimeter",description:"Kies de juiste lengtemaat",callId:"level2",questions:6,correct:"Goed gedaan!",incorrect:"Helaas, het door jou gegeven antwoord (###) is niet goed. Het antwoord had moeten zijn: ",time:10,points:1},
+        {name:"Maten: rekenen met astronaut maten decimeter",description:"Sleep de astronaut naar de juiste lengtemaat",callId:"level3",questions:6,correct:"Goed gedaan!",incorrect:"Helaas, het door jou gegeven antwoord (###) is niet goed. Het antwoord had moeten zijn: ",time:10,points:1}
     ];
 
     var timestamp = (new Date()).getTime();
@@ -199,3 +200,4 @@ Meteor.methods({
         Meteor.users.remove();
     }
 });
+}

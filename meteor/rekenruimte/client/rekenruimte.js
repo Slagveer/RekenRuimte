@@ -1,14 +1,14 @@
 "use strict";
 
-var rekenruimte = rekenruimte || (function(){
+this.rekenruimte = this.rekenruimte || (function(){
     var stage = {}, canvas, _lessons = new Meteor.Collection("lessons"), _scores = new Meteor.Collection("scores"),
-        _ranking = new Meteor.Collection("ranking"), _results = new Meteor.Collection("results");
+        _ranking = new Meteor.Collection("ranking"), _results = new Meteor.Collection("results"), gameInitialized = false;
 
     function _init(){
         var width = $(".gamescreen").width(),height = 450;
         $("#gamecanvas").attr({width:width,height:height});
-        stagecanvasWidth = width;
-        stagecanvasHeight = height;
+        this.stagecanvasWidth = width;
+        this.stagecanvasHeight = height;
         canvas = document.getElementById("gamecanvas");
         stage = new createjs.Stage(canvas);
 
@@ -26,9 +26,69 @@ var rekenruimte = rekenruimte || (function(){
         canvas.style.background = color;
     }
 
-    function _deleteStage () {console.log(stage);
+    function _deleteStage () {
         delete this.stage;
     }
+
+    function _setGameInitialized (state) {
+        gameInitialized = state;
+    }
+
+    function _getGameInitialized () {
+        return gameInitialized;
+    }
+
+    //rekenruimte.questions = (function(){
+        function _generateSizeQuestion( question, size ) {
+            var values =  [
+                    {value : _randomFloatBetween(0,10,1)},
+                    {value : _randomFloatBetween(0,10,1)},
+                    {value : _randomFloatBetween(0,10,1)}
+                ],
+                value1 = values[_randomFloatBetween(0,2,0)].value, value2 = values[_randomFloatBetween(0,2,0)].value,
+                answer =  ((value1 + value2) * 10).toFixed(1),
+                options =  [
+                    {value : answer},
+                    {value : parseFloat(values[_randomFloatBetween(0,2,0)].value + values[_randomFloatBetween(0,2,0)].value + 3).toFixed(1)},
+                    {value : parseFloat((values[_randomFloatBetween(0,2,0)].value * 10) + values[_randomFloatBetween(0,2,0)].value + 1).toFixed(1)}
+                ],
+                getIndex = function(ops){
+                    return (function(ops){
+                        var index = _randomFloatBetween(0,2,0);
+                        if(ops.indexOf(index) === -1){
+                            ops.push(index);
+                            return index;
+                        }else{
+                            return getIndex(ops);
+                        }
+                    })(ops);
+                },
+                question = {
+                    title : value1 + " m + " + value2 + " m",
+                    description : "Reken uit: geef je antwoord in decimeter",
+                    answer : parseFloat(answer),
+                    sum: value1 + " + " + value2,
+                    option1 : parseFloat(options[getIndex(options)].value),
+                    option2 : parseFloat(options[getIndex(options)].value),
+                    option3 : parseFloat(options[getIndex(options)].value)
+                }
+            //console.info(question);
+            return question;
+        }
+
+    //})();
+
+    //rekenruimte.functions = (function(){
+        // Random float between
+        function _randomFloatBetween( $min, $max, $precision ) {
+            if( typeof( $precision ) == 'undefined') {
+                $precision = 2;
+            }
+            return parseFloat( Math.min( $min + ( Math.random() * ( $max - $min ) ), $max ).toFixed( $precision ) );
+        };
+
+
+    //})();
 
     return {
         lessons : _lessons,
@@ -37,11 +97,15 @@ var rekenruimte = rekenruimte || (function(){
         results : _results,
         init : _init,
         initGameLevel : _initGameLevel,
+        generateSizeQuestion : _generateSizeQuestion,
+        randomFloatBetween : _randomFloatBetween,
         setBackgroundColor : _setBackgroundColor,
+        getGameInitialized : _getGameInitialized,
+        setGameInitialized : _setGameInitialized,
         deleteStage : _deleteStage
 
     }
-})(), config = {
+})(), this.config = {
     FPS: 24
 };
 
@@ -106,64 +170,9 @@ Meteor.autosubscribe(function() {
     });
 });
 
-rekenruimte.functions = (function(){
-    // Random float between
-    function randomFloatBetween( $min, $max, $precision ) {
-        if( typeof( $precision ) == 'undefined') {
-            $precision = 2;
-        }
-        return parseFloat( Math.min( $min + ( Math.random() * ( $max - $min ) ), $max ).toFixed( $precision ) );
-    };
 
-    return {
-        randomFloatBetween : randomFloatBetween
-    }
-})();
 
-rekenruimte.questions = (function(){
-    function generateSizeQuestion( question, size ) {
-        var values =  [
-            {value : rekenruimte.functions.randomFloatBetween(0,10,1)},
-            {value : rekenruimte.functions.randomFloatBetween(0,10,1)},
-            {value : rekenruimte.functions.randomFloatBetween(0,10,1)}
-        ],
-            value1 = values[rekenruimte.functions.randomFloatBetween(0,2,0)].value, value2 = values[rekenruimte.functions.randomFloatBetween(0,2,0)].value,
-            answer =  ((value1 + value2) * 10).toFixed(1),
-            options =  [
-                {value : answer},
-                {value : parseFloat(values[rekenruimte.functions.randomFloatBetween(0,2,0)].value + values[rekenruimte.functions.randomFloatBetween(0,2,0)].value + 3).toFixed(1)},
-                {value : parseFloat((values[rekenruimte.functions.randomFloatBetween(0,2,0)].value * 10) + values[rekenruimte.functions.randomFloatBetween(0,2,0)].value + 1).toFixed(1)}
-            ],
-            getIndex = function(ops){
-            return (function(ops){
-                var index = rekenruimte.functions.randomFloatBetween(0,2,0);
-                if(ops.indexOf(index) === -1){
-                    ops.push(index);
-                    return index;
-                }else{
-                    return getIndex(ops);
-                }
-            })(ops);
-            },
-            question = {
-                title : value1 + " m + " + value2 + " m",
-                description : "Reken uit: geef je antwoord in decimeter",
-                answer : parseFloat(answer),
-                sum: value1 + " + " + value2,
-                option1 : parseFloat(options[getIndex(options)].value),
-                option2 : parseFloat(options[getIndex(options)].value),
-                option3 : parseFloat(options[getIndex(options)].value)
-            }
-        //console.info(question);
-        return question;
-    }
-
-    return {
-        generateSizeQuestion : generateSizeQuestion
-    }
-})();
-
-function tick(){
+this.tick = function tick(){
     rekenruimte[rekenruimte.lessons.findOne({_id:Session.get("selectedLesson")}).callId].tick.call();
 }
 
@@ -202,12 +211,13 @@ if (Meteor.isClient) {
                 }
             }
         }
-        if(gameInitialized === false && Session.get("activescreen") === "gamescreen"){
+
+        if(rekenruimte.getGameInitialized() === false && Session.get("activescreen") === "gamescreen"){
             //initLevel1();
             if(typeof rekenruimte.lessons.findOne({_id:Session.get("selectedLesson")}) !== "undefined"){
                 //rekenruimte.levels["init" + Lessons.findOne({_id:Session.get("selectedLesson")}).callId].call();
                 rekenruimte[rekenruimte.lessons.findOne({_id:Session.get("selectedLesson")}).callId].init.call();
-                gameInitialized = true;
+                rekenruimte.setGameInitialized(true);
             }
         }
     },1000);

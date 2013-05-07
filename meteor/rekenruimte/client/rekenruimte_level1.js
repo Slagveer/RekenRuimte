@@ -1,11 +1,12 @@
 "use strict";
 
-var rekenruimte = rekenruimte || {};
+this.rekenruimte = this.rekenruimte || {};
 
-rekenruimte.level1 = rekenruimte.level1 || (function() {
-    var stage,spaceShips = [], spiral, rock, rock2, planet,  _good = {}, stars = [], starLength = 16
+this.rekenruimte.level1 = this.rekenruimte.level1 || (function() {
+    var stage,spaceShips = [], spiral, rock, rock2, planet,  _good = {}, stars = [], starLength = 16, moon, questions = [];
 
     function _init () {
+        questions = [];
         var width = $(".gamescreen").width(),height = 450;
 
         stage = rekenruimte.init();
@@ -62,7 +63,7 @@ rekenruimte.level1 = rekenruimte.level1 || (function() {
         stage.addChild(rekenruimte.level1.good);
 
         stage.update();
-        createjs.Ticker.setFPS(config.FPS);
+        createjs.Ticker.setFPS(window.config.FPS);
         createjs.Ticker.addListener(window);
     }
 
@@ -75,19 +76,19 @@ rekenruimte.level1 = rekenruimte.level1 || (function() {
                 moveRock(rock2);
                 questionsLength = rekenruimte.lessons.findOne({_id:Session.get("selectedLesson")}).questions;
                 if(questions.length !== questionsLength){
-                    Session.set("question", rekenruimte.questions.generateSizeQuestion(rekenruimte.lessons.findOne({_id:Session.get("selectedLesson")})));
+                    Session.set("question", rekenruimte.generateSizeQuestion(rekenruimte.lessons.findOne({_id:Session.get("selectedLesson")})));
                     questions.push(Session.get("question"));
 
                     //  SPACESHIP 1
-                    var spaceShip = (Math.random() > 0.5) ? createSpaceShip(stagecanvasWidth + 100,100,questionIndex,handleClick,"option1") : createRocketShip(stagecanvasWidth + 100,100,questionIndex,handleClick,"option1");
+                    var spaceShip = (Math.random() > 0.5) ? createSpaceShip(rekenruimte.stagecanvasWidth + 100,100,questionIndex,handleClick,"option1") : createRocketShip(rekenruimte.stagecanvasWidth + 100,100,questionIndex,handleClick,"option1");
                     stage.addChild(spaceShip);
-                    createjs.Tween.get(spaceShip).wait(Math.random() * 500).to({x: stagecanvasWidth - 500},1000, createjs.Ease.elasticInOut).call(function(){
+                    createjs.Tween.get(spaceShip).wait(Math.random() * 500).to({x: rekenruimte.stagecanvasWidth - 500},1000, createjs.Ease.elasticInOut).call(function(){
                         //
                     });
                     spaceShips.push(spaceShip);
 
                     //  SPACESHIP 2
-                    spaceShip = (Math.random() > 0.5) ? createSpaceShip(stagecanvasWidth + 100,220,questionIndex,handleClick,"option2") : createRocketShip(stagecanvasWidth + 100,220,questionIndex,handleClick,"option2");
+                    spaceShip = (Math.random() > 0.5) ? createSpaceShip(rekenruimte.stagecanvasWidth + 100,220,questionIndex,handleClick,"option2") : createRocketShip(rekenruimte.stagecanvasWidth + 100,220,questionIndex,handleClick,"option2");
                     stage.addChild(spaceShip);
                     createjs.Tween.get(spaceShip).wait(Math.random() * 500).to({x: 300},1000, createjs.Ease.elasticInOut).call(function(){
                         //
@@ -95,9 +96,9 @@ rekenruimte.level1 = rekenruimte.level1 || (function() {
                     spaceShips.push(spaceShip);
 
                     //  SPACESHIP 3
-                    spaceShip = (Math.random() > 0.5) ? createSpaceShip(stagecanvasWidth + 100,350,questionIndex,handleClick,"option3") : createRocketShip(stagecanvasWidth + 100,350,questionIndex,handleClick,"option3");
+                    spaceShip = (Math.random() > 0.5) ? createSpaceShip(rekenruimte.stagecanvasWidth + 100,350,questionIndex,handleClick,"option3") : createRocketShip(rekenruimte.stagecanvasWidth + 100,350,questionIndex,handleClick,"option3");
                     stage.addChild(spaceShip);
-                    createjs.Tween.get(spaceShip).wait(Math.random() * 500).to({x: stagecanvasWidth - 200},1000, createjs.Ease.elasticInOut).call(function(){
+                    createjs.Tween.get(spaceShip).wait(Math.random() * 500).to({x: rekenruimte.stagecanvasWidth - 200},1000, createjs.Ease.elasticInOut).call(function(){
                         //
                     });
                     spaceShips.push(spaceShip);
@@ -122,7 +123,11 @@ rekenruimte.level1 = rekenruimte.level1 || (function() {
 
             removeSpaceShips();
         }
-        stage.update();
+        if(typeof stage !== "undefined"){
+            stage.update();
+        }
+        createjs.Ticker.setFPS(window.config.FPS);
+        createjs.Ticker.addListener(window);
     }
 
     function generateStars () {
