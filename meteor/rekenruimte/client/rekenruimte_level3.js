@@ -1,12 +1,12 @@
 "use strict";
 
-var rekenruimte = rekenruimte || {};
+this.rekenruimte = this.rekenruimte || {};
 
-rekenruimte.level3 = rekenruimte.level3 || (function() {
+this.rekenruimte.level3 = this.rekenruimte.level3 || (function() {
     var drag = true, _good = {}, astronaut, stage, hole1, hole2, hole3;
 
     function _init () {
-        var size,width = $(".gamescreen").width(),height = 450, mask, bigShipInterval, bg, marker, planet, planet2;
+        var width = $(".gamescreen").width();
 
         stage = rekenruimte.init();
         rekenruimte.initGameLevel();
@@ -31,7 +31,10 @@ rekenruimte.level3 = rekenruimte.level3 || (function() {
 
         Session.set("nextQuestion", true);
 
-        stage.update();
+        if(typeof stage !== "undefined"){
+            stage.update();
+        }
+
         createjs.Ticker.setFPS(config.FPS);
         createjs.Ticker.addListener(window);
     }
@@ -72,7 +75,9 @@ rekenruimte.level3 = rekenruimte.level3 || (function() {
                 Session.set("nextQuestion", true);
             }
         }
-        stage.update();
+        if(typeof stage !== "undefined"){
+            stage.update();
+        }
     }
 
     function startAnimation (btnProps) {

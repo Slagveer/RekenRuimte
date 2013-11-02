@@ -169,7 +169,9 @@ this.rekenruimte.level2 = this.rekenruimte.level2 || (function() {
                 Session.set("nextQuestion", true);
             }
         }
-        stage.update();
+        if(typeof stage !== "undefined"){
+            stage.update();
+        }
     }
 
     function handleButton(evt){
@@ -254,13 +256,4 @@ this.rekenruimte.level2 = this.rekenruimte.level2 || (function() {
     }
 }());
 
-function initLevel2 () {
-    rekenruimte.level2.init();
-
-    gameInitialized = true;
-}
-
-function tickLevel2(){
-    rekenruimte.level2.tick();
-}
 

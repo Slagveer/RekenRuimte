@@ -62,7 +62,10 @@ this.rekenruimte.level1 = this.rekenruimte.level1 || (function() {
         rekenruimte.level1.good.color = "#ff0000";
         stage.addChild(rekenruimte.level1.good);
 
-        stage.update();
+        if(typeof stage !== "undefined"){
+            stage.update();
+        }
+
         createjs.Ticker.setFPS(window.config.FPS);
         createjs.Ticker.addListener(window);
     }
@@ -126,8 +129,6 @@ this.rekenruimte.level1 = this.rekenruimte.level1 || (function() {
         if(typeof stage !== "undefined"){
             stage.update();
         }
-        createjs.Ticker.setFPS(window.config.FPS);
-        createjs.Ticker.addListener(window);
     }
 
     function generateStars () {
